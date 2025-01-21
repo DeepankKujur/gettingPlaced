@@ -438,6 +438,7 @@ p {
   margin: 0 auto;
   padding: 50px 0;
   gap: 35px;
+  text-align: center;
 }
 .categories .banner {
   display: flex;
@@ -1348,4 +1349,69 @@ nav .hamburger {
   .resume-modal {
     z-index: 11;
   }
+}
+/* Styles for the Hero Section Login Button */
+.loginButton {
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: #007bff; /* Primary blue color */
+  color: #fff; /* White text */
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  width: 150px; /* Adjusted smaller width */
+  text-align: center;
+}
+
+.loginButton:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: translateY(-2px); /* Slight hover effect */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Enhance shadow on hover */
+}
+
+.loginButton:active {
+  background-color: #00408a; /* Even darker blue on click */
+  transform: translateY(0); /* Remove hover effect */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reduce shadow on click */
+}
+/* Register Button */
+button[type="submit"] {
+  position: relative;
+  padding: 12px 24px;
+  background-color: #28a745; /* Initial green background */
+  color: white; /* White text */
+  border: 2px solid transparent; /* Transparent border initially */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer; /* Pointer cursor */
+  transition: all 0.3s ease-in-out; /* Smooth hover transition */
+  overflow: hidden; /* Prevent any overflow from animations */
+}
+
+/* Hover Effect */
+button[type="submit"]:hover {
+  background-color: #218838; /* Darker green background */
+  border: 2px solid transparent; /* Maintain the border size */
+  border-image: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #ffeb00,
+    #47ff00,
+    #00e4ff,
+    #6f00ff,
+    #ff00e1
+  ); /* Gradient border */
+  border-image-slice: 1; /* Applies gradient border effect fully */
+}
+
+/* Active (Click) State */
+button[type="submit"]:active {
+  background-color: #1e7e34; /* Even darker green when clicked */
+  transform: scale(0.98); /* Slight button press effect */
 }

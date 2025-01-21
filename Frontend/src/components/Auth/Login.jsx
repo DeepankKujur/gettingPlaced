@@ -13,7 +13,6 @@ const Login = () => {
   const [role, setRole] = useState("");
 
   const { isAuthorized, setIsAuthorized } = useContext(Context);
-
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -37,9 +36,9 @@ const Login = () => {
     }
   };
 
-  if(isAuthorized){
-    return <Navigate to={'/'}/>
-  }
+  // if(isAuthorized){
+  //   return <Navigate to={'/'}/>
+  // }
 
   return (
     <>
