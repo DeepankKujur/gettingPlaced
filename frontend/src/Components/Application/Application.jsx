@@ -62,25 +62,65 @@ function Application() {
     navigateTo("");
   }
 
-  return <>
-    <section className="application">
-      <div className="container">
-        <h3>Application Form</h3>
-        <form onSubmit={handleApplication}>
-          <input type="text" placeholder="Your Name" value={name} onChange={(e) => setName(e.target.value)} />
-          <input type="text" placeholder="Your Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-          <input type="number" placeholder="Your Phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
-          <input type="text" placeholder="Your Address" value={address} onChange={(e) => setAddress(e.target.value)} />
-          <textarea value={coverLetter} onChange={(e) => setCoverLetter(e.target.value)} placeholder="Cover Letter" />
-          <div>
-            <label htmlFor="" style={{textAlign: "start", display:"block", fontSize:"20px"}}>Select Resume</label>
-            <input type="file" accept=".jpg, .png, .webp" onChange={handleFileChange} style={{width: "100%"}} />
-          </div>
-          <button type="submit">Send Application</button>
-        </form>
-      </div>
-    </section>
-  </>;
+  return (
+    <>
+      <section className="application">
+        <div className="container">
+          <h3>Application Form</h3>
+          <form onSubmit={handleApplication}>
+            <input
+              type="text"
+              placeholder="Your Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Your Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="number"
+              placeholder="Your Phone"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Your Address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+            <textarea
+              value={coverLetter}
+              onChange={(e) => setCoverLetter(e.target.value)}
+              placeholder="Cover Letter"
+            />
+            <div>
+              <label
+                htmlFor=""
+                style={{
+                  textAlign: "start",
+                  display: "block",
+                  fontSize: "20px",
+                }}
+              >
+                Select Resume
+              </label>
+              <input
+                type="file"
+                accept=".jpg, .png, .webp"
+                onChange={handleFileChange}
+                style={{ width: "100%" }}
+              />
+            </div>
+            <button type="submit">Send Application</button>
+          </form>
+        </div>
+      </section>
+    </>
+  );
 }
 
 export default Application;

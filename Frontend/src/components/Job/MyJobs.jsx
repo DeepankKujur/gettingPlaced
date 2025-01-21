@@ -149,7 +149,39 @@ function MyJobs() {
                               );
                             }}
                             disabled={editingMode !== element.id ? true : false}
-                          ></select>
+                          >
+                            <option value="">Select Category</option>
+                            <option value="Graphics & Design">
+                              Graphics & Design
+                            </option>
+                            <option value="Mobile App Development">
+                              Mobile App Development
+                            </option>
+                            <option value="Frontend Web Development">
+                              Frontend Web Development
+                            </option>
+                            <option value="MERN Stack Development">
+                              MERN STACK Development
+                            </option>
+                            <option value="Account & Finance">
+                              Account & Finance
+                            </option>
+                            <option value="Artificial Intelligence">
+                              Artificial Intelligence
+                            </option>
+                            <option value="Video Animation">
+                              Video Animation
+                            </option>
+                            <option value="MEAN Stack Development">
+                              MEAN STACK Development
+                            </option>
+                            <option value="MEVN Stack Development">
+                              MEVN STACK Development
+                            </option>
+                            <option value="Data Entry Operator">
+                              Data Entry Operator
+                            </option>
+                          </select>
                         </div>
                         <div>
                           <span>
@@ -206,15 +238,16 @@ function MyJobs() {
                         <div>
                           <span>Expired: </span>
                           <select
-                          value={element.expired}
-                          onChange={(e) => {
-                            handleInputChange(
-                              element._id,
-                              "expired",
-                              e.target.value
-                            );
-                          }}
-                          disabled={editingMode !== element.id ? true : false}>
+                            value={element.expired}
+                            onChange={(e) => {
+                              handleInputChange(
+                                element._id,
+                                "expired",
+                                e.target.value
+                              );
+                            }}
+                            disabled={editingMode !== element.id ? true : false}
+                          >
                             <option value={true}>TRUE</option>
                             <option value={false}>FALSE</option>
                           </select>
@@ -223,48 +256,74 @@ function MyJobs() {
                       <div className="long_field">
                         <div>
                           <span>Description:</span>
-                          <textarea rows={5} value={element.description} onChange={(e) => {
-                            handleInputChange(
-                              element._id,
-                              "description",
-                              e.target.value
-                            );
-                          }}></textarea>
+                          <textarea
+                            rows={5}
+                            value={element.description}
+                            onChange={(e) => {
+                              handleInputChange(
+                                element._id,
+                                "description",
+                                e.target.value
+                              );
+                            }}
+                          ></textarea>
                         </div>
                         <div>
                           <span>Location:</span>
-                          <textarea rows={5} value={element.location} onChange={(e) => {
-                            handleInputChange(
-                              element._id,
-                              "location",
-                              e.target.value
-                            );
-                          }}></textarea>
+                          <textarea
+                            rows={5}
+                            value={element.location}
+                            onChange={(e) => {
+                              handleInputChange(
+                                element._id,
+                                "location",
+                                e.target.value
+                              );
+                            }}
+                          ></textarea>
                         </div>
                       </div>
                     </div>
                     <div className="button_wrapper">
                       <div className="edit_btn_wrapper">
-                        {
-                          editingMode === element.id ? (
-                            <>
-                              <button onClick={() => {
-                                handleUpdateJob(element._id)
-                              }} className="check_btn"><FaCheck/></button>
-                              <button onClick={() => {
-                                handelDisableEdit()
-                              }} className="cross_btn"><RxCross2/></button>
-                            </>
-                          ) : (
-                            <button onClick={() => {
-                              handelEnableEdit(element._id)
-                            }} className="edit_btn">Edit</button>
-                          )
-                        }
+                        {editingMode === element.id ? (
+                          <>
+                            <button
+                              onClick={() => {
+                                handleUpdateJob(element._id);
+                              }}
+                              className="check_btn"
+                            >
+                              <FaCheck />
+                            </button>
+                            <button
+                              onClick={() => {
+                                handelDisableEdit();
+                              }}
+                              className="cross_btn"
+                            >
+                              <RxCross2 />
+                            </button>
+                          </>
+                        ) : (
+                          <button
+                            onClick={() => {
+                              handelEnableEdit(element._id);
+                            }}
+                            className="edit_btn"
+                          >
+                            Edit
+                          </button>
+                        )}
                       </div>
-                      <button onClick={() => {
-                                handleJobDelete(element._id)
-                              }} className="delete_btn">Delete</button>
+                      <button
+                        onClick={() => {
+                          handleJobDelete(element._id);
+                        }}
+                        className="delete_btn"
+                      >
+                        Delete
+                      </button>
                     </div>
                   </div>
                 );
