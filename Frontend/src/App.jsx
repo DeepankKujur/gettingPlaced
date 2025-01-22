@@ -16,6 +16,7 @@ import MyApplication from "./components/Application/MyApplication";
 import NotFound from "./components/NotFound/NotFound";
 import axios from "axios";
 import { Toaster } from "react-hot-toast";
+import JobCategoriesPage from "./components/Job/JobCategoriesPage";
 
 export default function App() {
   const { isAuthorized, setIsAuthorized, setUser } = useContext(Context);
@@ -49,6 +50,7 @@ export default function App() {
         <Route path="/job/me" element={<MyJobs />} />
         <Route path="/application/:id" element={<Application />} />
         <Route path="/application/me" element={<MyApplication />} />
+        <Route path="/job-categories" element={<JobCategoriesPage/>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
