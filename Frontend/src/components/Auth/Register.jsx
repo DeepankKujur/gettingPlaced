@@ -19,7 +19,7 @@ const Register = () => {
   const navigate = useNavigate(); // Use the navigate hook
 
 
-  const { isAuthorized, setIsAuthorized, user, setUser } = useContext(Context);
+  const {isAuthorized, setIsAuthorized, user, setUser} = useContext(Context);
 
   const handleRegister = async (e) => {
     e.preventDefault();
