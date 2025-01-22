@@ -91,6 +91,191 @@ p {
     font-size: 1.15rem;
   }
 }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid layout */
+  gap: 24px; /* Space between cards */
+}
+
+img {
+  width: 100%; /* Ensure full width of the card */
+  height: 12rem; /* Fixed height for uniformity */
+  object-fit: cover; /* Crop or fit image proportionally */
+  border-top-left-radius: 0.5rem; /* Match card's rounded corners */
+  border-top-right-radius: 0.5rem;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 0.5rem; /* Rounded corners for the card */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Slight lift on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+h2 {
+  color: #2563eb; /* Tailwind blue-600 */
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  font-size: 0.875rem; /* Tailwind text-sm */
+  color: #6b7280; /* Tailwind gray-600 */
+}
+
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f3f4f6;
+}
+
+/* Categories Section */
+.categories {
+  text-align: center;
+  padding: 2rem;
+}
+
+.categories-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #0e0f11;
+  margin-bottom: 2rem;
+  cursor: pointer;
+  transition: text-decoration 0.3s ease;
+}
+
+
+
+/* Banner Grid */
+/* .banner {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  justify-items: center;
+  padding: 0 1rem;
+} */
+
+/* Card Styles */
+/* .card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 250px;
+} */
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Icon Styles */
+.icon {
+  font-size: 3rem;
+  color: #2563eb;
+  margin-bottom: 1rem;
+}
+
+/* Text Styles */
+.text .title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #1f2937;
+}
+
+.text .subtitle {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f3f4f6;
+}
+
+/* Job Categories Section */
+.job-categories {
+  padding: 2rem;
+  background-color: #f3f4f6;
+  min-height: 100vh;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #1f2937; /* Dark gray */
+  cursor: pointer;
+  transition: text-decoration 0.3s ease;
+}
+
+.title:hover {
+  text-decoration: underline;
+}
+
+/* Grid Layout */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+  gap: 1.5rem;
+}
+
+/* Card Styles */
+.card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Image Styles */
+.card-image {
+  width: 100%;
+  height: 12rem; /* Fixed height */
+  object-fit: cover;
+}
+
+/* Card Content */
+.card-content {
+  padding: 1rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #2563eb; /* Blue */
+  margin-bottom: 0.5rem;
+}
+
+.card-description {
+  font-size: 0.875rem;
+  color: #6b7280; /* Gray */
+  line-height: 1.5;
+}
+
 
 .authPage {
   display: flex;
@@ -178,7 +363,7 @@ p {
   margin-top: 25px;
   font-weight: 700;
   color: #fff;
-  background: #2d5649;
+  background: #255f31;
   font-size: 1.2rem;
   border-radius: 7px;
 }
@@ -392,6 +577,7 @@ hr {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-decoration: none;
 }
 
 .heroSection .container .title h1 {
@@ -435,6 +621,19 @@ hr {
   justify-content: center;
   padding: 10px;
   color: #2d5649;
+}
+.navbar {
+  background-color: #1a202c; /* Dark background */
+  padding: 10px 20px;
+  height: 100px;
+  width: 100%; /* Decreased navbar width */
+  margin: 0 auto; /* Center the navbar */
+  /* border-radius: 8px; Rounded edges */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
 .heroSection .details .card .content p:first-child {
@@ -818,6 +1017,7 @@ hr {
 .jobs .container .banner .card p:first-child {
   font-weight: bold;
   font-size: 1.6rem;
+  color: #184235;
 }
 
 .jobs .container .banner .card p:nth-child(2) {

@@ -1,4 +1,7 @@
 import React from "react";
+import "../../App.jsx"
+import { useNavigate } from "react-router-dom";
+
 import {
   MdOutlineDesignServices,
   MdOutlineWebhook,
@@ -11,6 +14,8 @@ import { GiArtificialIntelligence } from "react-icons/gi";
 import { IoGameController } from "react-icons/io5";
 
 const PopularCategories = () => {
+  const navigateTo = useNavigate();
+
   const categories = [
     {
       id: 1,
@@ -33,7 +38,7 @@ const PopularCategories = () => {
     {
       id: 4,
       title: "MERN STACK Development",
-      subTitle: "1000+ Open Postions",
+      subTitle: "1000+ Open Positions",
       icon: <FaReact />,
     },
     {
@@ -61,21 +66,31 @@ const PopularCategories = () => {
       icon: <IoGameController />,
     },
   ];
+
+  // Handle redirection to JobCategories page
+  const redirectToCategories = () => {
+    navigateTo("/job-categories");
+  };
+
   return (
     <div className="categories">
-      <h3>POPULAR CATEGORIES</h3>
+      <h3 >
+        POPULAR CATEGORIES
+      </h3>
       <div className="banner">
-        {categories.map((element) => {
-          return (
-            <div className="card" key={element.id}>
-              <div className="icon">{element.icon}</div>
-              <div className="text">
-                <p>{element.title}</p>
-                <p>{element.subTitle}</p>
-              </div>
+        {categories.map((element) => (
+          <div
+            className="card"
+            key={element.id}
+            onClick={redirectToCategories}
+          >
+            <div className="icon">{element.icon}</div>
+            <div className="text">
+              <p className="title">{element.title}</p>
+              <p className="subtitle">{element.subTitle}</p>
             </div>
-          );
-        })}
+          </div>
+        ))}
       </div>
     </div>
   );

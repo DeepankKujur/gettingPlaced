@@ -20,15 +20,20 @@ export default function Navbar() {
       setIsAuthorized(false);
       navigateTo("/login");
     } catch (error) {
-      toast.error(error.response.data.message), setIsAuthorized(true);
+      toast.error(error.response.data.message);
+      setIsAuthorized(true);
     }
   };
+
+  const handleLogin = () => {
+    navigateTo("/login"); // Navigate to the login page
+  };
+
   return (
-    <nav className={isAuthorized ? "navbarShow" : "navbarHide"}>
+    <nav className="navbar">
       <div className="container">
         <div className="logo">
           <img src="/JobZee-logos__white.png" alt="logo" />
-          {/* 4:20 */}
         </div>
         <ul className={!show ? "menu" : "show-menu menu"}>
           <li>
@@ -61,10 +66,17 @@ export default function Navbar() {
                 </Link>
               </li>
             </>
+          ) : null}
+          {/* Conditional Rendering for Login/Logout Button */}
+          {isAuthorized ? (
+            <button className="auth-btn" onClick={handleLogout}>
+              LOGOUT
+            </button>
           ) : (
-            <></>
+            <button className="auth-btn" onClick={handleLogin}>
+              LOGIN
+            </button>
           )}
-          <button onClick={handleLogout}>LOGOUT</button>
         </ul>
         <div className="hamburger">
           <GiHamburgerMenu onClick={() => setShow(!show)} />

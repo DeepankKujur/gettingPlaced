@@ -19,9 +19,6 @@ const Jobs = () => {
         console.error("Error fetching jobs:", error.response || error.message);
       });
   }, []);
-  if (!isAuthorized) {
-    navigateTo("/");
-  }
 
   return (
     <section className="jobs page">

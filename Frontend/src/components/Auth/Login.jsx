@@ -6,11 +6,13 @@ import { FaRegUser } from "react-icons/fa";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Context } from "../../main";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
+  const navigate=useNavigate();
 
   const { isAuthorized, setIsAuthorized } = useContext(Context);
   const handleLogin = async (e) => {
@@ -31,6 +33,7 @@ const Login = () => {
       setPassword("");
       setRole("");
       setIsAuthorized(true);
+      navigate("/")
     } catch (error) {
       toast.error(error.response.data.message);
     }
