@@ -12,11 +12,12 @@ const MyApplication = () => {
   const { user, isAuthorized } = useContext(Context);
   const navigateTo = useNavigate();
 
-  // If the user is not authorized, redirect to login page
-  if (!isAuthorized) {
-    navigateTo("/login");
-    return null; // Prevent further rendering
-  }
+  // Handle unauthorized users
+  useEffect(() => {
+    if (!isAuthorized) {
+      navigateTo("/login");
+    }
+  }, [isAuthorized, navigateTo]);
 
   useEffect(() => {
     const fetchApplications = async () => {
@@ -34,7 +35,9 @@ const MyApplication = () => {
       }
     };
 
-    fetchApplications();
+    if (isAuthorized) {
+      fetchApplications();
+    }
   }, [isAuthorized, user]);
 
   // Delete application by ID
@@ -134,11 +137,15 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
         </p>
       </div>
       <div className="resume">
-        <img
-          src={element.resume.url}
-          alt="resume"
-          onClick={() => openModal(element.resume.url)}
-        />
+        {element.resume && element.resume.url ? (
+          <img
+            src={element.resume.url}
+            alt="resume"
+            onClick={() => openModal(element.resume.url)}
+          />
+        ) : (
+          <p>No resume available</p>
+        )}
       </div>
       <div className="btn_area">
         <button onClick={() => deleteApplication(element._id)}>
@@ -176,11 +183,15 @@ const EmployerCard = ({ element, openModal }) => {
         </p>
       </div>
       <div className="resume">
-        <img
-          src={element.resume.url}
-          alt="resume"
-          onClick={() => openModal(element.resume.url)}
-        />
+        {element.resume && element.resume.url ? (
+          <img
+            src={element.resume.url}
+            alt="resume"
+            onClick={() => openModal(element.resume.url)}
+          />
+        ) : (
+          <p>No resume available</p>
+        )}
       </div>
     </div>
   );
