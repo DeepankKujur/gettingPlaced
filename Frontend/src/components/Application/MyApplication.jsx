@@ -37,7 +37,9 @@ const MyApplication = () => {
       }
     };
 
-    fetchApplications();
+    if (isAuthorized) {
+      fetchApplications();
+    }
   }, [isAuthorized, user]);
 
   useEffect(() => {
@@ -135,11 +137,15 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
         </p>
       </div>
       <div className="resume">
-        <img
-          src={element.resume.url}
-          alt="resume"
-          onClick={() => openModal(element.resume.url)}
-        />
+        {element.resume && element.resume.url ? (
+          <img
+            src={element.resume.url}
+            alt="resume"
+            onClick={() => openModal(element.resume.url)}
+          />
+        ) : (
+          <p>No resume available</p>
+        )}
       </div>
       <div className="btn_area">
         <button onClick={() => deleteApplication(element._id)}>
@@ -177,11 +183,15 @@ const EmployerCard = ({ element, openModal }) => {
         </p>
       </div>
       <div className="resume">
-        <img
-          src={element.resume.url}
-          alt="resume"
-          onClick={() => openModal(element.resume.url)}
-        />
+        {element.resume && element.resume.url ? (
+          <img
+            src={element.resume.url}
+            alt="resume"
+            onClick={() => openModal(element.resume.url)}
+          />
+        ) : (
+          <p>No resume available</p>
+        )}
       </div>
     </div>
   );

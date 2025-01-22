@@ -19,7 +19,7 @@ const Register = () => {
   const navigate = useNavigate(); // Use the navigate hook
 
 
-  const { isAuthorized, setIsAuthorized, user, setUser } = useContext(Context);
+  const {isAuthorized, setIsAuthorized, user, setUser} = useContext(Context);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -78,7 +78,7 @@ const Register = () => {
               <div>
                 <input
                   type="text"
-                  placeholder="Deepank"
+                  placeholder="name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
@@ -90,7 +90,7 @@ const Register = () => {
               <div>
                 <input
                   type="email"
-                  placeholder="dk@gmail.com"
+                  placeholder="@gmail.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
