@@ -1,12 +1,13 @@
-import app from "./app.js"
-import cloudinary from "cloudinary"
-//cloudinary allows users to manage, store, and deliver images and videos for websites and mobile apps
-cloudinary.v2.config({
-    cloud_name:process.env.CLOUDINARY_CLIENT_NAME,
-    cloud_key:process.env.CLOUDINARY_CLIENT_API,
-    cloud_secret:process.env.CLOUDINARY_CLIENT_SECRET
-})
+import app from "./app.js";
+import { v2 as cloudinary } from "cloudinary"; // Import Cloudinary using ES6 modules
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLIENT_NAME,
+  api_key: process.env.CLOUDINARY_CLIENT_API,
+  api_secret: process.env.CLOUDINARY_CLIENT_SECRET,
+});
 
-app.listen(process.env.PORT,()=>{
-    console.log(`server is running on port ${process.env.PORT}`)
-})
+// Start the server
+app.listen(process.env.PORT, () => {
+  console.log(`Server is running on port ${process.env.PORT}`);
+});
