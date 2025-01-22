@@ -6,38 +6,44 @@ import { useNavigate } from "react-router-dom";
 import ResumeModal from "./ResumeModal";
 
 const MyApplication = () => {
-  const [application, setApplication] = useState([]); // Default to an empty array
+  const [application, setApplication] = useState([]); // Default to empty array
   const [modalOpen, setModalOpen] = useState(false);
   const [resumeImageUrl, setResumeImageUrl] = useState("");
   const { user, isAuthorized } = useContext(Context);
   const navigateTo = useNavigate();
 
-  // If the user is not authorized, redirect to login page
-  if (!isAuthorized) {
-    navigateTo("/login");
-    return null; // Prevent further rendering
-  }
+  useEffect(() => {
+    if (!isAuthorized) {
+      navigateTo("/login");
+      return; // Prevent further rendering of the component
+    }
+  }, [isAuthorized, navigateTo]);
 
   useEffect(() => {
     const fetchApplications = async () => {
+      if (!user || !isAuthorized) return; // Ensure prerequisites
+
       try {
         const endpoint =
-          user && user.role === "Employer"
+          user.role === "Employer"
             ? "http://localhost:4000/api/application/employer/getall"
             : "http://localhost:4000/api/application/jobseeker/getall";
 
         const res = await axios.get(endpoint, { withCredentials: true });
-        setApplication(res.data.application || []); // Ensure fallback to empty array
+        setApplication(res.data.applications || []);
       } catch (error) {
         toast.error(error.response?.data?.message || "Failed to fetch applications");
-        setApplication([]); // Handle as an empty array on failure
+        setApplication([]); // Handle empty state
       }
     };
 
     fetchApplications();
   }, [isAuthorized, user]);
 
-  // Delete application by ID
+  useEffect(() => {
+    console.log("Application state updated:", application);
+  }, [application]);
+  
   const deleteApplication = async (id) => {
     try {
       const res = await axios.delete(
@@ -46,22 +52,17 @@ const MyApplication = () => {
       );
       toast.success(res.data.message);
 
-      // Update state by removing the deleted application
-      setApplication((prevApplications) =>
-        prevApplications.filter((application) => application._id !== id)
-      );
+      setApplication((prev) => prev.filter((app) => app._id !== id));
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to delete application");
     }
   };
 
-  // Open the resume modal
   const openModal = (imageUrl) => {
     setResumeImageUrl(imageUrl);
     setModalOpen(true);
   };
 
-  // Close the resume modal
   const closeModal = () => {
     setModalOpen(false);
   };
@@ -184,4 +185,4 @@ const EmployerCard = ({ element, openModal }) => {
       </div>
     </div>
   );
-};
+}; 
