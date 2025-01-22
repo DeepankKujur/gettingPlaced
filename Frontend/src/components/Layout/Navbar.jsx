@@ -10,7 +10,6 @@ export default function Navbar() {
     const {isAuthorized, setIsAuthorized, user }= useContext(Context);
     const navigateTo = useNavigate();
 
-
     const handleLogout = async () => {
         try {
             const response =await axios.get("http://localhost:4000/api/user/logout",{withCredentials:true});
