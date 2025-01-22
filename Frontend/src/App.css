@@ -282,7 +282,7 @@ body {
   min-width: 1500px;
   max-width: 1500px;
   margin: 0 auto;
-  min-height: 100vh;
+  min-height: 80vh;
 }
 
 .authPage .container {
@@ -1451,7 +1451,7 @@ hr {
   display: flex;
   gap: 20px;
   border-bottom: 1px solid #18191c;
-  padding: 10px 0;
+  padding: 20px 10px;
 }
 
 .myJobs .container .banner .card .content {
