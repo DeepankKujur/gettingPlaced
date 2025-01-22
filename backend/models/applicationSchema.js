@@ -33,7 +33,7 @@ const applicationSchema = mongoose.Schema({
     url: {
       type: String,
       required: true,
-    }
+    },
   },
   applicantID: {
     user: {

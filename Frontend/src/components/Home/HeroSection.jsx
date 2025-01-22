@@ -1,7 +1,10 @@
 import React from "react";
 import { FaBuilding, FaSuitcase, FaUsers, FaUserPlus } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
+  const navigate=useNavigate();
+
   const details = [
     {
       id: 1,
@@ -40,6 +43,9 @@ const HeroSection = () => {
               voluptate repellat modi quidem aliquid eaque ducimus ipsa et,
               facere mollitia!
             </p>
+            <button className="loginButton" onClick={() => navigate("/login")}>
+              Login
+            </button>
           </div>
           <div className="image">
             <img src="/heroS.jpg" alt="hero" />

@@ -8,6 +8,7 @@ import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Context } from "../../main";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -15,6 +16,8 @@ const Register = () => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
+  const navigate = useNavigate(); // Use the navigate hook
+
 
   const { isAuthorized, setIsAuthorized, user, setUser } = useContext(Context);
 
@@ -38,14 +41,16 @@ const Register = () => {
       setPhone("");
       setRole("");
       setIsAuthorized(true);
+      navigate("/");
     } catch (error) {
       toast.error(error.response.data.message);
     }
+    
   };
 
-  if(isAuthorized){
-    return <Navigate to={'/'}/>
-  }
+  // if(isAuthorized){
+  //   return <Navigate to={'/'}/>
+  // }
 
 
   return (

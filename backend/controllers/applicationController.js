@@ -128,20 +128,20 @@ export const postApplication = catchAsyncError(async (req, res, next) => {
   }
   const application = await Application.create({
     name,
-    email ,
+    email,
     coverLetter,
-    phone ,
-    address ,
-    applicantID ,
-    employerID ,
-    resume:{
-        public_id:cloudinaryResponse.public_id,
-        url:cloudinaryResponse.secure_url
-    }
+    phone,
+    address,
+    applicantID,
+    employerID,
+    resume: {
+      public_id: cloudinaryResponse.public_id,
+      url: cloudinaryResponse.secure_url,
+    },
   });
   res.status(200).json({
-    success:true,
-    message:"Application Submitted",
-    application
-  })
+    success: true,
+    message: "Application Submitted",
+    application,
+  });
 });
