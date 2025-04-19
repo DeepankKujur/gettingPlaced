@@ -5,8 +5,7 @@ const applicationSchema = mongoose.Schema({
   name: {
     type: String,
     required: [true, "Please provide your name"],
-    minLength: [3, "Name must contain at least 3 characters"],
-    maxLength: [30, "Name cannot exceed 30 characters"],
+    minLength: [3, "Name must be atleast 3 characters"],
   },
   email: {
     type: String,

@@ -1,22 +1,24 @@
-import React, { useEffect, useContext } from "react";
-import "./App.css";
+//import "./App.css";
+import axios from "axios";
 import { Context } from "./main";
+import React, { useEffect, useContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "./components/Auth/Login";
-import Register from "./components/Auth/Register";
-import Navbar from "./components/Layout/Navbar";
-import Footer from "./components/Layout/Footer";
-import Home from "./components/Home/Home";
+import { Toaster } from "react-hot-toast";
+
 import Jobs from "./components/Job/Jobs";
-import JobDetails from "./components/Job/JobDetails";
+import Home from "./components/Home/Home";
+import Login from "./components/Auth/Login";
 import MyJobs from "./components/Job/MyJobs";
 import PostJobs from "./components/Job/PostJob";
+import Register from "./components/Auth/Register";
+import JobDetails from "./components/Job/JobDetails";
 import Application from "./components/Application/Application";
 import MyApplication from "./components/Application/MyApplication";
 import NotFound from "./components/NotFound/NotFound";
-import axios from "axios";
-import { Toaster } from "react-hot-toast";
 import JobCategoriesPage from "./components/Job/JobCategoriesPage";
+
+import NewFooter from "./components/Layout/NewFooter";
+import NewNavbar from "./components/Layout/NewNav";
 
 export default function App() {
   const { isAuthorized, setIsAuthorized, setUser } = useContext(Context);
@@ -39,7 +41,7 @@ export default function App() {
   }, [isAuthorized]);
   return (
     <Router>
-      <Navbar />
+      <NewNavbar />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -50,10 +52,10 @@ export default function App() {
         <Route path="/job/me" element={<MyJobs />} />
         <Route path="/application/:id" element={<Application />} />
         <Route path="/application/me" element={<MyApplication />} />
-        <Route path="/job-categories" element={<JobCategoriesPage/>}/>
+        <Route path="/job-categories" element={<JobCategoriesPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <Footer />
+      <NewFooter />
       <Toaster />
     </Router>
   );

@@ -154,7 +154,7 @@ body {
 
 
 /* Banner Grid */
-/* .banner {
+ .banner {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
@@ -163,7 +163,7 @@ body {
 } */
 
 /* Card Styles */
-/* .card {
+ .card {
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -420,7 +420,7 @@ body {
 }
 
 /* Footer Styles */
-footer.footer {
+ footer.footer {
   background-color: #dcdcdc;
   padding-top: 2rem;
   padding-bottom: 1.5rem;
@@ -548,7 +548,7 @@ hr {
 .navbarHide {
   display: none;
 }
-
+/* 
 .heroSection {
   display: flex;
   flex-direction: column;
@@ -621,7 +621,7 @@ hr {
   justify-content: center;
   padding: 10px;
   color: #2d5649;
-}
+} */
 .navbar {
   background-color: #1a202c; /* Dark background */
   padding: 10px 20px;
@@ -636,7 +636,7 @@ hr {
   transition: all 0.3s ease;
 }
 
-.heroSection .details .card .content p:first-child {
+/* .heroSection .details .card .content p:first-child {
   font-weight: bold;
 }
 
@@ -714,7 +714,7 @@ hr {
     min-width: 100%;
     max-width: 100%;
   }
-}
+} */
 
 .howitworks {
   background: #f1f3f6;
@@ -1661,43 +1661,35 @@ nav .menu {
 nav .menu button {
   height: fit-content;
   padding: 7px 20px;
-  /* Adjust padding for a more balanced look */
   border: 2px solid #f1f3f6;
-  /* Slightly thicker border for better visibility */
   border-radius: 25px;
-  /* Rounded corners */
   color: #f1f3f6;
   background: transparent;
   font-size: 20px;
   font-weight: 300;
   cursor: pointer;
   transition: all 0.3s ease;
-  /* Smooth transition */
 }
 
 nav .menu button:hover {
   color: #184235;
-  /* Text color when hovered */
   background: #f1f3f6;
-  /* Background color when hovered */
   border: 2px solid #184235;
-  /* Border color when hovered */
   font-weight: 500;
-  /* Increase font weight on hover */
 }
 
 nav .menu li a {
-  color: #f1f3f6; /* Default text color */
-  text-decoration: none; /* Remove underline by default */
+  color: #f1f3f6;
+  text-decoration: none;
   font-weight: 300;
   font-size: 20px;
   position: relative;
 }
 
 nav .menu li a:hover {
-  color: #fff; /* Change text color to white when hovered */
-  transition: all 0.3s; /* Smooth transition for color change */
-  text-decoration: none; /* Ensure no underline on hover */
+  color: #fff;
+  transition: all 0.3s;
+  text-decoration: none;
 }
 
 nav .menu li a::before {
@@ -1709,7 +1701,7 @@ nav .menu li a::before {
   left: -100%;
   bottom: 0;
   transition: all 0.3s;
-  display: none; /* Disable the underline completely */
+  display: none;
 }
 
 nav .menu li a:hover::before {
@@ -1718,9 +1710,9 @@ nav .menu li a:hover::before {
 }
 
 nav .menu li a.active-link {
-  color: #fff; /* White color for active link */
-  text-decoration: none; /* Remove any underline for active link */
-  font-weight: 500; /* Make the font bold or slightly thicker */
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
 }
 
 nav .menu button {
@@ -1743,7 +1735,6 @@ nav .menu button:hover {
   font-weight: 500;
 }
 
-/* Mobile menu adjustments */
 nav .hamburger {
   display: none;
 }
@@ -1830,7 +1821,6 @@ nav .hamburger {
     width: 100%;
   }
 }
-
 
 .notfound {
   min-height: 750px;
