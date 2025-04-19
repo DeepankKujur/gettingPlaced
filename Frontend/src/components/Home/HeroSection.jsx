@@ -66,8 +66,12 @@ const HeroSection = () => {
               {item.icon}
             </div>
             <div>
-              <p className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{item.title}</p>
-              <p className="font-normal text-gray-700 dark:text-gray-400">{item.subTitle}</p>
+              <p className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                {item.title}
+              </p>
+              <p className="font-normal text-gray-700 dark:text-gray-400">
+                {item.subTitle}
+              </p>
             </div>
           </div>
         ))}
