@@ -5,24 +5,20 @@ import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function NewNavbar() {
-  const { isAuthorized, setIsAuthorized, user } = useContext(Context);
+  const { isAuthorized, user, checkAuth } = useContext(Context);
   const navigateTo = useNavigate();
 
   const handleLogout = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:4000/api/user/logout",
-        { withCredentials: true }
-      );
-      toast.success(response.data.message);
-      setIsAuthorized(false);
+      await axios.get("http://localhost:4000/api/user/logout", {
+        withCredentials: true,
+      });
+      await checkAuth(); // Re-check auth state after logout
       navigateTo("/login");
     } catch (error) {
-      toast.error(error.response.data.message);
-      setIsAuthorized(true);
+      toast.error(error.response?.data?.message || "Logout failed");
     }
   };
-
   const handleLogin = () => {
     navigateTo("/login"); // Navigate to the login page
   };
@@ -66,7 +62,7 @@ export default function NewNavbar() {
                     : "My Applications"}
                 </Link>
               </li>
-              {user && user.role === "Employer" ? (
+              {user?.role === "Employer" ? (
                 <>
                   <li>
                     <Link
