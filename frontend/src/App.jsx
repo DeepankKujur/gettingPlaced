@@ -1,7 +1,5 @@
 // import "./App.css";
-import axios from "axios";
-import { Context } from "./main";
-import React, { useEffect, useContext } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
@@ -13,32 +11,15 @@ import PostJobs from "./components/Job/PostJob";
 import Register from "./components/Auth/Register";
 import JobDetails from "./components/Job/JobDetails";
 import Application from "./components/Application/Application";
-import MyApplication from "./components/Application/MyApplication";
+import MyApplication from "./components/Application/MyApplication.jsx";
 import NotFound from "./components/NotFound/NotFound";
 import JobCategoriesPage from "./components/Job/JobCategoriesPage";
 
 import NewFooter from "./components/Layout/NewFooter";
 import NewNavbar from "./components/Layout/NewNav";
+import Chatbot from "./Components/Chatbot";
 
 export default function App() {
-  const { isAuthorized, setIsAuthorized, setUser } = useContext(Context);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:4000/api/user/getuser",
-          { withCredentials: true }
-        );
-        setUser(response.data.user);
-        setIsAuthorized(true);
-      } catch (error) {
-        console.error("Error fetching user:", error);
-        setIsAuthorized(false);
-      }
-    };
-    fetchUser();
-  }, [isAuthorized]);
   return (
     <Router>
       <NewNavbar />
@@ -55,6 +36,7 @@ export default function App() {
         <Route path="/job-categories" element={<JobCategoriesPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Chatbot />
       <NewFooter />
       <Toaster />
     </Router>

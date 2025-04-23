@@ -13,41 +13,29 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
   const navigate = useNavigate();
+  const { checkAuth } = useContext(Context);
 
-  const { isAuthorized, setIsAuthorized } = useContext(Context);
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
         "http://localhost:4000/api/user/login",
         { email, password, role },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        }
+        { withCredentials: true }
       );
       toast.success(data.message);
-      setEmail("");
-      setPassword("");
-      setRole("");
-      setIsAuthorized(true);
+      await checkAuth(); // Re-check auth state after login
       navigate("/");
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message || "Login failed");
     }
   };
-
-  // if(isAuthorized){
-  //   return <Navigate to={'/'}/>
-  // }
 
   return (
     <div className="flex w-full min-h-screen [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]">
       <div className="flex-1 flex items-center justify-center">
         <div className="w-full max-w-sm">
-        <div className="text-center mb-6">
+          <div className="text-center mb-6">
             <h3 className="text-2xl text-white font-semibold mt-4 italic relative inline-block group">
               <span className="hover-underline">Create a new account</span>
               <span className="absolute left-0 -bottom-[5px] w-full h-[2px] bg-gradient-to-r from-pink-500 to-cyan-400 scale-x-0 group-hover:scale-x-100 origin-right group-hover:origin-left transition-transform duration-500"></span>
@@ -55,7 +43,7 @@ const Login = () => {
           </div>
           <form className="space-y-5">
             <div>
-            <label className="block text-sm font-medium text-white mb-1">
+              <label className="block text-sm font-medium text-white mb-1">
                 Login As
               </label>
               <div className="flex items-center border border-gray-500 rounded-md p-2">
@@ -87,7 +75,7 @@ const Login = () => {
               </div>
             </div>
             <div>
-            <label className="block text-sm mb-1 font-medium text-gray-300">
+              <label className="block text-sm mb-1 font-medium text-gray-300">
                 Password
               </label>
               <div className="flex items-center border border-gray-300 rounded-md p-2">
