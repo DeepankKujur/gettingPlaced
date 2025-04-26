@@ -2,7 +2,7 @@
 import { Router } from "express";
 import axios from "axios";
 import dotenv from "dotenv";
-dotenv.config({ path: "config/config.env" });
+dotenv.config();
 
 const router = Router();
 

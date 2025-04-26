@@ -1,7 +1,7 @@
 // utils/sendEmail.js
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
-dotenv.config({path: "./config/config.env"});
+dotenv.config();
 
 export async function sendInterviewEmail({ to, applicantName, company, date, time,  meetingUrl }) {
   const match = meetingUrl.match(/\/j\/(\d+)\?pwd=([\w.]+)/);
