@@ -40,6 +40,7 @@ const applicationSchema = mongoose.Schema({
       ref: "User",
       required: true,
     },
+    email: String,
     role: {
       type: String,
       enum: ["Job Seeker"],

@@ -27,10 +27,11 @@ const HeroSection = () => {
               words={[
                 "Discover job opportunities that truly match your passion. From freshers to experienced professionals, we've got you covered. Take the next step in your career — smart, simple, and fast.",
               ]}
-              loop={false}
+              // loop={false}
               cursor
               cursorStyle="|"
               typeSpeed={70}
+              deleteSpeed={0}
               delaySpeed={2000}
             />
           </p>

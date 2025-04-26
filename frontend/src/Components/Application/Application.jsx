@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import { useContext } from "react";
-import { Context } from "../../main";
-import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { Context } from "../../main";
+import React, { useState, useContext } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 function Application() {
   const [name, setName] = useState("");

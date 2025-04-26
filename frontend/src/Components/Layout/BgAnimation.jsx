@@ -4,7 +4,7 @@ import "./bganimation.css";
 function BgAnimation() {
   return (
     <div className="area">
-      <ul className ="circles">
+      <ul className="circles">
         <li></li>
         <li></li>
         <li></li>

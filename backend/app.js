@@ -8,6 +8,8 @@ import userRouter from "./routes/userRouter.js";
 import { errorMiddleware } from "./middlewares/error.js";
 import dbConnection from "./database/dbConnection.js";
 import applicationRouter from "./routes/applicationRouter.js";
+import zoomRoutes from "./routes/zoom.js"
+import inviteRoutes from "./routes/inviteRoute.js";
 
 dotenv.config();
 const app = express();
@@ -32,6 +34,8 @@ app.use(fileUpload({
 app.use("/api/user", userRouter);
 app.use("/api/application", applicationRouter);
 app.use("/api/job", jobRouter);
+app.use("/api/zoom", zoomRoutes);
+app.use("/api/invite", inviteRoutes);
 
 //app.use(errorMiddleware);      for sometime
 

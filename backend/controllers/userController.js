@@ -70,3 +70,4 @@ export const getUser = catchAsyncError(async (req, res, next) => {
     user,
   });
 });
+ 

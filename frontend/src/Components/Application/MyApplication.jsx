@@ -2,13 +2,17 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { Context } from "../../main";
 import ResumeModal from "./ResumeModal";
+import ZoomForm from "../ZoomForm.jsx";
 import { useNavigate } from "react-router-dom";
 import React, { useContext, useEffect, useState } from "react";
+import BgAnimation from "../Layout/BgAnimation.jsx";
 
-const MyApplication = () => {
-  const [application, setApplication] = useState([]);
+const MyApplications = () => {
+  const [applications, setApplications] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
+  const [showZoomForm, setShowZoomForm] = useState(false);
   const [resumeImageUrl, setResumeImageUrl] = useState("");
+  const [selectedApplication, setSelectedApplication] = useState(null);
   const { user, isAuthorized } = useContext(Context);
   const navigateTo = useNavigate();
 
@@ -25,8 +29,8 @@ const MyApplication = () => {
             ? "http://localhost:4000/api/application/employer/getall"
             : "http://localhost:4000/api/application/jobseeker/getall";
 
-        const res = await axios.get(endpoint, { withCredentials: true });
-        setApplication(res.data.application);
+        const { data } = await axios.get(endpoint, { withCredentials: true });
+        setApplications(data.applications);
       } catch (error) {
         toast.error(error.response?.data?.message || "Something went wrong");
       }
@@ -37,12 +41,12 @@ const MyApplication = () => {
 
   const deleteApplication = async (id) => {
     try {
-      const res = await axios.delete(
+      const { data } = await axios.delete(
         `http://localhost:4000/api/application/delete/${id}`,
         { withCredentials: true }
       );
-      toast.success(res.data.message);
-      setApplication((prev) => prev.filter((app) => app._id !== id));
+      toast.success(data.message);
+      setApplications((prev) => prev.filter((app) => app._id !== id));
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to delete");
     }
@@ -57,63 +61,129 @@ const MyApplication = () => {
     setModalOpen(false);
   };
 
+  const openZoomForm = (application) => {
+    setSelectedApplication(application);
+    setShowZoomForm(true);
+  };
+
+  const closeZoomForm = () => {
+    setSelectedApplication(null);
+    setShowZoomForm(false);
+  };
+
+  const handleInterviewScheduled = (interview) => {
+    setApplications((prev) =>
+      prev.map((app) =>
+        app._id === interview.application
+          ? {
+              ...app,
+              employerID: { ...app.employerID, interviewScheduled: true },
+            }
+          : app
+      )
+    );
+    toast.success("Interview scheduled successfully!");
+  };
+
   return (
-    <div className="my_application page">
+    <div className="w-full min-h-screen flex flex-col items-center py-8 px-4 sm:px-6 lg:px-8">
+      <div className="absolute top-0 left-0 h-full w-full -z-10">
+        <BgAnimation />
+      </div>
       {user && user.role === "Job Seeker" ? (
-        <div className="container">
-          <h1>My Applications</h1>
-          {application.length <= 0 ? (
-            <h4>No Application Found</h4>
+        <div className="max-w-6xl mx-auto flex flex-col items-center">
+          <h3 className="text-4xl text-white font-medium mb-10 italic relative inline-block group">
+            <span className="hover-underline">My Applications</span>
+            <span className="absolute left-0 -bottom-[14px] w-full h-[5px] bg-gradient-to-r from-red-500 to-cyan-400 scale-x-0 group-hover:scale-x-100 origin-right group-hover:origin-left transition-transform duration-500"></span>
+            <span className="absolute left-0 -top-[5px] w-full h-[5px] bg-gradient-to-r from-red-500 to-cyan-400 scale-x-0 group-hover:scale-x-100 origin-left group-hover:origin-right transition-transform duration-500"></span>
+          </h3>
+
+          {applications.length <= 0 ? (
+            <h4 className="text-center text-white mt-10 text-2xl">
+              No Applications Found
+            </h4>
           ) : (
-            application.map((element) => (
-              <JobSeekerCard
-                key={element._id}
-                element={element}
-                deleteApplication={deleteApplication}
-                openModal={openModal}
-              />
-            ))
+            <div className="grid gap-6">
+              {applications.map((element) => (
+                <JobSeekerCard
+                  key={element._id}
+                  element={element}
+                  deleteApplication={deleteApplication}
+                  openModal={openModal}
+                />
+              ))}
+            </div>
           )}
         </div>
       ) : (
-        <div className="container">
-          <h3>Applications from Job Seekers</h3>
-          {application.map((element) => (
-            <EmployerCard
-              key={element._id}
-              element={element}
-              openModal={openModal}
-            />
-          ))}
+        <div className="max-w-6xl mx-auto flex flex-col items-center">
+          <h3 className="text-4xl text-white font-medium mb-10 italic relative inline-block group">
+            <span className="hover-underline">
+              Applications from job seekers
+            </span>
+            <span className="absolute left-0 -bottom-[14px] w-full h-[5px] bg-gradient-to-r from-red-500 to-cyan-400 scale-x-0 group-hover:scale-x-100 origin-right group-hover:origin-left transition-transform duration-500"></span>
+            <span className="absolute left-0 -top-[5px] w-full h-[5px] bg-gradient-to-r from-red-500 to-cyan-400 scale-x-0 group-hover:scale-x-100 origin-left group-hover:origin-right transition-transform duration-500"></span>
+          </h3>
+
+          {applications.length <= 0 ? (
+            <h4 className="text-center text-white mt-10 text-2xl">
+              No Applications Found
+            </h4>
+          ) : (
+            <div className="grid gap-6">
+              {applications.map((element) => (
+                <EmployerCard
+                  key={element._id}
+                  element={element}
+                  openModal={openModal}
+                  openZoomForm={openZoomForm}
+                />
+              ))}
+            </div>
+          )}
         </div>
       )}
+
+      {/* Resume Modal */}
       {modalOpen && (
         <ResumeModal imageUrl={resumeImageUrl} onClose={closeModal} />
+      )}
+
+      {/* Interview Zoom Form Modal */}
+      {showZoomForm && selectedApplication && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black opacity-80"></div>
+          <div className="relative p-6 w-full max-w-md mx-4 z-50">
+            <button
+              onClick={closeZoomForm}
+              className="absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white rounded-full p-2"
+            >
+              ✕
+            </button>
+            <ZoomForm application={selectedApplication} />
+          </div>
+        </div>
       )}
     </div>
   );
 };
-
-export default MyApplication;
 
 const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
   return (
     <div className="job_seeker_card">
       <div className="detail">
         <p>
-          <span>Name:</span> {element.name}
+          <span>Job Title:</span> {element.job?.title || "N/A"}
         </p>
         <p>
-          <span>Email:</span> {element.email}
+          <span>Status:</span>{" "}
+          {element.employerID?.interviewScheduled
+            ? "Interview Scheduled"
+            : "Under Review"}
         </p>
         <p>
-          <span>Phone:</span> {element.phone}
-        </p>
-        <p>
-          <span>Address:</span> {element.address}
-        </p>
-        <p>
-          <span>CoverLetter:</span> {element.coverLetter}
+          <span>Applied On:</span>{" "}
+          {new Date(element.createdAt).toLocaleDateString()}
         </p>
       </div>
       <div className="resume">
@@ -121,44 +191,71 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
           src={element.resume.url}
           alt="resume"
           onClick={() => openModal(element.resume.url)}
+          style={{ cursor: "pointer" }}
         />
       </div>
       <div className="btn_area">
         <button onClick={() => deleteApplication(element._id)}>
-          Delete Application
+          Withdraw Application
         </button>
       </div>
     </div>
   );
 };
 
-const EmployerCard = ({ element, openModal }) => {
+const EmployerCard = ({ element, openModal, openZoomForm }) => {
   return (
-    <div className="job_seeker_card">
-      <div className="detail">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 flex flex-col sm:flex-row items-center gap-8 hover:shadow-2xl transition-all duration-300">
+      {/* Details Section */}
+      <div className="flex-1 space-y-3 text-gray-900 dark:text-gray-100">
         <p>
-          <span>Name:</span> {element.name}
+          <span className="font-semibold">Name:</span> {element.name}
         </p>
         <p>
-          <span>Email:</span> {element.email}
+          <span className="font-semibold">Email:</span>{" "}
+          {element.email || "Not provided"}
         </p>
         <p>
-          <span>Phone:</span> {element.phone}
+          <span className="font-semibold">Phone:</span>{" "}
+          {element.phone || "Not provided"}
         </p>
         <p>
-          <span>Address:</span> {element.address}
-        </p>
-        <p>
-          <span>CoverLetter:</span> {element.coverLetter}
+          <span className="font-semibold">Address:</span>{" "}
+          {element.address || "Not provided"}
         </p>
       </div>
-      <div className="resume">
-        <img
-          src={element.resume.url}
-          alt="resume"
-          onClick={() => openModal(element.resume.url)}
-        />
+
+      {/* Resume Section */}
+      {element.resume?.url && (
+        <div
+          className="w-32 h-40 cursor-pointer overflow-hidden rounded-md shadow-md hover:scale-105 transition-transform"
+          onClick={() => openModal(element.resume?.url)}
+        >
+          <img
+            src={element.resume.url}
+            alt="Resume"
+            className="object-cover w-full h-full bg-green-500"
+          />
+        </div>
+      )}
+
+      {/* Button Area */}
+      <div className="w-full sm:w-auto">
+        <button
+          onClick={() => openZoomForm(element)}
+          className={`w-full sm:w-auto px-5 py-3 rounded-md text-white font-semibold transition-colors ${
+            element.employerID?.interviewScheduled
+              ? "bg-green-500 hover:bg-green-600"
+              : "bg-blue-500 hover:bg-blue-600"
+          }`}
+        >
+          {element.employerID?.interviewScheduled
+            ? "View Interview"
+            : "Invite for Interview"}
+        </button>
       </div>
     </div>
   );
 };
+
+export default MyApplications;
