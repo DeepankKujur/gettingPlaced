@@ -51,7 +51,7 @@ const JobCategoriesPage = () => {
     <div className="w-full min-h-screen flex flex-col items-center py-8 px-4 sm:px-6 lg:px-8">
       <div className="absolute top-0 left-0 h-full w-full -z-10">
         <BgAnimation />
-      </div>   
+      </div>
       <h3 className="text-4xl text-white font-medium mb-6 italic relative inline-block group">
         <span className="hover-underline">Job Categories</span>
         <span className="absolute left-0 -bottom-[14px] w-full h-[5px] bg-gradient-to-r from-red-500 to-cyan-400 scale-x-0 group-hover:scale-x-100 origin-right group-hover:origin-left transition-transform duration-500"></span>
@@ -72,7 +72,9 @@ const JobCategoriesPage = () => {
               <h2 className="text-xl font-semibold dark:text-white text-black mb-2">
                 {category.title}
               </h2>
-              <p className="text-gray-600 dark:text-gray-300 text-sm">{category.description}</p>
+              <p className="text-gray-600 dark:text-gray-300 text-sm">
+                {category.description}
+              </p>
             </div>
           </div>
         ))}

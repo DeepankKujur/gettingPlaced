@@ -11,10 +11,10 @@ const Home = () => {
       <div className="absolute top-0 left-0 h-full w-full -z-10">
         <BgAnimation />
       </div>
-        <HeroSection />
-        <HowItWorks />
-        <PopularCategories />
-        <PopularCompanies />
+      <HeroSection />
+      <HowItWorks />
+      <PopularCategories />
+      <PopularCompanies />
     </div>
   );
 };

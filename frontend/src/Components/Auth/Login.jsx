@@ -3,8 +3,7 @@ import toast from "react-hot-toast";
 import { Context } from "../../main";
 import { FaRegUser } from "react-icons/fa";
 import { RiLock2Fill } from "react-icons/ri";
-import { useNavigate } from "react-router-dom";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useContext, useState } from "react";
 import { MdOutlineMailOutline } from "react-icons/md";
 

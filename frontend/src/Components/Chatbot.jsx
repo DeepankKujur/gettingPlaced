@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { MessageCircle, X } from "lucide-react"; // Icons for UI
+import { MessageCircle, X } from "lucide-react";
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isChatOpen, setIsChatOpen] = useState(false); // State for toggling chatbox
 
-  const API_KEY = "AIzaSyDvvdqVBlH0m8R_awO-336aaD1nn3SwKOQ";  const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+  const API_KEY = "AIzaSyDvvdqVBlH0m8R_awO-336aaD1nn3SwKOQ";
+  const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
   const generateBotResponse = async () => {
     const requestOptions = {
@@ -57,7 +58,7 @@ const Chatbot = () => {
         <div className="w-80 h-96 flex flex-col bg-white shadow-lg rounded-lg fixed bottom-16 right-5">
           {/* Header */}
           <div className="bg-blue-500 text-white p-3 flex justify-between items-center rounded-t-lg ">
-          <h2 className="text-lg font-semibold ">Chat With Me</h2>
+            <h2 className="text-lg font-semibold ">Chat With Me</h2>
             <button onClick={() => setIsChatOpen(false)}>
               <X size={20} />
             </button>

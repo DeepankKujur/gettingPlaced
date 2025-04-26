@@ -27,7 +27,7 @@ async function getZoomAccessToken() {
 
 // Create meeting
 router.post("/create-meeting", async (req, res) => {
-  const { date, time, note } = req.body;
+  const { date, time, company } = req.body;
   try {
     const accessToken = await getZoomAccessToken();
     const dateTimeISO = new Date(`${date}T${time}`).toISOString();
@@ -35,7 +35,7 @@ router.post("/create-meeting", async (req, res) => {
     const meetingResponse = await axios.post(
       "https://api.zoom.us/v2/users/me/meetings",
       {
-        topic: note || "Scheduled Meeting",
+        topic: company || "Scheduled Meeting",
         type: 2,
         start_time: dateTimeISO,
         duration: 60,

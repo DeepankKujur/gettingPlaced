@@ -41,18 +41,18 @@ const PopularCompanies = () => {
                 className="w-[220px] h-[120px] bg-gray-100 dark:bg-gray-800 hover:scale-105 p-5 rounded-lg flex justify-evenly items-center shadow-sm hover:shadow-lg transition-transform duration-100 border border-gray-200 dark:border-gray-700 cursor-pointer"
                 key={element.id}
               >
-                  <div className="text-gray-500 dark:text-gray-400 text-4xl">
-                    {element.icon}
-                  </div>
-                  <div className="text">
-                    <p className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                      {element.title}
-                    </p>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">
-                      {element.location}
-                    </p>
-                  </div>
+                <div className="text-gray-500 dark:text-gray-400 text-4xl">
+                  {element.icon}
                 </div>
+                <div className="text">
+                  <p className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                    {element.title}
+                  </p>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm">
+                    {element.location}
+                  </p>
+                </div>
+              </div>
             );
           })}
         </div>

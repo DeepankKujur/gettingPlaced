@@ -25,7 +25,7 @@ export default function NewNavbar() {
   return (
     <>
       {/* Top Navbar */}
-      <nav className="bg-white border-gray-200 dark:bg-gray-900 ">
+      <nav className="border-gray-200 bg-gray-900 ">
         <div className="flex flex-wrap justify-between items-center mx-auto w-full px-4 py-3">
           <Link to={"/"}>
             <img

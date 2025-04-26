@@ -5,6 +5,7 @@ import ResumeModal from "./ResumeModal";
 import ZoomForm from "../ZoomForm.jsx";
 import { useNavigate } from "react-router-dom";
 import React, { useContext, useEffect, useState } from "react";
+import BgAnimation from "../Layout/BgAnimation.jsx";
 
 const MyApplications = () => {
   const [applications, setApplications] = useState([]);
@@ -85,51 +86,79 @@ const MyApplications = () => {
   };
 
   return (
-    <div className="my_applications page">
+    <div className="w-full min-h-screen flex flex-col items-center py-8 px-4 sm:px-6 lg:px-8">
+      <div className="absolute top-0 left-0 h-full w-full -z-10">
+        <BgAnimation />
+      </div>
       {user && user.role === "Job Seeker" ? (
-        <div className="container">
-          <h1>My Applications</h1>
+        <div className="max-w-6xl mx-auto flex flex-col items-center">
+          <h3 className="text-4xl text-white font-medium mb-10 italic relative inline-block group">
+            <span className="hover-underline">My Applications</span>
+            <span className="absolute left-0 -bottom-[14px] w-full h-[5px] bg-gradient-to-r from-red-500 to-cyan-400 scale-x-0 group-hover:scale-x-100 origin-right group-hover:origin-left transition-transform duration-500"></span>
+            <span className="absolute left-0 -top-[5px] w-full h-[5px] bg-gradient-to-r from-red-500 to-cyan-400 scale-x-0 group-hover:scale-x-100 origin-left group-hover:origin-right transition-transform duration-500"></span>
+          </h3>
+
           {applications.length <= 0 ? (
-            <h4>No Applications Found</h4>
+            <h4 className="text-center text-white mt-10 text-2xl">
+              No Applications Found
+            </h4>
           ) : (
-            applications.map((element) => (
-              <JobSeekerCard
-                key={element._id}
-                element={element}
-                deleteApplication={deleteApplication}
-                openModal={openModal}
-              />
-            ))
+            <div className="grid gap-6">
+              {applications.map((element) => (
+                <JobSeekerCard
+                  key={element._id}
+                  element={element}
+                  deleteApplication={deleteApplication}
+                  openModal={openModal}
+                />
+              ))}
+            </div>
           )}
         </div>
       ) : (
-        <div className="container">
-          <h3>Applications from Job Seekers</h3>
+        <div className="max-w-6xl mx-auto flex flex-col items-center">
+          <h3 className="text-4xl text-white font-medium mb-10 italic relative inline-block group">
+            <span className="hover-underline">
+              Applications from job seekers
+            </span>
+            <span className="absolute left-0 -bottom-[14px] w-full h-[5px] bg-gradient-to-r from-red-500 to-cyan-400 scale-x-0 group-hover:scale-x-100 origin-right group-hover:origin-left transition-transform duration-500"></span>
+            <span className="absolute left-0 -top-[5px] w-full h-[5px] bg-gradient-to-r from-red-500 to-cyan-400 scale-x-0 group-hover:scale-x-100 origin-left group-hover:origin-right transition-transform duration-500"></span>
+          </h3>
+
           {applications.length <= 0 ? (
-            <h4>No Applications Found</h4>
+            <h4 className="text-center text-white mt-10 text-2xl">
+              No Applications Found
+            </h4>
           ) : (
-            applications.map((element) => (
-              <EmployerCard
-                key={element._id}
-                element={element}
-                openModal={openModal}
-                openZoomForm={openZoomForm}
-              />
-            ))
+            <div className="grid gap-6">
+              {applications.map((element) => (
+                <EmployerCard
+                  key={element._id}
+                  element={element}
+                  openModal={openModal}
+                  openZoomForm={openZoomForm}
+                />
+              ))}
+            </div>
           )}
         </div>
       )}
+
+      {/* Resume Modal */}
       {modalOpen && (
         <ResumeModal imageUrl={resumeImageUrl} onClose={closeModal} />
       )}
+
+      {/* Interview Zoom Form Modal */}
       {showZoomForm && selectedApplication && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="relative">
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black opacity-80"></div>
+          <div className="relative p-6 w-full max-w-md mx-4 z-50">
             <button
               onClick={closeZoomForm}
-              className="absolute top-0 right-0 m-2 bg-red-500 text-white rounded-full px-3 py-1 text-sm hover:bg-red-600"
+              className="absolute top-8 right-8 bg-red-500 hover:bg-red-600 text-white rounded-xl p-2"
             >
-              ✕
+              Close
             </button>
             <ZoomForm application={selectedApplication} />
           </div>
@@ -176,35 +205,45 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
 
 const EmployerCard = ({ element, openModal, openZoomForm }) => {
   return (
-    <div className="job_seeker_card">
-      <div className="detail">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 flex flex-col sm:flex-row items-center gap-8 hover:shadow-2xl transition-all duration-300">
+      {/* Details Section */}
+      <div className="flex-1 space-y-3 text-gray-900 dark:text-gray-100">
         <p>
-          <span>Name:</span> {element.name}
+          <span className="font-semibold">Name:</span> {element.name}
         </p>
         <p>
-          <span>Email:</span> {element.email || "Not provided"}
+          <span className="font-semibold">Email:</span>{" "}
+          {element.email || "Not provided"}
         </p>
         <p>
-          <span>Phone:</span> {element.phone || "Not provided"}
+          <span className="font-semibold">Phone:</span>{" "}
+          {element.phone || "Not provided"}
         </p>
         <p>
-          <span>Address:</span> {element.address || "Not provided"}
+          <span className="font-semibold">Address:</span>{" "}
+          {element.address || "Not provided"}
         </p>
       </div>
 
-      <div className="resume">
-        <img
-          src={element.resume?.url}
-          alt="resume"
+      {/* Resume Section */}
+      {element.resume?.url && (
+        <div
+          className="w-32 h-40 cursor-pointer overflow-hidden rounded-md shadow-md hover:scale-105 transition-transform"
           onClick={() => openModal(element.resume?.url)}
-          style={{ cursor: "pointer" }}
-        />
-      </div>
+        >
+          <img
+            src={element.resume.url}
+            alt="Resume"
+            className="object-cover w-full h-full bg-green-500"
+          />
+        </div>
+      )}
 
-      <div className="btn_area">
+      {/* Button Area */}
+      <div className="w-full sm:w-auto">
         <button
           onClick={() => openZoomForm(element)}
-          className={`px-4 py-2 rounded text-white ${
+          className={`w-full sm:w-auto px-5 py-3 rounded-md text-white font-semibold transition-colors ${
             element.employerID?.interviewScheduled
               ? "bg-green-500 hover:bg-green-600"
               : "bg-blue-500 hover:bg-blue-600"
@@ -218,6 +257,5 @@ const EmployerCard = ({ element, openModal, openZoomForm }) => {
     </div>
   );
 };
-
 
 export default MyApplications;
