@@ -62,8 +62,18 @@ const PostJob = () => {
           },
         }
       )
-      .then((res) => {     
+      .then((res) => {
         toast.success(res.data.message);
+        setTitle("");
+        setDescription("");
+        setCategory("");
+        setCountry("");
+        setCity("");
+        setLocation("");
+        setSalaryFrom("");
+        setSalaryTo("");
+        setFixedSalary("");
+        setSalaryType("default");
       })
       .catch((err) => {
         toast.error(err.message);
@@ -114,36 +124,28 @@ const PostJob = () => {
             >
               Category
             </label>
-            <select
-              id="category"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              className="w-full bg-gray-900 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-100"
-            >
-              <option value="">Select Category</option>
-              <option value="Graphics & Design">Graphics & Design</option>
-              <option value="Mobile App Development">
-                Mobile App Development
-              </option>
-              <option value="Frontend Web Development">
-                Frontend Web Development
-              </option>
-              <option value="MERN Stack Development">
-                MERN STACK Development
-              </option>
-              <option value="Account & Finance">Account & Finance</option>
-              <option value="Artificial Intelligence">
-                Artificial Intelligence
-              </option>
-              <option value="Video Animation">Video Animation</option>
-              <option value="MEAN Stack Development">
-                MEAN STACK Development
-              </option>
-              <option value="MEVN Stack Development">
-                MEVN STACK Development
-              </option>
-              <option value="Data Entry Operator">Data Entry Operator</option>
-            </select>
+            <input
+  list="categories"
+  id="category"
+  value={category}
+  onChange={(e) => setCategory(e.target.value)}
+  placeholder="Select or type category"
+  className="w-full bg-gray-900 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-100"
+/>
+
+<datalist id="categories">
+  <option value="Graphics & Design" />
+  <option value="Mobile App Development" />
+  <option value="Frontend Web Development" />
+  <option value="MERN Stack Development" />
+  <option value="Account & Finance" />
+  <option value="Artificial Intelligence" />
+  <option value="Video Animation" />
+  <option value="MEAN Stack Development" />
+  <option value="MEVN Stack Development" />
+  <option value="Data Entry Operator" />
+</datalist>
+
           </div>
         </div>
 

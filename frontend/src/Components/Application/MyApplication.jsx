@@ -77,7 +77,7 @@ const MyApplications = () => {
         app._id === interview.application
           ? {
               ...app,
-              employerID: { ...app.employerID, interviewScheduled: true },
+              interviewScheduled: true,
             }
           : app
       )
@@ -169,7 +169,6 @@ const MyApplications = () => {
 };
 
 const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
-  console.log("element is ", element.jobId);
 
   return (
     <div className="bg-white rounded-2xl shadow-md p-6 flex flex-col md:flex-row items-center justify-between gap-6">
@@ -180,13 +179,7 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
         </p>
         <p className="text-gray-700">
           <span className="font-semibold text-gray-900">Status:</span>{" "}
-          {element.employerID?.interviewScheduled
-            ? "Interview Scheduled"
-            : "Under Review"}
-        </p>
-        <p className="text-gray-700">
-          <span className="font-semibold text-gray-900">Applied On:</span>{" "}
-          {new Date(element.createdAt).toLocaleDateString()}
+          {element.interviewScheduled ? "Interview Scheduled" : "Under Review"}
         </p>
       </div>
 
@@ -214,7 +207,6 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
 const EmployerCard = ({ element, openModal, openZoomForm }) => {
   return (
     <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 flex flex-col sm:flex-row items-center gap-8 hover:shadow-2xl transition-all duration-300">
-      {/* Details Section */}
       <div className="flex-1 space-y-3 text-gray-900 dark:text-gray-100">
         <p>
           <span className="font-semibold">Name:</span> {element.name}
@@ -247,20 +239,44 @@ const EmployerCard = ({ element, openModal, openZoomForm }) => {
         </div>
       )}
 
-      {/* Button Area */}
       <div className="w-full sm:w-auto">
-        <button
-          onClick={() => openZoomForm(element)}
-          className={`w-full sm:w-auto px-5 py-3 rounded-md text-white font-semibold transition-colors ${
-            element.employerID?.interviewScheduled
-              ? "bg-green-500 hover:bg-green-600"
-              : "bg-blue-500 hover:bg-blue-600"
-          }`}
-        >
-          {element.employerID?.interviewScheduled
-            ? "View Interview"
-            : "Invite for Interview"}
-        </button>
+        {element.interviewScheduled && element.zoomHostLink ? (
+          <>
+            {/* Interview Info Card */}
+            <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 shadow-md mb-4">
+              <h3 className="text-sm font-medium text-gray-800 mb-2">
+                Interview Details
+              </h3>
+              <div className="space-y-1 text-sm text-gray-700">
+                <p>
+                  <span className="font-semibold text-gray-900">📅 Date:</span>{" "}
+                  {element.interviewDate}
+                </p>
+                <p>
+                  <span className="font-semibold text-gray-900">⏰ Time:</span>{" "}
+                  {element.interviewTime}
+                </p>
+              </div>
+            </div>
+
+            {/* Host Button */}
+            <a
+              href={element.zoomHostLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full text-center px-5 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-md transition"
+            >
+              Host Interview
+            </a>
+          </>
+        ) : (
+          <button
+            onClick={() => openZoomForm(element)}
+            className="w-full px-5 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md transition"
+          >
+            Invite for Interview
+          </button>
+        )}
       </div>
     </div>
   );
