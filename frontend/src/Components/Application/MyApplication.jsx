@@ -170,32 +170,38 @@ const MyApplications = () => {
 
 const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
   return (
-    <div className="job_seeker_card">
-      <div className="detail">
-        <p>
-          <span>Job Title:</span> {element.job?.title || "N/A"}
+    <div className="bg-white rounded-2xl shadow-md p-6 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="flex-1 space-y-3">
+        <p className="text-gray-700">
+          <span className="font-semibold text-gray-900">Job Title:</span>{" "}
+          {element.job?.title || "N/A"}
         </p>
-        <p>
-          <span>Status:</span>{" "}
+        <p className="text-gray-700">
+          <span className="font-semibold text-gray-900">Status:</span>{" "}
           {element.employerID?.interviewScheduled
             ? "Interview Scheduled"
             : "Under Review"}
         </p>
-        <p>
-          <span>Applied On:</span>{" "}
+        <p className="text-gray-700">
+          <span className="font-semibold text-gray-900">Applied On:</span>{" "}
           {new Date(element.createdAt).toLocaleDateString()}
         </p>
       </div>
-      <div className="resume">
+
+      <div className="flex-shrink-0">
         <img
           src={element.resume.url}
           alt="resume"
           onClick={() => openModal(element.resume.url)}
-          style={{ cursor: "pointer" }}
+          className="w-32 h-32 object-cover rounded-lg cursor-pointer hover:scale-105 transition-transform duration-300"
         />
       </div>
-      <div className="btn_area">
-        <button onClick={() => deleteApplication(element._id)}>
+
+      <div className="flex-shrink-0">
+        <button
+          onClick={() => deleteApplication(element._id)}
+          className="mt-4 md:mt-0 px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-300"
+        >
           Withdraw Application
         </button>
       </div>

@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { Context } from "../../main";
 import React, { useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import BgAnimation from "../Layout/BgAnimation";
 
 function Application() {
   const [name, setName] = useState("");
@@ -44,6 +45,8 @@ function Application() {
           },
         }
       );
+      console.log("saved data is : ", data);
+      
       setName("");
       setEmail("");
       setPhone("");
@@ -53,7 +56,9 @@ function Application() {
       toast.success(data.message);
       navigateTo("/job/getall");
     } catch (error) {
-      toast.error(error.response.data.message);
+      console.log("erorr: ", error);
+      
+      toast.error(error.message);
     }
   };
 
@@ -62,63 +67,72 @@ function Application() {
   }
 
   return (
-    <>
-      <section className="application">
-        <div className="container">
-          <h3>Application Form</h3>
-          <form onSubmit={handleApplication}>
+    <div className="w-full min-h-screen flex flex-col items-center py-8 px-4 sm:px-6 lg:px-8">
+      <div className="absolute top-0 left-0 h-full w-full -z-10">
+        <BgAnimation />
+      </div>
+      <h3 className="text-4xl text-white font-medium mb-10 italic relative inline-block group">
+        <span className="hover-underline">Apply here</span>
+        <span className="absolute left-0 -bottom-[14px] w-full h-[5px] bg-gradient-to-r from-red-500 to-cyan-400 scale-x-0 group-hover:scale-x-100 origin-right group-hover:origin-left transition-transform duration-500"></span>
+        <span className="absolute left-0 -top-[5px] w-full h-[5px] bg-gradient-to-r from-red-500 to-cyan-400 scale-x-0 group-hover:scale-x-100 origin-left group-hover:origin-right transition-transform duration-500"></span>
+      </h3>
+      <div className="container mx-auto bg-white max-w-2xl p-8 rounded-2xl shadow-md">
+        <form onSubmit={handleApplication} className="space-y-6">
+          <input
+            type="text"
+            placeholder="Your Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="w-full p-3 border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <input
+            type="text"
+            placeholder="Your Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full p-3 border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <input
+            type="number"
+            placeholder="Your Phone"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            className="w-full p-3 border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <input
+            type="text"
+            placeholder="Your Address"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            className="w-full p-3 border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <textarea
+            value={coverLetter}
+            onChange={(e) => setCoverLetter(e.target.value)}
+            placeholder="Cover Letter"
+            rows="5"
+            className="w-full p-3 border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <div>
+            <label className="block text-lg font-medium mb-2">
+              Select Resume
+            </label>
             <input
-              type="text"
-              placeholder="Your Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              type="file"
+              accept=".jpg, .png, .webp"
+              onChange={handleFileChange}
+              className="w-full p-3 border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-            <input
-              type="text"
-              placeholder="Your Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-              type="number"
-              placeholder="Your Phone"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            />
-            <input
-              type="text"
-              placeholder="Your Address"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-            />
-            <textarea
-              value={coverLetter}
-              onChange={(e) => setCoverLetter(e.target.value)}
-              placeholder="Cover Letter"
-            />
-            <div>
-              <label
-                htmlFor=""
-                style={{
-                  textAlign: "start",
-                  display: "block",
-                  fontSize: "20px",
-                }}
-              >
-                Select Resume
-              </label>
-              <input
-                type="file"
-                accept=".jpg, .png, .webp"
-                onChange={handleFileChange}
-                style={{ width: "100%" }}
-              />
-            </div>
-            <button type="submit">Send Application</button>
-          </form>
-        </div>
-      </section>
-    </>
+          </div>
+          <button
+            type="submit"
+            className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300"
+          >
+            Send Application
+          </button>
+        </form>
+      </div>
+    </div>
   );
 }
 

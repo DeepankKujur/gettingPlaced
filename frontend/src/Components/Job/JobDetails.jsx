@@ -82,7 +82,7 @@ const JobDetails = () => {
             <div className="pt-4">
               <Link
                 to={`/application/${job._id}`}
-                className="inline-block w-full text-center text-white bg-gradient-to-r from-red-500 to-cyan-400 py-3 rounded-md hover:scale-105 transition-transform font-semibold"
+                className="inline-block w-full text-center text-white bg-blue-600 py-3 rounded-md hover:scale-105 transition-transform font-semibold"
               >
                 Apply Now
               </Link>
