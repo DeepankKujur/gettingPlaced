@@ -22,7 +22,7 @@ import Chatbot from "./Components/Chatbot";
 export default function App() {
   return (
     <Router>
-      <NewNavbar />
+      <NewNavbar/>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

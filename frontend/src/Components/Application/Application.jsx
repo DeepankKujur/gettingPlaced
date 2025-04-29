@@ -64,61 +64,63 @@ function Application() {
 
   return (
     <>
-      <section className="application">
-        <div className="container">
-          <h3>Application Form</h3>
-          <form onSubmit={handleApplication}>
+      <section className="bg-gray-100 py-8 px-4">
+        <div className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
+          <h3 className="text-2xl font-semibold text-center text-gray-800 mb-6">Application Form</h3>
+          <form onSubmit={handleApplication} className="space-y-4">
             <input
               type="text"
               placeholder="Your Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <input
               type="text"
               placeholder="Your Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <input
               type="number"
               placeholder="Your Phone"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <input
               type="text"
               placeholder="Your Address"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <textarea
               value={coverLetter}
               onChange={(e) => setCoverLetter(e.target.value)}
               placeholder="Cover Letter"
+              className="w-full p-3 border border-gray-300 rounded-md resize-y focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <div>
-              <label
-                htmlFor=""
-                style={{
-                  textAlign: "start",
-                  display: "block",
-                  fontSize: "20px",
-                }}
-              >
-                Select Resume
-              </label>
+              <label className="block text-lg mb-1 text-gray-700">Select Resume</label>
               <input
                 type="file"
                 accept=".jpg, .png, .webp"
                 onChange={handleFileChange}
-                style={{ width: "100%" }}
+                className="w-full p-2 border border-gray-300 rounded-md file:cursor-pointer bg-white"
               />
             </div>
-            <button type="submit">Send Application</button>
+            <button
+              type="submit"
+              className="w-full bg-blue-600 text-white font-semibold py-3 rounded-md hover:bg-blue-700 transition"
+            >
+              Send Application
+            </button>
           </form>
         </div>
       </section>
+
     </>
   );
 }

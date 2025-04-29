@@ -75,9 +75,9 @@ const MyApplications = () => {
       prev.map((app) =>
         app._id === interview.application
           ? {
-              ...app,
-              employerID: { ...app.employerID, interviewScheduled: true },
-            }
+            ...app,
+            employerID: { ...app.employerID, interviewScheduled: true },
+          }
           : app
       )
     );
@@ -85,12 +85,12 @@ const MyApplications = () => {
   };
 
   return (
-    <div className="my_applications page">
+    <div className="my_applications page px-4 py-6 min-h-screen bg-gray-50">
       {user && user.role === "Job Seeker" ? (
-        <div className="container">
-          <h1>My Applications</h1>
+        <div className="container max-w-6xl mx-auto space-y-6">
+          <h1 className="text-3xl font-bold text-gray-800 mb-4">My Applications</h1>
           {applications.length <= 0 ? (
-            <h4>No Applications Found</h4>
+            <h4 className="text-lg text-gray-600">No Applications Found</h4>
           ) : (
             applications.map((element) => (
               <JobSeekerCard
@@ -103,10 +103,10 @@ const MyApplications = () => {
           )}
         </div>
       ) : (
-        <div className="container">
-          <h3>Applications from Job Seekers</h3>
+        <div className="container max-w-6xl mx-auto space-y-6">
+          <h3 className="text-2xl font-semibold text-gray-800 mb-4">Applications from Job Seekers</h3>
           {applications.length <= 0 ? (
-            <h4>No Applications Found</h4>
+            <h4 className="text-lg text-gray-600">No Applications Found</h4>
           ) : (
             applications.map((element) => (
               <EmployerCard
@@ -119,12 +119,14 @@ const MyApplications = () => {
           )}
         </div>
       )}
+
       {modalOpen && (
         <ResumeModal imageUrl={resumeImageUrl} onClose={closeModal} />
       )}
+
       {showZoomForm && selectedApplication && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="relative">
+          <div className="relative bg-white rounded-lg shadow-lg p-4 w-full max-w-lg">
             <button
               onClick={closeZoomForm}
               className="absolute top-0 right-0 m-2 bg-red-500 text-white rounded-full px-3 py-1 text-sm hover:bg-red-600"
@@ -136,79 +138,85 @@ const MyApplications = () => {
         </div>
       )}
     </div>
+
   );
 };
 
 const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
   return (
-    <div className="job_seeker_card">
-      <div className="detail">
+    <div className="job_seeker_card flex flex-col md:flex-row gap-4 p-4 bg-white rounded-lg shadow-md border border-gray-200 w-full max-w-4xl mx-auto">
+      <div className="detail flex-1 text-gray-800 space-y-2">
         <p>
-          <span>Job Title:</span> {element.job?.title || "N/A"}
+          <span className="font-semibold">Job Title:</span> {element.job?.title || "N/A"}
         </p>
         <p>
-          <span>Status:</span>{" "}
+          <span className="font-semibold">Status:</span>{" "}
           {element.employerID?.interviewScheduled
             ? "Interview Scheduled"
             : "Under Review"}
         </p>
         <p>
-          <span>Applied On:</span>{" "}
+          <span className="font-semibold">Applied On:</span>{" "}
           {new Date(element.createdAt).toLocaleDateString()}
         </p>
       </div>
-      <div className="resume">
+
+      <div className="resume w-full md:w-1/4 flex items-center justify-center">
         <img
           src={element.resume.url}
           alt="resume"
           onClick={() => openModal(element.resume.url)}
-          style={{ cursor: "pointer" }}
+          className="w-32 h-40 object-cover rounded-lg shadow cursor-pointer transition-transform hover:scale-105"
         />
       </div>
-      <div className="btn_area">
-        <button onClick={() => deleteApplication(element._id)}>
+
+      <div className="btn_area flex items-center justify-center md:items-end md:justify-end">
+        <button
+          onClick={() => deleteApplication(element._id)}
+          className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded transition-colors"
+        >
           Withdraw Application
         </button>
       </div>
     </div>
+
   );
 };
 
 const EmployerCard = ({ element, openModal, openZoomForm }) => {
   return (
-    <div className="job_seeker_card">
-      <div className="detail">
+    <div className="job_seeker_card flex flex-col md:flex-row gap-4 p-4 bg-white rounded-lg shadow-md border border-gray-200 w-full max-w-4xl mx-auto">
+      <div className="detail flex-1 text-gray-800 space-y-2">
         <p>
-          <span>Name:</span> {element.name}
+          <span className="font-semibold">Name:</span> {element.name}
         </p>
         <p>
-          <span>Email:</span> {element.email || "Not provided"}
+          <span className="font-semibold">Email:</span> {element.email || "Not provided"}
         </p>
         <p>
-          <span>Phone:</span> {element.phone || "Not provided"}
+          <span className="font-semibold">Phone:</span> {element.phone || "Not provided"}
         </p>
         <p>
-          <span>Address:</span> {element.address || "Not provided"}
+          <span className="font-semibold">Address:</span> {element.address || "Not provided"}
         </p>
       </div>
 
-      <div className="resume">
+      <div className="resume w-full md:w-1/4 flex items-center justify-center">
         <img
           src={element.resume?.url}
           alt="resume"
           onClick={() => openModal(element.resume?.url)}
-          style={{ cursor: "pointer" }}
+          className="w-32 h-40 object-cover rounded-lg shadow cursor-pointer transition-transform hover:scale-105"
         />
       </div>
 
-      <div className="btn_area">
+      <div className="btn_area flex items-center justify-center md:items-end md:justify-end">
         <button
           onClick={() => openZoomForm(element)}
-          className={`px-4 py-2 rounded text-white ${
-            element.employerID?.interviewScheduled
-              ? "bg-green-500 hover:bg-green-600"
-              : "bg-blue-500 hover:bg-blue-600"
-          }`}
+          className={`px-4 py-2 rounded text-white transition-colors ${element.employerID?.interviewScheduled
+            ? "bg-green-500 hover:bg-green-600"
+            : "bg-blue-500 hover:bg-blue-600"
+            }`}
         >
           {element.employerID?.interviewScheduled
             ? "View Interview"
@@ -216,6 +224,7 @@ const EmployerCard = ({ element, openModal, openZoomForm }) => {
         </button>
       </div>
     </div>
+
   );
 };
 
