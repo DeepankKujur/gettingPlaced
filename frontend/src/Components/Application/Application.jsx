@@ -23,6 +23,7 @@ function Application() {
   };
 
   const { id } = useParams();
+  
   const handleApplication = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -78,6 +79,11 @@ function Application() {
       </h3>
       <div className="container mx-auto bg-white max-w-2xl p-8 rounded-2xl shadow-md">
         <form onSubmit={handleApplication} className="space-y-6">
+        <input
+            type="text"
+            value= {id}
+            className="w-full p-3 border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
           <input
             type="text"
             placeholder="Your Name"
