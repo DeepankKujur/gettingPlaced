@@ -1,18 +1,59 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FaBuilding, FaSuitcase, FaUsers, FaUserPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../main";
 import { Typewriter } from "react-simple-typewriter";
+import axios from "axios";
 
 const HeroSection = () => {
   const navigate = useNavigate();
   const { isAuthorized } = useContext(Context);
 
+  const [stats, setStats] = useState({
+    liveJobs: -1,
+    companies: -1,
+    jobSeekers: -1,
+    employers: -1,
+  });
+  
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const {data} = await axios.get("http://localhost:4000/api/totalCounts/");
+        console.log("Fetched stats:", data);        
+        setStats(data);
+      } catch (error) {
+        console.error("Failed to fetch stats:", error);
+      }
+    };
+    fetchStats(); 
+  }, []);
+  
   const details = [
-    { id: 1, title: "1,23,441", subTitle: "Live Job", icon: <FaSuitcase /> },
-    { id: 2, title: "91220", subTitle: "Companies", icon: <FaBuilding /> },
-    { id: 3, title: "2,34,200", subTitle: "Job Seekers", icon: <FaUsers /> },
-    { id: 4, title: "1,03,761", subTitle: "Employers", icon: <FaUserPlus /> },
+    {
+      id: 1,
+      title: stats.liveJobs.toLocaleString(),
+      subTitle: "Live Jobs",
+      icon: <FaSuitcase />,
+    },
+    {
+      id: 2,
+      title: stats.companies.toLocaleString(),
+      subTitle: "Companies",
+      icon: <FaBuilding />,
+    },
+    {
+      id: 3,
+      title: stats.jobSeekers.toLocaleString(),
+      subTitle: "Job Seekers",
+      icon: <FaUsers />,
+    },
+    {
+      id: 4,
+      title: stats.employers.toLocaleString(),
+      subTitle: "Employers",
+      icon: <FaUserPlus />,
+    },
   ];
 
   return (
@@ -27,7 +68,6 @@ const HeroSection = () => {
               words={[
                 "Discover job opportunities that truly match your passion. From freshers to experienced professionals, we've got you covered. Take the next step in your career — smart, simple, and fast.",
               ]}
-              // loop={false}
               cursor
               cursorStyle="|"
               typeSpeed={70}
@@ -38,7 +78,7 @@ const HeroSection = () => {
           {!isAuthorized && (
             <button
               type="button"
-              className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-md px-4 py-2 text-center me-2 mt-3 w-24 "
+              className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-md px-4 py-2 text-center me-2 mt-3 w-24"
               onClick={() => navigate("/login")}
             >
               Login
@@ -46,7 +86,6 @@ const HeroSection = () => {
           )}
         </div>
 
-        {/* Image */}
         <div className="flex-1 relative overflow-hidden">
           <img
             src="/heroS.jpg"
@@ -56,7 +95,6 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Details Section */}
       <div className="flex flex-wrap gap-4 justify-between w-full p-12 mx-auto">
         {details.map((item) => (
           <div

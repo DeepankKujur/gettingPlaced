@@ -8,27 +8,30 @@ import userRouter from "./routes/userRouter.js";
 import { errorMiddleware } from "./middlewares/error.js";
 import dbConnection from "./database/dbConnection.js";
 import applicationRouter from "./routes/applicationRouter.js";
-import zoomRoutes from "./routes/zoom.js"
+import zoomRoutes from "./routes/zoom.js";
+import countRouter from "./routes/totalCounts.js";
 import inviteRoutes from "./routes/inviteRoute.js";
 
 dotenv.config();
 const app = express();
 dbConnection();
 
-app.use(cors({
-  origin: "http://localhost:5173", // Your frontend origin
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Your frontend origin
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(fileUpload({
+app.use(
+  fileUpload({
     // can use multer also
     useTempFiles: true,
     tempFileDir: "/tmp/",
   })
 );
-
 
 // Routes
 app.use("/api/user", userRouter);
@@ -36,6 +39,7 @@ app.use("/api/application", applicationRouter);
 app.use("/api/job", jobRouter);
 app.use("/api/zoom", zoomRoutes);
 app.use("/api/invite", inviteRoutes);
+app.use("/api/totalCounts", countRouter);
 
 //app.use(errorMiddleware);      for sometime
 
