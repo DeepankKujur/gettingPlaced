@@ -82,10 +82,11 @@ const Jobs = () => {
             className="bg-gray-800 shadow-md rounded-lg p-5 flex flex-col justify-between h-60"
           >
             <div>
-              <p className="text-xl font-semibold text-gray-100 truncate mb-1">{element.title}</p>
-              <p className="text-md text-white truncate mb-1">{element.category}</p>
-              <p className="text-sm text-white truncate mb-1">Country: {element.country}</p>
-              <p className="text-sm text-gray-300 truncate"><span className="text-blue-400">{element.company}</span></p>
+            <p className="text-3xl font-semibold text-gray-300  text-center truncate"><span className="text-blue-400">{element.company}</span></p>
+              <p className="text-2xl font-semibold text-gray-100  truncate mb-1">{element.title}</p>
+              <p className="text-xl text-white truncate mb-2">{element.category}</p>
+              <p className="text-md text-white truncate mb-3">{element.country}</p>
+             
             </div>
 
             <div className="flex justify-center mt-3">
