@@ -17,38 +17,51 @@ export default function ZoomForm({ application }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (isPastTime()) {
       alert("Please select a future time.");
       return;
     }
-
+  
     setLoading(true);
-    setError(""); // Reset error state on new submission
-
+    setError("");
     try {
-      // Step 1: Create Zoom meeting
+      //Create Zoom meeting
       const res = await axios.post(
         "http://localhost:4000/api/zoom/create-meeting",
         form
       );
       const meetingData = res.data;
       setMeeting(meetingData);
-
-      // Step 2: Send email with nodemailer
-      const emailRes = await axios.post(
-        "http://localhost:4000/api/invite/interview",
+  
+      //Send interview email
+      await axios.post("http://localhost:4000/api/invite/interview", {
+        to: application.email,
+        applicantName: application.name,
+        company: form.company,
+        date: form.date,
+        time: form.time,
+        meetingUrl: meetingData.join_url,
+      });
+  
+      //Update application status
+      await axios.patch(
+        `http://localhost:4000/api/application/status/${application._id}`,
+        {},
+        { withCredentials: true }
+      );
+  
+      //Update application with interview info
+      await axios.patch(
+        `http://localhost:4000/api/application/update/${application._id}`,
         {
-          to: application.email,
-          applicantName: application.name,
-          company: form.company,
-          date: form.date,
-          time: form.time,
-          meetingUrl: meetingData.join_url,
+          interviewScheduled: true,
+          interviewDate: form.date.split("-").reverse().join("-"), // Convert yyyy-mm-dd to dd-mm-yyyy
+          interviewTime: form.time,
+          zoomHostLink: meetingData.start_url,
         }
       );
-
-      // If both operations succeed, set success state to true
+  
       setSuccess(true);
       alert("Invitation email sent to applicant.");
     } catch (err) {
@@ -58,6 +71,7 @@ export default function ZoomForm({ application }) {
       setLoading(false);
     }
   };
+  
 
   const handleDateChange = (e) => {
     setForm({ ...form, date: e.target.value, time: "" }); // Reset time when date changes

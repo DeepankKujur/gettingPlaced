@@ -145,3 +145,36 @@ export const postApplication = catchAsyncError(async (req, res, next) => {
     application,
   });
 });
+
+export const statusIsInterviewScheduled = catchAsyncError(async (req, res) => {
+  const application = await Application.findById(req.params.id);
+
+  if (!application) {
+    return res.status(404).json({ message: "Application not found" });
+  }
+
+  application.interviewScheduled = true;
+  await application.save();
+
+  res.status(200).json({ message: "Interview status updated." });
+});
+
+export const updateApplicationZoomDetails = async (req, res) => {
+  const { id } = req.params;
+  const { interviewScheduled, interviewDate, interviewTime, zoomHostLink } = req.body;
+
+  try {
+    const updated = await Application.findByIdAndUpdate(
+      id,
+      { interviewScheduled, interviewDate, interviewTime, zoomHostLink },
+      { new: true }
+    );
+
+    if (!updated) return res.status(404).json({ message: "Application not found" });
+
+    res.status(200).json({ message: "Application updated", application: updated });
+  } catch (error) {
+    console.error("Update Error:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};

@@ -59,6 +59,19 @@ const applicationSchema = mongoose.Schema({
       required: true,
     },
   },
+  interviewScheduled: {
+    type: Boolean,
+    default: false,
+  },
+  interviewDate: {
+    type: String, 
+  },
+  interviewTime: {
+    type: String,
+  },
+  zoomHostLink: {
+    type: String,
+  },
 });
 
 export const Application = mongoose.model("Application", applicationSchema);
