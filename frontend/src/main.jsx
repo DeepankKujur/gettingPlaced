@@ -17,7 +17,6 @@ const AppWrapper = () => {
         "http://localhost:4000/api/user/public/getuser",
         { withCredentials: true }
       );
-      console.log("data is -----", data);
 
       if (data.user) {
         setUser(data.user);

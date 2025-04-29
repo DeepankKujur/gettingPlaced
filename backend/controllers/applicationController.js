@@ -33,8 +33,11 @@ export const jobSeekerGetAllApplication = catchAsyncError(
         new ErrorHandler("Employer is not allowed to access this resource", 400)
       );
     }
-    const { _id } = req.user;
-    const applications = await Application.find({ "applicantID.user": _id });
+    const applications = await Application.find({
+      "applicantID.user": req.user._id,
+    }).populate("jobId");
+    console.log("backend applications", applications);
+    
     res.status(200).json({
       success: true,
       applications,
@@ -98,6 +101,8 @@ export const postApplication = catchAsyncError(async (req, res, next) => {
     );
     return next(new ErrorHandler("Failed to upload resume", 500));
   }
+  console.log("Request body: ", req.body);
+
   const { name, email, coverLetter, phone, address, jobId } = req.body; //jobId is to check if this job even exist or not
   const applicantID = {
     user: req.user._id,
@@ -134,6 +139,7 @@ export const postApplication = catchAsyncError(async (req, res, next) => {
     address,
     applicantID,
     employerID,
+    jobId,
     resume: {
       public_id: cloudinaryResponse.public_id,
       url: cloudinaryResponse.secure_url,

@@ -35,7 +35,7 @@ const JobDetails = () => {
       </div>
 
       <h3 className="text-4xl text-white font-medium mb-10 italic relative inline-block group">
-        <span className="hover-underline">All Available Jobs</span>
+        <span className="hover-underline">Apply Here</span>
         <span className="absolute left-0 -bottom-[14px] w-full h-[5px] bg-gradient-to-r from-red-500 to-cyan-400 scale-x-0 group-hover:scale-x-100 origin-right group-hover:origin-left transition-transform duration-500"></span>
         <span className="absolute left-0 -top-[5px] w-full h-[5px] bg-gradient-to-r from-red-500 to-cyan-400 scale-x-0 group-hover:scale-x-100 origin-left group-hover:origin-right transition-transform duration-500"></span>
       </h3>
