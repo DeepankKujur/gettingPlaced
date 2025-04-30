@@ -32,29 +32,29 @@ const HeroSection = () => {
   const details = [
     {
       id: 1,
-      title: stats.liveJobs.toLocaleString(),
+      title: stats.liveJobs >= 0 ? stats.liveJobs.toLocaleString() : "N/A",
       subTitle: "Live Jobs",
       icon: <FaSuitcase />,
     },
     {
       id: 2,
-      title: stats.companies.toLocaleString(),
+      title: stats.companies >= 0 ? stats.companies.toLocaleString() : "N/A",
       subTitle: "Companies",
       icon: <FaBuilding />,
     },
     {
       id: 3,
-      title: stats.jobSeekers.toLocaleString(),
+      title: stats.jobSeekers >= 0 ? stats.jobSeekers.toLocaleString() : "N/A",
       subTitle: "Job Seekers",
       icon: <FaUsers />,
     },
     {
       id: 4,
-      title: stats.employers.toLocaleString(),
+      title: stats.employers >= 0 ? stats.employers.toLocaleString() : "N/A",
       subTitle: "Employers",
       icon: <FaUserPlus />,
     },
-  ];
+  ];  
 
   return (
     <div className="flex flex-col py-[75px] px-4 lg:px-0">
