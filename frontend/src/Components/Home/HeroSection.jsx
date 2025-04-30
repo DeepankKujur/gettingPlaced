@@ -20,7 +20,6 @@ const HeroSection = () => {
     const fetchStats = async () => {
       try {
         const {data} = await axios.get("http://localhost:4000/api/totalCounts/");
-        console.log("Fetched stats:", data);        
         setStats(data);
       } catch (error) {
         console.error("Failed to fetch stats:", error);

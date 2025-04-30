@@ -22,7 +22,7 @@ import MyApplications from "./Components/Application/MyApplication";
 export default function App() {
   return (
     <Router>
-      <NewNavbar />
+      <NewNavbar/>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
