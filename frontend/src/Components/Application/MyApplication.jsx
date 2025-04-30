@@ -169,7 +169,6 @@ const MyApplications = () => {
 };
 
 const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
-  console.log("element is ", element.jobId);
 
   return (
     <div className="bg-white rounded-2xl shadow-md p-6 flex flex-col md:flex-row items-center justify-between gap-6">

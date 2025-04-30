@@ -12,20 +12,21 @@ function Application() {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [resume, setResume] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const { isAuthorized, user } = useContext(Context);
   const navigateTo = useNavigate();
+  const { id } = useParams();
 
-  // function to handle file input changes
   const handleFileChange = (e) => {
     const resume = e.target.files[0];
     setResume(resume);
   };
 
-  const { id } = useParams();
-  
   const handleApplication = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     const formData = new FormData();
     formData.append("name", name);
     formData.append("email", email);
@@ -46,8 +47,7 @@ function Application() {
           },
         }
       );
-      console.log("saved data is : ", data);
-      
+
       setName("");
       setEmail("");
       setPhone("");
@@ -57,9 +57,10 @@ function Application() {
       toast.success(data.message);
       navigateTo("/job/getall");
     } catch (error) {
-      console.log("erorr: ", error);
-      
+      console.log("error: ", error);
       toast.error(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -79,9 +80,10 @@ function Application() {
       </h3>
       <div className="container mx-auto bg-white max-w-2xl p-8 rounded-2xl shadow-md">
         <form onSubmit={handleApplication} className="space-y-6">
-        <input
+          <input
             type="text"
-            value= {id}
+            value={id}
+            readOnly
             className="w-full p-3 border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
@@ -132,9 +134,14 @@ function Application() {
           </div>
           <button
             type="submit"
-            className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300"
+            disabled={loading}
+            className={`w-full py-3 font-semibold rounded-lg transition duration-300 ${
+              loading
+                ? "bg-gray-500 cursor-not-allowed text-white"
+                : "bg-blue-600 hover:bg-blue-700 text-white"
+            }`}
           >
-            Send Application
+            {loading ? "Submitting..." : "Send Application"}
           </button>
         </form>
       </div>

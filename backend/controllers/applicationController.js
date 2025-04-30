@@ -36,7 +36,6 @@ export const jobSeekerGetAllApplication = catchAsyncError(
     const applications = await Application.find({
       "applicantID.user": req.user._id,
     }).populate("jobId");
-    console.log("backend applications", applications);
     
     res.status(200).json({
       success: true,
@@ -101,7 +100,6 @@ export const postApplication = catchAsyncError(async (req, res, next) => {
     );
     return next(new ErrorHandler("Failed to upload resume", 500));
   }
-  console.log("Request body: ", req.body);
 
   const { name, email, coverLetter, phone, address, jobId } = req.body; //jobId is to check if this job even exist or not
   const applicantID = {
