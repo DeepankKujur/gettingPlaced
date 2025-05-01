@@ -3,11 +3,21 @@ import { Context } from "../../main";
 import { Link } from "react-router-dom";
 import React, { useContext, useEffect, useState } from "react";
 import BgAnimation from "../Layout/BgAnimation";
+import { useLocation } from "react-router-dom";
 
 const Jobs = () => {
   const [jobs, setJobs] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const { isAuthorized } = useContext(Context);
+  const location = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const searchFromURL = params.get("search");
+    if (searchFromURL) {
+      setSearchTerm(searchFromURL);
+    }
+  }, [location.search]);
 
   useEffect(() => {
     axios
