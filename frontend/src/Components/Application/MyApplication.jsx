@@ -2,7 +2,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { Context } from "../../main";
 import ResumeModal from "./ResumeModal";
-import ZoomForm from "../ZoomForm.jsx";
+import ZoomForm from "../zoomForm.jsx";
 import { useNavigate } from "react-router-dom";
 import React, { useContext, useEffect, useState } from "react";
 import BgAnimation from "../Layout/BgAnimation.jsx";
