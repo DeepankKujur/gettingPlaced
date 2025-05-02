@@ -25,7 +25,7 @@ const HowItWorks = () => {
 
           <div className="bg-[linear-gradient(145deg,_#2a2a2a,_#383838)] border-2 border-yellow-400 text-white text-center hover:scale-110 rounded-lg transition-transform duration-200 flex flex-col items-center justify-center flex-1 h-[350px] p-8 gap-3 w-full max-w-[400px]">
             <MdFindInPage className="text-4xl text-[#339c7b]" />
-            <p className="text-xl font-semibold">Find a Job/Post a Job</p> 
+            <p className="text-xl font-semibold">Find a Job/Post a Job</p>
             <p className="text-md text-gray-400">
               Browse thousands of job listings or post vacancies to connect with
               the right candidates quickly and easily.

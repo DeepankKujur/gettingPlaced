@@ -125,27 +125,26 @@ const PostJob = () => {
               Category
             </label>
             <input
-  list="categories"
-  id="category"
-  value={category}
-  onChange={(e) => setCategory(e.target.value)}
-  placeholder="Select or type category"
-  className="w-full bg-gray-900 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-100"
-/>
+              list="categories"
+              id="category"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              placeholder="Select or type category"
+              className="w-full bg-gray-900 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-100"
+            />
 
-<datalist id="categories">
-  <option value="Graphics & Design" />
-  <option value="Mobile App Development" />
-  <option value="Frontend Web Development" />
-  <option value="MERN Stack Development" />
-  <option value="Account & Finance" />
-  <option value="Artificial Intelligence" />
-  <option value="Video Animation" />
-  <option value="MEAN Stack Development" />
-  <option value="MEVN Stack Development" />
-  <option value="Data Entry Operator" />
-</datalist>
-
+            <datalist id="categories">
+              <option value="Graphics & Design" />
+              <option value="Mobile App Development" />
+              <option value="Frontend Web Development" />
+              <option value="MERN Stack Development" />
+              <option value="Account & Finance" />
+              <option value="Artificial Intelligence" />
+              <option value="Video Animation" />
+              <option value="MEAN Stack Development" />
+              <option value="MEVN Stack Development" />
+              <option value="Data Entry Operator" />
+            </datalist>
           </div>
         </div>
 

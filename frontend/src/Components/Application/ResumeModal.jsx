@@ -12,7 +12,9 @@ const ResumeModal = ({ imageUrl, onClose }) => {
           >
             Close
           </button>
-          <div className="w-full h-full flex justify-center"><img src={imageUrl} alt="resume"/></div>
+          <div className="w-full h-full flex justify-center">
+            <img src={imageUrl} alt="resume" />
+          </div>
         </div>
       </div>
     </>

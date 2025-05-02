@@ -15,20 +15,22 @@ const HeroSection = () => {
     jobSeekers: -1,
     employers: -1,
   });
-  
+
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const {data} = await axios.get("http://localhost:4000/api/totalCounts/");
-        console.log("Fetched stats:", data);        
+        const { data } = await axios.get(
+          "http://localhost:4000/api/totalCounts/"
+        );
+        console.log("Fetched stats:", data);
         setStats(data);
       } catch (error) {
         console.error("Failed to fetch stats:", error);
       }
     };
-    fetchStats(); 
+    fetchStats();
   }, []);
-  
+
   const details = [
     {
       id: 1,

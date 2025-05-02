@@ -3,7 +3,14 @@ import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 dotenv.config();
 
-export async function sendInterviewEmail({ to, applicantName, company, date, time,  meetingUrl }) {
+export async function sendInterviewEmail({
+  to,
+  applicantName,
+  company,
+  date,
+  time,
+  meetingUrl,
+}) {
   const match = meetingUrl.match(/\/j\/(\d+)\?pwd=([\w.]+)/);
   const meetingId = match?.[1] || "Unavailable";
   const passcode = match?.[2] || "Unavailable";

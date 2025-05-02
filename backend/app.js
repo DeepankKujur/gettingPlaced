@@ -2,15 +2,14 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import cookieParser from "cookie-parser";
+import zoomRoutes from "./routes/zoom.js";
 import fileUpload from "express-fileupload";
 import jobRouter from "./routes/jobRouter.js";
 import userRouter from "./routes/userRouter.js";
-import { errorMiddleware } from "./middlewares/error.js";
 import dbConnection from "./database/dbConnection.js";
-import applicationRouter from "./routes/applicationRouter.js";
-import zoomRoutes from "./routes/zoom.js";
 import countRouter from "./routes/totalCounts.js";
 import inviteRoutes from "./routes/inviteRoute.js";
+import applicationRouter from "./routes/applicationRouter.js";
 
 dotenv.config();
 const app = express();
@@ -18,7 +17,7 @@ dbConnection();
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // Your frontend origin
+    origin: process.env.FRONTEND_URL, // Your frontend origin
     credentials: true,
   })
 );
@@ -40,8 +39,6 @@ app.use("/api/job", jobRouter);
 app.use("/api/zoom", zoomRoutes);
 app.use("/api/invite", inviteRoutes);
 app.use("/api/totalCounts", countRouter);
-
-//app.use(errorMiddleware);      for sometime
 
 app.get("/", (req, res) => {
   res.send("Server is running");

@@ -18,25 +18,25 @@ router.get("/getuser", isAuthorized, getUser);
 // Public endpoint that doesn't require auth
 router.get("/public/getuser", async (req, res) => {
   const token = req.cookies.token;
-  
+
   if (!token) {
-    return res.status(200).json({ 
+    return res.status(200).json({
       success: true,
-      user: null 
+      user: null,
     });
   }
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const user = await User.findById(decoded.id);
-    res.status(200).json({ 
+    res.status(200).json({
       success: true,
-      user 
+      user,
     });
   } catch (error) {
-    res.status(200).json({ 
+    res.status(200).json({
       success: true,
-      user: null 
+      user: null,
     });
   }
 });

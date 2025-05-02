@@ -63,6 +63,8 @@ export const createZoomMeeting = async (meetingData) => {
       data: error.response?.data,
       message: error.message,
     });
-    throw new Error(error.response?.data?.message || "Failed to create Zoom meeting");
+    throw new Error(
+      error.response?.data?.message || "Failed to create Zoom meeting"
+    );
   }
 };

@@ -64,7 +64,7 @@ const applicationSchema = mongoose.Schema({
     default: false,
   },
   interviewDate: {
-    type: String, 
+    type: String,
   },
   interviewTime: {
     type: String,
