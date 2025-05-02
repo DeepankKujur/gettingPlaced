@@ -16,7 +16,7 @@ import AboutUs from "./Components/Layout/AboutUs";
 import NotFound from "./Components/NotFound/NotFound";
 import Footer from "./Components/Layout/Footer";
 import Chatbot from "./Components/Chatbot";
-import NewNavbar from "./Components/Layout/NewNavbar";
+import NewNavbar from "./Components/Layout/NewNav";
 import MyApplications from "./Components/Application/MyApplication";
 
 export default function App() {
