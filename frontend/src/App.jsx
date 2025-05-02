@@ -3,7 +3,6 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
-import Jobs from "./components/Job/Jobs";
 import Home from "./components/Home/Home";
 import Login from "./components/Auth/Login";
 import MyJobs from "./components/Job/MyJobs";
@@ -19,6 +18,7 @@ import Chatbot from "./Components/Chatbot";
 import MyApplications from "./Components/Application/MyApplication";
 import TermsAndConditions from "./Components/Layout/TermsAndConditions";
 import AboutUs from "./Components/Layout/AboutUs";
+import Jobs from "./components/Job/Jobs";
 
 export default function App() {
   return (
@@ -28,7 +28,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<Home />} />
-        <Route path="/job/getall" element={<Jobs />} />
+        <Route path="/job/getall" element={<Jobs/>} />
         <Route path="/job/:id" element={<JobDetails />} />
         <Route path="/job/post" element={<PostJobs />} />
         <Route path="/job/me" element={<MyJobs />} />
