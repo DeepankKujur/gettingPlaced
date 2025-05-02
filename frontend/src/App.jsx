@@ -3,34 +3,33 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
-import Home from "./components/Home/Home";
-import Login from "./components/Auth/Login";
-import MyJobs from "./components/Job/MyJobs";
-import PostJobs from "./components/Job/PostJob";
-import Register from "./components/Auth/Register";
-import JobDetails from "./components/Job/JobDetails";
-import Application from "./components/Application/Application";
-import NotFound from "./components/NotFound/NotFound";
-
-import Footer from "./Components/Layout/Footer";
-import NewNavbar from "./components/Layout/NewNav";
-import Chatbot from "./Components/Chatbot";
-import MyApplications from "./Components/Application/MyApplication";
+import Home from "./Components/Home/Home";
+import Login from "./Components/Auth/Login";
+import Register from "./Components/Auth/Register";
+import Jobs from "./Components/Job/Jobs";
+import JobDetails from "./Components/Job/JobDetails";
+import PostJob from "./Components/Job/PostJob";
+import MyJobs from "./Components/Job/MyJobs";
+import Application from "./Components/Application/Application";
 import TermsAndConditions from "./Components/Layout/TermsAndConditions";
 import AboutUs from "./Components/Layout/AboutUs";
-import Jobs from "./components/Job/Jobs";
+import NotFound from "./Components/NotFound/NotFound";
+import Footer from "./Components/Layout/Footer";
+import Chatbot from "./Components/Chatbot";
+import NewNavbar from "./Components/Layout/NewNavbar";
+import MyApplications from "./Components/Application/MyApplication";
 
 export default function App() {
   return (
     <Router>
-      <NewNavbar/>
+      <NewNavbar />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<Home />} />
-        <Route path="/job/getall" element={<Jobs/>} />
+        <Route path="/job/getall" element={<Jobs />} />
         <Route path="/job/:id" element={<JobDetails />} />
-        <Route path="/job/post" element={<PostJobs />} />
+        <Route path="/job/post" element={<PostJob />} />
         <Route path="/job/me" element={<MyJobs />} />
         <Route path="/application/:id" element={<Application />} />
         <Route path="/application/me" element={<MyApplications />} />
