@@ -26,8 +26,8 @@ const MyApplications = () => {
       try {
         const endpoint =
           user?.role === "Employer"
-            ? "http://localhost:4000/api/application/employer/getall"
-            : "http://localhost:4000/api/application/jobseeker/getall";
+            ? `${import.meta.env.VITE_BACKEND_URL}/api/application/employer/getall`
+            : `${import.meta.env.VITE_BACKEND_URL}/api/application/jobseeker/getall`;
 
         const { data } = await axios.get(endpoint, { withCredentials: true });
         setApplications(data.applications);
@@ -42,7 +42,7 @@ const MyApplications = () => {
   const deleteApplication = async (id) => {
     try {
       const { data } = await axios.delete(
-        `http://localhost:4000/api/application/delete/${id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/application/delete/${id}`,
         { withCredentials: true }
       );
       toast.success(data.message);
@@ -165,6 +165,7 @@ const MyApplications = () => {
         </div>
       )}
     </div>
+
   );
 };
 
@@ -172,6 +173,10 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
   return (
     <div className="bg-white rounded-2xl shadow-md p-6 flex flex-col md:flex-row items-center justify-between gap-6">
       <div className="flex-1 space-y-3">
+      <p className="text-gray-700">
+          <span className="font-semibold text-gray-900">Company:</span>{" "}
+          {element.jobId?.company || "N/A"}
+        </p>
         <p className="text-gray-700">
           <span className="font-semibold text-gray-900">Job Title:</span>{" "}
           {element.jobId?.title || "N/A"}
@@ -200,6 +205,7 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
         </button>
       </div>
     </div>
+
   );
 };
 
@@ -278,6 +284,7 @@ const EmployerCard = ({ element, openModal, openZoomForm }) => {
         )}
       </div>
     </div>
+
   );
 };
 

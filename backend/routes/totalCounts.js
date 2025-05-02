@@ -6,14 +6,12 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    const [jobSeekers, employers, jobs] = await Promise.all([
+    const [jobSeekers, employers, jobs,companies] = await Promise.all([
       User.countDocuments({ role: "Job Seeker" }),
       User.countDocuments({ role: "Employer" }),
-      Job.countDocuments(),
+      Job.countDocuments({expired: false}),
+      Job.distinct("company").then((companies) => companies.length),
     ]);
-
-    // Assuming companies are inferred from the number of employers
-    const companies = employers;
 
     res.json({
       jobSeekers,

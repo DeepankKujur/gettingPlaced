@@ -23,7 +23,7 @@ const Register = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:4000/api/user/register",
+        `${import.meta.env.VITE_BACKEND_URL}/api/user/register`,
         { name, phone, email, role, password },
         {
           headers: {

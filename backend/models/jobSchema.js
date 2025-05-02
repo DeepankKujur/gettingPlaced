@@ -11,6 +11,10 @@ const jobSchema = mongoose.Schema({
     required: [true, "Please provide job description"],
     minLength: [3, "description must contain at least 3 characters"],
   },
+  company: {
+    type: String,
+    required: true, 
+  },
   category: {
     type: String,
     required: [true, "Please provide Job category"],

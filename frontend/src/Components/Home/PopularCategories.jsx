@@ -73,10 +73,11 @@ const PopularCategories = () => {
     },
   ];
 
-  // Handle redirection to JobCategories page
-  const redirectToCategories = () => {
-    navigateTo("/job-categories");
+  const redirectToCategories = (title) => {
+    const encodedTitle = encodeURIComponent(title);
+    navigateTo(`/job/getall?search=${encodedTitle}`);
   };
+  
 
   return (
     <div className="w-full max-w-[1500px] mx-auto flex flex-col items-center mt-5 p-12 gap-12 text-center">
@@ -90,7 +91,7 @@ const PopularCategories = () => {
         {categories.map((element) => (
           <div
             key={element.id}
-            onClick={redirectToCategories}
+            onClick={() => redirectToCategories(element.title)}
             className="w-[320px] h-[180px] bg-gray-100 dark:bg-gray-800 hover:scale-105 p-5 rounded-lg flex items-start gap-4 shadow-sm hover:shadow-lg transition-transform duration-100 border border-gray-200 dark:border-gray-700 cursor-pointer"
           >
             <div className="text-gray-500 dark:text-gray-400 text-2xl">

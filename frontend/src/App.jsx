@@ -12,17 +12,18 @@ import Register from "./components/Auth/Register";
 import JobDetails from "./components/Job/JobDetails";
 import Application from "./components/Application/Application";
 import NotFound from "./components/NotFound/NotFound";
-import JobCategoriesPage from "./components/Job/JobCategoriesPage";
 
-import NewFooter from "./components/Layout/NewFooter";
+import Footer from "./Components/Layout/Footer";
 import NewNavbar from "./components/Layout/NewNav";
 import Chatbot from "./Components/Chatbot";
 import MyApplications from "./Components/Application/MyApplication";
+import TermsAndConditions from "./Components/Layout/TermsAndConditions";
+import AboutUs from "./Components/Layout/AboutUs";
 
 export default function App() {
   return (
     <Router>
-      <NewNavbar />
+      <NewNavbar/>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -33,11 +34,12 @@ export default function App() {
         <Route path="/job/me" element={<MyJobs />} />
         <Route path="/application/:id" element={<Application />} />
         <Route path="/application/me" element={<MyApplications />} />
-        <Route path="/job-categories" element={<JobCategoriesPage />} />
+        <Route path="/termsandconditions" element={<TermsAndConditions />} />
+        <Route path="/aboutus" element={<AboutUs />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Chatbot />
-      <NewFooter />
+      <Footer />
       <Toaster />
     </Router>
   );

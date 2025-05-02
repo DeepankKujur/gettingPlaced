@@ -19,10 +19,7 @@ const HeroSection = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const { data } = await axios.get(
-          "http://localhost:4000/api/totalCounts/"
-        );
-        console.log("Fetched stats:", data);
+        const {data} = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/totalCounts/`);
         setStats(data);
       } catch (error) {
         console.error("Failed to fetch stats:", error);
@@ -34,29 +31,29 @@ const HeroSection = () => {
   const details = [
     {
       id: 1,
-      title: stats.liveJobs.toLocaleString(),
+      title: stats.liveJobs >= 0 ? stats.liveJobs.toLocaleString() : "N/A",
       subTitle: "Live Jobs",
       icon: <FaSuitcase />,
     },
     {
       id: 2,
-      title: stats.companies.toLocaleString(),
+      title: stats.companies >= 0 ? stats.companies.toLocaleString() : "N/A",
       subTitle: "Companies",
       icon: <FaBuilding />,
     },
     {
       id: 3,
-      title: stats.jobSeekers.toLocaleString(),
+      title: stats.jobSeekers >= 0 ? stats.jobSeekers.toLocaleString() : "N/A",
       subTitle: "Job Seekers",
       icon: <FaUsers />,
     },
     {
       id: 4,
-      title: stats.employers.toLocaleString(),
+      title: stats.employers >= 0 ? stats.employers.toLocaleString() : "N/A",
       subTitle: "Employers",
       icon: <FaUserPlus />,
     },
-  ];
+  ];  
 
   return (
     <div className="flex flex-col py-[75px] px-4 lg:px-0">
@@ -90,7 +87,7 @@ const HeroSection = () => {
 
         <div className="flex-1 relative overflow-hidden">
           <img
-            src="/heroS.jpg"
+            src="\heroS-removebg-preview.png"
             alt="hero"
             className="w-full h-full object-cover lg:static lg:opacity-100"
           />
