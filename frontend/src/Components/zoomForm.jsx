@@ -17,25 +17,25 @@ export default function ZoomForm({ application }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (isPastTime()) {
       alert("Please select a future time.");
       return;
     }
-  
+
     setLoading(true);
     setError("");
     try {
       //Create Zoom meeting
       const res = await axios.post(
-        "http://localhost:4000/api/zoom/create-meeting",
+        `${import.meta.env.VITE_BACKEND_URL}/api/zoom/create-meeting`,
         form
       );
       const meetingData = res.data;
       setMeeting(meetingData);
-  
+
       //Send interview email
-      await axios.post("http://localhost:4000/api/invite/interview", {
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/invite/interview`, {
         to: application.email,
         applicantName: application.name,
         company: form.company,
@@ -43,17 +43,17 @@ export default function ZoomForm({ application }) {
         time: form.time,
         meetingUrl: meetingData.join_url,
       });
-  
+
       //Update application status
       await axios.patch(
-        `http://localhost:4000/api/application/status/${application._id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/application/status/${application._id}`,
         {},
         { withCredentials: true }
       );
-  
+
       //Update application with interview info
       await axios.patch(
-        `http://localhost:4000/api/application/update/${application._id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/application/update/${application._id}`,
         {
           interviewScheduled: true,
           interviewDate: form.date.split("-").reverse().join("-"), // Convert yyyy-mm-dd to dd-mm-yyyy
@@ -61,7 +61,7 @@ export default function ZoomForm({ application }) {
           zoomHostLink: meetingData.start_url,
         }
       );
-  
+
       setSuccess(true);
       alert("Invitation email sent to applicant.");
     } catch (err) {
@@ -71,7 +71,6 @@ export default function ZoomForm({ application }) {
       setLoading(false);
     }
   };
-  
 
   const handleDateChange = (e) => {
     setForm({ ...form, date: e.target.value, time: "" }); // Reset time when date changes

@@ -36,7 +36,7 @@ export const jobSeekerGetAllApplication = catchAsyncError(
     const applications = await Application.find({
       "applicantID.user": req.user._id,
     }).populate("jobId");
-    
+
     res.status(200).json({
       success: true,
       applications,
@@ -165,7 +165,8 @@ export const statusIsInterviewScheduled = catchAsyncError(async (req, res) => {
 
 export const updateApplicationZoomDetails = async (req, res) => {
   const { id } = req.params;
-  const { interviewScheduled, interviewDate, interviewTime, zoomHostLink } = req.body;
+  const { interviewScheduled, interviewDate, interviewTime, zoomHostLink } =
+    req.body;
 
   try {
     const updated = await Application.findByIdAndUpdate(
@@ -174,9 +175,12 @@ export const updateApplicationZoomDetails = async (req, res) => {
       { new: true }
     );
 
-    if (!updated) return res.status(404).json({ message: "Application not found" });
+    if (!updated)
+      return res.status(404).json({ message: "Application not found" });
 
-    res.status(200).json({ message: "Application updated", application: updated });
+    res
+      .status(200)
+      .json({ message: "Application updated", application: updated });
   } catch (error) {
     console.error("Update Error:", error);
     res.status(500).json({ message: "Server error" });
