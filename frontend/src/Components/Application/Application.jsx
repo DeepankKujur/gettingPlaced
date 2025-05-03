@@ -123,7 +123,7 @@ function Application() {
           />
           <div>
             <label className="block text-lg font-medium mb-2">
-              Select Resume
+              Select Resume (.jpg, .png, .webp)
             </label>
             <input
               type="file"
