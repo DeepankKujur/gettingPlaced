@@ -1,11 +1,10 @@
-import React,{useEffect} from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const TermsAndConditions = () => {
-
-useEffect(() => {
-  window.scrollTo(0, 0);
-}, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="bg-gray-700 min-h-screen py-12 px-6">
@@ -16,71 +15,152 @@ useEffect(() => {
 
         <div className="text-lg text-gray-700 space-y-8">
           <section>
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Introduction</h2>
-            <p className="mb-4">
-              Welcome to <span className="font-semibold text-blue-600">
-                <Link to="/" className="hover:underline">[GG-OG]</Link><span className='text-gray-800'>Resume-Builder</span>
-              </span>! By accessing or using our platform, you agree to comply with the terms and conditions outlined below. Please read them carefully.
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+              Introduction
+            </h2>
+            <p>
+              Welcome to{" "}
+              <span className="font-semibold text-blue-600">
+                <Link to="/" className="hover:underline">
+                  JobZee
+                </Link>
+              </span>{" "}
+              — a platform designed to connect job seekers with potential
+              employers. By accessing or using our services, you agree to abide
+              by the terms outlined below.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Use of the Website</h2>
-            <p className="mb-4">
-              Our platform provides tools for users to create, edit, view, delete, and download resumes using predefined templates and AI-powered features. You agree not to use this website for any unlawful or prohibited activities.
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+              Platform Overview
+            </h2>
+            <p>
+              JobConnect provides tools and features for two types of users:
             </p>
-            <ul className="list-disc pl-6 space-y-2 mb-4">
-              <li>Do not upload or create misleading or false resume information.</li>
-              <li>Do not use AI-generated content in a deceptive or unethical manner.</li>
-              <li>Respect intellectual property rights and do not plagiarize content.</li>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>
+                <strong>Job Seekers</strong> can create profiles, upload
+                resumes, apply for listed jobs, and potentially receive
+                interview invitations via Zoom.
+              </li>
+              <li>
+                <strong>Employers</strong> can create job postings, view
+                applicant resumes, and schedule interviews.
+              </li>
             </ul>
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">User Responsibilities</h2>
-            <p className="mb-4">
-              As a user of our platform, you are responsible for:
-            </p>
-            <ul className="list-disc pl-6 space-y-2 mb-4">
-              <li>Providing accurate and truthful information in your resumes.</li>
-              <li>Using the AI features responsibly and ethically.</li>
-              <li>Keeping your account credentials secure and not sharing them with others.</li>
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+              User Responsibilities
+            </h2>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>
+                Users must provide accurate and up-to-date information in
+                profiles, resumes, and job postings.
+              </li>
+              <li>
+                Job Seekers should only apply for jobs they are genuinely
+                interested in and qualified for.
+              </li>
+              <li>
+                Employers are expected to review applications fairly and respond
+                professionally.
+              </li>
+              <li>
+                Misuse of the platform, including fake job posts or spam
+                applications, is strictly prohibited.
+              </li>
             </ul>
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">AI Features and Limitations</h2>
-            <p className="mb-4">
-              Our AI-powered tools, including ATS-score analysis, AI chat assistance, and resume summaries, are designed to enhance your resume-building experience. However, we do not guarantee the accuracy or success of AI-generated content.
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+              Application Process
+            </h2>
+            <p>When a job seeker applies for a job:</p>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>Their resume and profile are shared with the employer.</li>
+              <li>
+                Employers may review applications and schedule Zoom interviews
+                if the applicant is shortlisted.
+              </li>
+              <li>
+                Job seekers will receive notifications or emails about interview
+                invitations or updates.
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+              Privacy and Data Handling
+            </h2>
+            <p>
+              We value your privacy. Resumes and user data are only shared with
+              relevant employers for the jobs you've applied to. For full
+              details, see our{" "}
+              <span className="text-blue-600 cursor-pointer hover:underline">
+                Privacy Policy
+              </span>
+              .
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Data Privacy and Security</h2>
-            <p className="mb-4">
-              Your privacy is important to us. We do not sell your personal data. Please review our <span className="text-blue-600 cursor-pointer hover:underline">Privacy Policy</span> to understand how we collect, use, and protect your information.
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+              Prohibited Conduct
+            </h2>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>
+                No fraudulent, misleading, or discriminatory job postings or
+                resumes.
+              </li>
+              <li>
+                No harassment, offensive communication, or impersonation of
+                others.
+              </li>
+              <li>No unauthorized advertising or solicitation.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+              Disclaimer
+            </h2>
+            <p>
+              JobConnect is not responsible for the outcome of interviews or
+              hiring decisions. We facilitate connections but do not guarantee
+              employment or candidate quality.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Liability</h2>
-            <p className="mb-4">
-              We are not responsible for any consequences resulting from the use of our resume-building tools or AI features. It is the user's responsibility to verify the accuracy and effectiveness of their resume before submission to employers.
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+              Changes to Terms
+            </h2>
+            <p>
+              We may update these Terms and Conditions periodically. Changes
+              will be posted on this page. Continued use of the platform
+              indicates your acceptance of the updated terms.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Changes to the Terms</h2>
-            <p className="mb-4">
-              We reserve the right to update these Terms and Conditions at any time. Any changes will be posted on this page, and we encourage you to review it regularly.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Contact Us</h2>
-            <p className="mb-4">
-              If you have any questions regarding these Terms and Conditions, feel free to contact us at:
-              <a href="mailto:support@yourwebsite.com" className="text-blue-600 hover:underline"> support@yourwebsite.com</a>.
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+              Contact Us
+            </h2>
+            <p>
+              For questions or concerns regarding these Terms, please contact us
+              at:{" "}
+              <a
+                href="mailto:support@jobconnect.com"
+                className="text-blue-600 hover:underline"
+              >
+                support@jobconnect.com
+              </a>
+              .
             </p>
           </section>
         </div>

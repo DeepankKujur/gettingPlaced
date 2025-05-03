@@ -1,135 +1,110 @@
-import React,{useEffect} from 'react';
+import React, { useEffect } from "react";
 import { FaTwitter, FaLinkedin, FaGithub, FaInstagram } from "react-icons/fa";
 
 const AboutUs = () => {
-    useEffect(() => {
-      window.scrollTo(0, 0);
-    }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const users = [
-    {
-      name: "Deepank Kujur",
-      role: "Full Stack Developer",
-      description: (
-        <div className="text-sm text-gray-300 px-4 mb-6">
-          <ul className="list-disc list-inside">
-            <li>Frontend Technologies: React.js, HTML, CSS, JavaScript</li>
-            <li>Responsive Design & Performance Optimization</li>
-            <li>Backend Integration with Node.js, Express, Strapi CMS, MongoDB, Node.js</li>
-          </ul>
-        </div>
-      ),
-      image:
-        "/Deepank.jpg",
-      socials: {
-        twitter: "https://twitter.com",
-        linkedin: "https://linkedin.com",
-        github: "https://github.com",
-        instagram: "https://instagram.com",
-      },
-    },
-    {
-      name: "Harshit Verma",
-      role: "Full Stack Developer",
-      description: (
-        <div className="text-sm text-gray-300 px-4 mb-6">
-          <ul className="list-disc list-inside">
-            <li>Backend Technologies: Node.js, Express,Strapi CMS, MongoDB</li>
-            <li>Frontend Contributions: UI, React.js, JavaScript, HTML, CSS</li>
-          </ul>
-        </div>
-      ),
-      image:
-        "/GauravSingh.jpg",
-      socials: {
-        twitter: "https://twitter.com",
-        linkedin: "https://linkedin.com",
-        github: "https://github.com",
-        instagram: "https://instagram.com",
-      },
-    },
     {
       name: "Gaurav Simkar",
       role: "Full Stack Developer",
       description: (
-        <div className="text-sm text-gray-300 px-4 mb-6">
-          <ul className="list-disc list-inside">
-            <li>Developed scalable web applications</li>
-            <li>Tech Stack: React.js, Node.js, Express, Strapi CMS,MongoDB, Python</li>
-            <li>Database Optimization & Performance Tuning</li>
-          </ul>
-        </div>
+        <ul className="list-disc list-inside space-y-1 text-left">
+          <li>Scalable Web Application Development</li>
+          <li>Stack: React.js, Node.js, Strapi, MongoDB, Python</li>
+          <li>Database Optimization & Performance Tuning</li>
+        </ul>
       ),
-      image:
-        "Gauravsim.jpg",
+      image: "138660091.jpeg",
       socials: {
-        twitter: "https://twitter.com",
+        linkedin: "https://www.linkedin.com/in/gauravsimkar/",
+        github: "https://github.com/GauravSimkar",
+      },
+    },
+
+    {
+      name: "Harshit Verma",
+      role: "Full Stack Developer",
+      description: (
+        <ul className="list-disc list-inside space-y-1 text-left">
+          <li>Backend: Node.js, Express, Strapi CMS, MongoDB</li>
+          <li>Frontend: UI, React.js, JavaScript, HTML, CSS</li>
+        </ul>
+      ),
+      image: "profile-pic (1).png",
+      socials: {
+        linkedin: "https://www.linkedin.com/in/harshitmnnit/",
+        github: "https://github.com/NITianHarsh",
+      },
+    },
+    {
+      name: "Deepank Kujur",
+      role: "Full Stack Developer",
+      description: (
+        <ul className="list-disc list-inside space-y-1 text-left">
+          <li>Frontend: React.js, HTML, CSS, JavaScript</li>
+          <li>Responsive Design, Performance Optimization</li>
+          <li>Backend: Node.js, Express, Strapi CMS, MongoDB</li>
+        </ul>
+      ),
+      image: "/Deepank.jpg",
+      socials: {
         linkedin: "https://linkedin.com",
         github: "https://github.com",
-        instagram: "https://instagram.com",
       },
     },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black flex justify-center items-center px-6 py-12">
+    <div className="min-h-screen bg-gradient-to-b from-[#0f0c29] via-[#302b63] to-[#24243e] py-14 px-6">
+      <h1 className="text-5xl font-extrabold text-center text-white mb-20 tracking-wide">
+        Meet Our Team
+      </h1>
+
       <div className="flex flex-wrap justify-center gap-12">
         {users.map((user, index) => (
           <div
             key={index}
-            className="bg-gray-800 text-white rounded-2xl shadow-2xl p-10 w-[400px] h-[550px] text-center relative transform hover:scale-105 hover:shadow-2xl transition duration-500 ease-in-out"
+            className="relative bg-opacity-10 backdrop-blur-lg border border-white/20 rounded-3xl p-8 w-[340px] shadow-2xl hover:scale-105 transition-all duration-300 ease-in-out"
           >
             {/* Profile Image */}
-            <div className="flex justify-center -mt-24">
+            <div className="flex justify-center -mt-20">
               <img
                 src={user.image}
                 alt={user.name}
-                className="w-48 h-48 rounded-full object-cover border-8 border-gray-700 shadow-lg scale-120"
+                className="w-36 h-36 rounded-full object-cover border-4 border-white shadow-md"
               />
             </div>
 
             {/* User Info */}
-            <h2 className="text-4xl font-bold mt-8">{user.name}</h2>
-            <p className="text-lg font-bold text-yellow-400 mb-4">{user.role}</p>
+            <h2 className="text-2xl text-white font-bold mt-6 text-center">
+              {user.name}
+            </h2>
+            <p className="text-sm text-purple-300 font-semibold mb-4 text-center">
+              {user.role}
+            </p>
 
-            {/* Divider */}
-            <div className="w-30 h-1 bg-gradient-to-r from-yellow-500 to-yellow-200 mx-auto rounded-full mb-4"></div>
+            {/* Gradient Divider */}
+            <div className="w-20 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full mb-4" />
 
-            {/* Description Section */}
-            <div className="text-sm text-gray-300 px-4 mb-6">{user.description}</div>
+            {/* Description */}
+            <div className="text-sm text-gray-200">{user.description}</div>
 
-            {/* Social Media Links at Bottom */}
-            <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-8">
-              <a
-                href={user.socials.twitter}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-400 hover:text-blue-500 transition transform hover:scale-125"
-              >
-                <FaTwitter size={50} />
+            {/* Social Media */}
+            <div className="flex justify-center gap-6 mt-6">
+              <a href={user.socials.linkedin} target="_blank" rel="noreferrer">
+                <FaLinkedin
+                  className="text-blue-500 hover:text-blue-600 transition-all duration-200"
+                  size={24}
+                />
               </a>
-              <a
-                href={user.socials.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:text-blue-700 transition transform hover:scale-125"
-              >
-                <FaLinkedin size={50} />
-              </a>
-              <a
-                href={user.socials.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-gray-300 transition transform hover:scale-125"
-              >
-                <FaGithub size={50} />
-              </a>
-              <a
-                href={user.socials.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-pink-500 hover:text-pink-600 transition transform hover:scale-125"
-              >
-                <FaInstagram size={50} />
+              <a href={user.socials.github} target="_blank" rel="noreferrer">
+                <FaGithub
+                  className="text-gray-300 hover:text-white transition-all duration-200"
+                  size={24}
+                />
               </a>
             </div>
           </div>

@@ -14,10 +14,11 @@ const AppWrapper = () => {
   const checkAuth = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:4000/api/user/public/getuser",
+        `${import.meta.env.VITE_BACKEND_URL}/api/user/public/getuser`,
         { withCredentials: true }
       );
-
+      console.log("User data:", data);
+      
       if (data.user) {
         setUser(data.user);
         setIsAuthorized(true);
