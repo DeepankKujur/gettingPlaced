@@ -8,7 +8,8 @@ export const sendToken = (user, statusCode, res, message) => {
       //considered 5 days and written it till millisecond
     ),
     httpOnly: true,
-    // secure:true, for https
+    secure:true,
+    sameSite: "None",
   };
   res.status(statusCode).cookie("token", token, options).json({
     success: true,
