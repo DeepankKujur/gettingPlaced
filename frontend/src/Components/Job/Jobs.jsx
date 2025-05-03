@@ -21,7 +21,7 @@ const Jobs = () => {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/api/job/getall`, { withCredentials: true })
+      .get(`https://gettingplaced.onrender.com/api/job/getall`, { withCredentials: true })
       .then((res) => {
         setJobs(res.data);
       })

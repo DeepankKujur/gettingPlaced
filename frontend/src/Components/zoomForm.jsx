@@ -28,14 +28,14 @@ export default function ZoomForm({ application }) {
     try {
       //Create Zoom meeting
       const res = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/zoom/create-meeting`,
+        `https://gettingplaced.onrender.com/api/zoom/create-meeting`,
         form
       );
       const meetingData = res.data;
       setMeeting(meetingData);
 
       //Send interview email
-      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/invite/interview`, {
+      await axios.post(`https://gettingplaced.onrender.com/api/invite/interview`, {
         to: application.email,
         applicantName: application.name,
         company: form.company,
@@ -46,14 +46,14 @@ export default function ZoomForm({ application }) {
 
       //Update application status
       await axios.patch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/application/status/${application._id}`,
+        `https://gettingplaced.onrender.com/api/application/status/${application._id}`,
         {},
         { withCredentials: true }
       );
 
       //Update application with interview info
       await axios.patch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/application/update/${application._id}`,
+        `https://gettingplaced.onrender.com/api/application/update/${application._id}`,
         {
           interviewScheduled: true,
           interviewDate: form.date.split("-").reverse().join("-"), // Convert yyyy-mm-dd to dd-mm-yyyy

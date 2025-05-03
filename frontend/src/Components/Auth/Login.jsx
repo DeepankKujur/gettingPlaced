@@ -18,7 +18,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/user/login`,
+        `https://gettingplaced.onrender.com/api/user/login`,
         { email, password, role },
         { withCredentials: true }
       );

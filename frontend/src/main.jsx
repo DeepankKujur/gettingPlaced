@@ -14,7 +14,7 @@ const AppWrapper = () => {
   const checkAuth = async () => {
     try {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/api/user/public/getuser`,
+        `https://gettingplaced.onrender.com/api/user/public/getuser`,
         { withCredentials: true }
       );
       console.log("User data:", data);

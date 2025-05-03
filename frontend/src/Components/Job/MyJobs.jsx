@@ -17,7 +17,7 @@ function MyJobs() {
     const fetchJobs = async () => {
       try {
         const { data } = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/api/job/myjobs`,
+          `https://gettingplaced.onrender.com/api/job/myjobs`,
           { withCredentials: true }
         );
         setMyJobs(data.myJobs);
@@ -44,7 +44,7 @@ function MyJobs() {
   const handleUpdateJob = async (jobId) => {
     const updatedJob = myJobs.find((job) => job._id === jobId);
     await axios
-      .put(`${import.meta.env.VITE_BACKEND_URL}/api/job/update/${jobId}`, updatedJob, {
+      .put(`https://gettingplaced.onrender.com/api/job/update/${jobId}`, updatedJob, {
         withCredentials: true,
       })
       .then((res) => {
@@ -59,7 +59,7 @@ function MyJobs() {
   // function for deleting job
   const handleJobDelete = async (jobId) => {
     await axios
-      .delete(`${import.meta.env.VITE_BACKEND_URL}/api/job/delete/${jobId}`, {
+      .delete(`https://gettingplaced.onrender.com/api/job/delete/${jobId}`, {
         withCredentials: true,
       })
       .then((res) => {

@@ -26,8 +26,8 @@ const MyApplications = () => {
       try {
         const endpoint =
           user?.role === "Employer"
-            ? `${import.meta.env.VITE_BACKEND_URL}/api/application/employer/getall`
-            : `${import.meta.env.VITE_BACKEND_URL}/api/application/jobseeker/getall`;
+            ? `https://gettingplaced.onrender.com/api/application/employer/getall`
+            : `https://gettingplaced.onrender.com/api/application/jobseeker/getall`;
 
         const { data } = await axios.get(endpoint, { withCredentials: true });
         setApplications(data.applications);
@@ -42,7 +42,7 @@ const MyApplications = () => {
   const deleteApplication = async (id) => {
     try {
       const { data } = await axios.delete(
-        `${import.meta.env.VITE_BACKEND_URL}/api/application/delete/${id}`,
+        `https://gettingplaced.onrender.com/api/application/delete/${id}`,
         { withCredentials: true }
       );
       toast.success(data.message);

@@ -35,7 +35,7 @@ const PostJob = () => {
 
     await axios
       .post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/job/post`,
+        `https://gettingplaced.onrender.com/api/job/post`,
         fixedSalary.length >= 4
           ? {
               title,

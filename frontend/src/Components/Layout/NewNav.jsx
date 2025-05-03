@@ -10,7 +10,7 @@ export default function NewNavbar() {
 
   const handleLogout = async () => {
     try {
-      await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/user/logout`, {
+      await axios.get(`https://gettingplaced.onrender.com/api/user/logout`, {
         withCredentials: true,
       });
       await checkAuth(); // Re-check auth state after logout
