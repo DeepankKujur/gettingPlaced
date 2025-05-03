@@ -16,7 +16,7 @@ const app = express();
 dbConnection();
 
 app.use(cors({
-  origin: 'https://gettingplaced.netlify.app/',
+  origin: 'https://gettingplaced.netlify.app',
   credentials: true
 }));
 app.use(express.json());

@@ -19,7 +19,7 @@ const HeroSection = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const {data} = await axios.get(`https://gettingplaced.onrender.com/api/totalCounts/`);
+        const {data} = await axios.get(`https://gettingplaced.onrender.com/api/totalCounts/`,{ withCredentials: true });
         setStats(data);
       } catch (error) {
         console.error("Failed to fetch stats:", error);

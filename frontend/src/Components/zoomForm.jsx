@@ -28,8 +28,8 @@ export default function ZoomForm({ application }) {
     try {
       //Create Zoom meeting
       const res = await axios.post(
-        `https://gettingplaced.onrender.com/api/zoom/create-meeting`,
-        form
+        `https://gettingplaced.onrender.com/api/zoom/create-meeting`,{ withCredentials: true },
+        {form}
       );
       const meetingData = res.data;
       setMeeting(meetingData);
@@ -42,7 +42,7 @@ export default function ZoomForm({ application }) {
         date: form.date,
         time: form.time,
         meetingUrl: meetingData.join_url,
-      });
+      },{ withCredentials: true });
 
       //Update application status
       await axios.patch(
@@ -59,7 +59,7 @@ export default function ZoomForm({ application }) {
           interviewDate: form.date.split("-").reverse().join("-"), // Convert yyyy-mm-dd to dd-mm-yyyy
           interviewTime: form.time,
           zoomHostLink: meetingData.start_url,
-        }
+        },{ withCredentials: true }
       );
 
       setSuccess(true);

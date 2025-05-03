@@ -11,6 +11,7 @@ async function getZoomAccessToken() {
   const tokenResponse = await axios.post(
     `https://zoom.us/oauth/token?grant_type=account_credentials&account_id=${process.env.ZOOM_ACCOUNT_ID}`,
     {},
+    { withCredentials: true },
     {
       headers: {
         Authorization:
@@ -46,6 +47,7 @@ router.post("/create-meeting", async (req, res) => {
           registration_type: 1,
         },
       },
+      { withCredentials: true },
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
