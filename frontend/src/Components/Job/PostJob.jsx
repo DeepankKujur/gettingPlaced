@@ -9,6 +9,7 @@ const PostJob = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
+  const [company, setCompany] = useState("");
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
   const [location, setLocation] = useState("");
@@ -39,6 +40,7 @@ const PostJob = () => {
           ? {
               title,
               description,
+              company,
               category,
               country,
               city,
@@ -48,6 +50,7 @@ const PostJob = () => {
           : {
               title,
               description,
+              company,
               category,
               country,
               city,
@@ -125,27 +128,26 @@ const PostJob = () => {
               Category
             </label>
             <input
-  list="categories"
-  id="category"
-  value={category}
-  onChange={(e) => setCategory(e.target.value)}
-  placeholder="Select or type category"
-  className="w-full bg-gray-900 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-100"
-/>
+              list="categories"
+              id="category"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              placeholder="Select or type category"
+              className="w-full bg-gray-900 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-100"
+            />
 
-<datalist id="categories">
-  <option value="Graphics & Design" />
-  <option value="Mobile App Development" />
-  <option value="Frontend Web Development" />
-  <option value="MERN Stack Development" />
-  <option value="Account & Finance" />
-  <option value="Artificial Intelligence" />
-  <option value="Video Animation" />
-  <option value="MEAN Stack Development" />
-  <option value="MEVN Stack Development" />
-  <option value="Data Entry Operator" />
-</datalist>
-
+            <datalist id="categories">
+              <option value="Graphics & Design" />
+              <option value="Mobile App Development" />
+              <option value="Frontend Web Development" />
+              <option value="MERN Stack Development" />
+              <option value="Account & Finance" />
+              <option value="Artificial Intelligence" />
+              <option value="Video Animation" />
+              <option value="MEAN Stack Development" />
+              <option value="MEVN Stack Development" />
+              <option value="Data Entry Operator" />
+            </datalist>
           </div>
         </div>
 
@@ -201,7 +203,16 @@ const PostJob = () => {
             className="w-full px-4 py-2 bg-gray-900 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-100"
           />
         </div>
-
+        <div className="flex-1 min-w-[45%]">
+          <label className="block text-sm font-medium mb-1">Company</label>
+          <input
+            type="text"
+            value={company}
+            onChange={(e) => setCompany(e.target.value)}
+            className="w-full p-3 border bg-gray-900 text-white border-gray-300 rounded-md"
+            placeholder="Company Name"
+          />
+        </div>
         <div className="mb-6">
           <label className="block text-white text-lg font-medium mb-2">
             Salary Information
