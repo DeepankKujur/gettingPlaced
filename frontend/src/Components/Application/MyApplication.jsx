@@ -14,6 +14,7 @@ const MyApplications = () => {
   const [resumeImageUrl, setResumeImageUrl] = useState("");
   const [selectedApplication, setSelectedApplication] = useState(null);
   const { user, isAuthorized } = useContext(Context);
+  const [loading, setLoading] = useState(true);
   const navigateTo = useNavigate();
 
   useEffect(() => {
@@ -84,7 +85,23 @@ const MyApplications = () => {
     );
     toast.success("Interview scheduled successfully!");
   };
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
 
+    return () => clearTimeout(timer);
+  }, []);
+ if(loading) {
+   return (
+     <div className="w-full min-h-screen flex items-center justify-center">
+       <div className="absolute top-0 left-0 h-full w-full -z-10">
+       <BgAnimation />
+     </div>
+       <div className="loader"></div>
+     </div>
+   );
+ }
   return (
     <div className="w-full min-h-screen flex flex-col items-center py-8 px-4 sm:px-6 lg:px-8">
       <div className="absolute top-0 left-0 h-full w-full -z-10">
