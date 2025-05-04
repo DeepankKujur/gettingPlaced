@@ -68,7 +68,6 @@ export default function App() {
   return (
     <div>
       <ScrollToTop />
-      <Router>
         <NewNavbar />
         <Routes>
           <Route path="/login" element={<Login />} />
@@ -87,7 +86,6 @@ export default function App() {
         <Chatbot />
         <Footer />
         <Toaster />
-      </Router>
     </div>
   );
 }
