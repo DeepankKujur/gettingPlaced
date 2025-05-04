@@ -10,20 +10,42 @@ const Chatbot = () => {
   const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
   const generateBotResponse = async () => {
+    const context = `
+      You are an intelligent assistant for the website "Getting Placed" (https://gettingplaced.netlify.app), 
+      a role-based job platform connecting job seekers and employers.
+  
+      ### For Job Seekers:
+      - Can view all available job listings up to date.
+      - Can search for jobs by title or category.
+      - Can apply to jobs directly through the platform.
+      
+      ### For Employers:
+      - Can view and search all job listings.
+      - Can post new job opportunities.
+      - Can view, update, and delete their posted jobs (CRUD operations).
+      - Can schedule interviews with applicants using Zoom API.
+      - Can send interview invites via email using Nodemailer.
+  
+      When responding, focus on guiding users based on their role (job seeker or employer) and your knowledge of the site's features. Only respond with what's relevant to the platform.
+    `;
+  
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        contents: [{ parts: [{ text: input }] }],
+        contents: [
+          { role: "user", parts: [{ text: context }] },
+          { role: "user", parts: [{ text: input }] }
+        ]
       }),
     };
-
+  
     try {
       const response = await fetch(API_URL, requestOptions);
       const data = await response.json();
-
+  
       if (!response.ok) throw new Error(data.error.message);
-
+  
       setMessages((prevMessages) => [
         ...prevMessages,
         { text: data.candidates[0].content.parts[0].text, sender: "bot" },
@@ -32,6 +54,7 @@ const Chatbot = () => {
       console.error("Error generating response:", error);
     }
   };
+  
 
   const handleSend = () => {
     if (!input.trim()) return;
