@@ -9,6 +9,7 @@ const JobDetails = () => {
   const { id } = useParams();
   const [job, setJob] = useState({});
   const navigateTo = useNavigate();
+  const [loading, setLoading] = useState(true);
   const { isAuthorized, user } = useContext(Context);
 
   useEffect(() => {
@@ -20,14 +21,27 @@ const JobDetails = () => {
         setJob(res.data.job);
       })
       .catch((error) => {
-        navigateTo("/notfound");
+        navigateTo("/login");
       });
   }, []);
 
   if (!isAuthorized) {
     navigateTo("/login");
   }
-
+ useEffect(() => {
+     const timer = setTimeout(() => {
+       setLoading(false);
+     }, 2500);
+ 
+     return () => clearTimeout(timer);
+   }, []);
+  if(loading) {
+    return (
+      <div className="w-full min-h-screen flex items-center justify-center">
+        <div className="loader"></div>
+      </div>
+    );
+  }
   return (
     <div className="w-full min-h-screen flex flex-col items-center py-8 px-4 sm:px-6 lg:px-8">
       <div className="absolute top-0 left-0 h-full w-full -z-10">
