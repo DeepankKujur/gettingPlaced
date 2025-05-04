@@ -11,7 +11,6 @@ async function getZoomAccessToken() {
   const tokenResponse = await axios.post(
     `https://zoom.us/oauth/token?grant_type=account_credentials&account_id=${process.env.ZOOM_ACCOUNT_ID}`,
     {},
-    { withCredentials: true },
     {
       headers: {
         Authorization:
@@ -47,7 +46,6 @@ router.post("/create-meeting", async (req, res) => {
           registration_type: 1,
         },
       },
-      { withCredentials: true },
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -57,8 +55,8 @@ router.post("/create-meeting", async (req, res) => {
     );
 
     const { join_url, start_url } = meetingResponse.data;
-    console.log("Zoom Join URL:", join_url);
-    console.log("Zoom Start URL:", start_url);
+    // console.log("Zoom Join URL:", join_url);
+    // console.log("Zoom Start URL:", start_url);
 
     const url = new URL(join_url);
     const meetingId = url.pathname.split("/").pop(); // gets the last part of /j/MEETING_ID

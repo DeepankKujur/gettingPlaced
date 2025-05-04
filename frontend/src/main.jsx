@@ -17,7 +17,7 @@ const AppWrapper = () => {
         `https://gettingplaced.onrender.com/api/user/public/getuser`,
         { withCredentials: true }
       );
-      console.log("User data:", data);
+      // console.log("User data:", data);
       
       if (data.user) {
         setUser(data.user);
