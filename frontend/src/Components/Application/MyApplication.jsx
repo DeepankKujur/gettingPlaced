@@ -90,20 +90,21 @@ const MyApplications = () => {
       <div className="absolute top-0 left-0 h-full w-full -z-10">
         <BgAnimation />
       </div>
+
       {user && user.role === "Job Seeker" ? (
-        <div className="max-w-6xl mx-auto flex flex-col items-center">
-          <h3 className="text-4xl text-white font-medium mb-10 italic relative inline-block group">
+        <div className="w-full max-w-6xl flex flex-col items-center">
+          <h3 className="text-3xl sm:text-4xl text-white font-medium mb-8 sm:mb-10 italic relative inline-block group text-center">
             <span className="hover-underline">My Applications</span>
             <span className="absolute left-0 -bottom-[14px] w-full h-[5px] bg-gradient-to-r from-red-500 to-cyan-400 scale-x-0 group-hover:scale-x-100 origin-right group-hover:origin-left transition-transform duration-500"></span>
             <span className="absolute left-0 -top-[5px] w-full h-[5px] bg-gradient-to-r from-red-500 to-cyan-400 scale-x-0 group-hover:scale-x-100 origin-left group-hover:origin-right transition-transform duration-500"></span>
           </h3>
 
           {applications.length <= 0 ? (
-            <h4 className="text-center text-white mt-10 text-2xl">
+            <h4 className="text-center text-white mt-10 text-xl sm:text-2xl">
               No Applications Found
             </h4>
           ) : (
-            <div className="grid gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full px-2">
               {applications.map((element) => (
                 <JobSeekerCard
                   key={element._id}
@@ -116,8 +117,8 @@ const MyApplications = () => {
           )}
         </div>
       ) : (
-        <div className="max-w-6xl mx-auto flex flex-col items-center">
-          <h3 className="text-4xl text-white font-medium mb-10 italic relative inline-block group">
+        <div className="w-full max-w-6xl flex flex-col items-center">
+          <h3 className="text-3xl sm:text-4xl text-white font-medium mb-8 sm:mb-10 italic relative inline-block group text-center">
             <span className="hover-underline">
               Applications from job seekers
             </span>
@@ -126,11 +127,11 @@ const MyApplications = () => {
           </h3>
 
           {applications.length <= 0 ? (
-            <h4 className="text-center text-white mt-10 text-2xl">
+            <h4 className="text-center text-white mt-10 text-xl sm:text-2xl">
               No Applications Found
             </h4>
           ) : (
-            <div className="grid gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full px-2">
               {applications.map((element) => (
                 <EmployerCard
                   key={element._id}
@@ -149,14 +150,14 @@ const MyApplications = () => {
         <ResumeModal imageUrl={resumeImageUrl} onClose={closeModal} />
       )}
 
-      {/* Interview Zoom Form Modal */}
+      {/* Zoom Form Modal */}
       {showZoomForm && selectedApplication && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
+        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto">
           <div className="absolute inset-0 bg-black opacity-80"></div>
-          <div className="relative p-6 w-full max-w-md mx-4 z-50">
+          <div className="relative p-6 w-full max-w-md mx-4 z-50 bg-white rounded-xl shadow-lg">
             <button
               onClick={closeZoomForm}
-              className="absolute top-8 right-8 bg-red-500 hover:bg-red-600 text-white rounded-xl p-2"
+              className="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white rounded-xl p-2"
             >
               Close
             </button>
@@ -165,15 +166,15 @@ const MyApplications = () => {
         </div>
       )}
     </div>
-
   );
 };
 
 const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
   return (
-    <div className="bg-white rounded-2xl shadow-md p-6 flex flex-col md:flex-row items-center justify-between gap-6">
-      <div className="flex-1 space-y-3">
-      <p className="text-gray-700">
+    <div className="bg-white rounded-2xl shadow-md p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 w-full">
+      {/* Text Section */}
+      <div className="flex-1 space-y-3 text-left w-full">
+        <p className="text-gray-700">
           <span className="font-semibold text-gray-900">Company:</span>{" "}
           {element.jobId?.company || "N/A"}
         </p>
@@ -183,35 +184,45 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
         </p>
         <p className="text-gray-700">
           <span className="font-semibold text-gray-900">Status:</span>{" "}
-          {element.interviewScheduled ? "Interview Scheduled" : "Under Review"}
+          <span
+            className={
+              element.interviewScheduled ? "text-green-500" : "text-gray-600"
+            }
+          >
+            {element.interviewScheduled
+              ? "Interview Scheduled"
+              : "Under Review"}
+          </span>
         </p>
       </div>
 
+      {/* Resume Image */}
       <div className="flex-shrink-0">
         <img
           src={element.resume.url}
           alt="resume"
           onClick={() => openModal(element.resume.url)}
-          className="w-32 h-32 object-cover rounded-lg cursor-pointer hover:scale-105 transition-transform duration-300"
+          className="w-32 h-32 max-w-[8rem] object-cover rounded-lg cursor-pointer hover:scale-105 transition-transform duration-300"
         />
       </div>
 
-      <div className="flex-shrink-0">
+      {/* Withdraw Button */}
+      <div className="flex-shrink-0 w-full md:w-auto text-right md:text-left">
         <button
           onClick={() => deleteApplication(element._id)}
-          className="mt-4 md:mt-0 px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-300"
+          className="mt-4 md:mt-0 w-full md:w-auto px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-300"
         >
           Withdraw Application
         </button>
       </div>
     </div>
-
   );
 };
 
 const EmployerCard = ({ element, openModal, openZoomForm }) => {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 flex flex-col sm:flex-row items-center gap-8 hover:shadow-2xl transition-all duration-300">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 flex flex-col sm:flex-row sm:items-start gap-6 hover:shadow-2xl transition-all duration-300 w-full">
+      {/* User Info */}
       <div className="flex-1 space-y-3 text-gray-900 dark:text-gray-100">
         <p>
           <span className="font-semibold">Name:</span> {element.name}
@@ -230,10 +241,10 @@ const EmployerCard = ({ element, openModal, openZoomForm }) => {
         </p>
       </div>
 
-      {/* Resume Section */}
+      {/* Resume Thumbnail */}
       {element.resume?.url && (
         <div
-          className="w-32 h-40 cursor-pointer overflow-hidden rounded-md shadow-md hover:scale-105 transition-transform"
+          className="w-32 h-40 cursor-pointer overflow-hidden rounded-md shadow-md hover:scale-105 transition-transform flex-shrink-0"
           onClick={() => openModal(element.resume?.url)}
         >
           <img
@@ -244,21 +255,26 @@ const EmployerCard = ({ element, openModal, openZoomForm }) => {
         </div>
       )}
 
-      <div className="w-full sm:w-auto">
+      {/* Action Section */}
+      <div className="w-full sm:w-60 flex-shrink-0">
         {element.interviewScheduled && element.zoomHostLink ? (
           <>
             {/* Interview Info Card */}
-            <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 shadow-md mb-4">
-              <h3 className="text-sm font-medium text-gray-800 mb-2">
+            <div className="bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl p-4 shadow-md mb-4">
+              <h3 className="text-sm font-medium text-gray-800 dark:text-gray-200 mb-2">
                 Interview Details
               </h3>
-              <div className="space-y-1 text-sm text-gray-700">
+              <div className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
                 <p>
-                  <span className="font-semibold text-gray-900">📅 Date:</span>{" "}
+                  <span className="font-semibold text-gray-900 dark:text-white">
+                    📅 Date:
+                  </span>{" "}
                   {element.interviewDate}
                 </p>
                 <p>
-                  <span className="font-semibold text-gray-900">⏰ Time:</span>{" "}
+                  <span className="font-semibold text-gray-900 dark:text-white">
+                    ⏰ Time:
+                  </span>{" "}
                   {element.interviewTime}
                 </p>
               </div>
@@ -284,7 +300,6 @@ const EmployerCard = ({ element, openModal, openZoomForm }) => {
         )}
       </div>
     </div>
-
   );
 };
 

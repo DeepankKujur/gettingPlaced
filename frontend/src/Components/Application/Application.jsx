@@ -73,18 +73,22 @@ function Application() {
       <div className="absolute top-0 left-0 h-full w-full -z-10">
         <BgAnimation />
       </div>
-      <h3 className="text-4xl text-white font-medium mb-10 italic relative inline-block group">
-        <span className="hover-underline">Apply here</span>
-        <span className="absolute left-0 -bottom-[14px] w-full h-[5px] bg-gradient-to-r from-red-500 to-cyan-400 scale-x-0 group-hover:scale-x-100 origin-right group-hover:origin-left transition-transform duration-500"></span>
-        <span className="absolute left-0 -top-[5px] w-full h-[5px] bg-gradient-to-r from-red-500 to-cyan-400 scale-x-0 group-hover:scale-x-100 origin-left group-hover:origin-right transition-transform duration-500"></span>
-      </h3>
-      <div className="container mx-auto bg-white max-w-2xl p-8 rounded-2xl shadow-md">
+
+      <div className="text-center">
+        <h3 className="text-4xl text-white font-medium mb-10 italic relative inline-block group">
+          <span className="hover-underline">Apply here</span>
+          <span className="absolute left-0 -bottom-[14px] w-full h-[5px] bg-gradient-to-r from-red-500 to-cyan-400 scale-x-0 group-hover:scale-x-100 origin-right group-hover:origin-left transition-transform duration-500"></span>
+          <span className="absolute left-0 -top-[5px] w-full h-[5px] bg-gradient-to-r from-red-500 to-cyan-400 scale-x-0 group-hover:scale-x-100 origin-left group-hover:origin-right transition-transform duration-500"></span>
+        </h3>
+      </div>
+
+      <div className="container w-full mx-auto bg-white max-w-lg p-6 sm:p-8 rounded-2xl shadow-md">
         <form onSubmit={handleApplication} className="space-y-6">
           <input
             type="text"
             value={id}
             readOnly
-            className="w-full p-3 border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full break-words p-3 border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="text"
@@ -94,14 +98,14 @@ function Application() {
             className="w-full p-3 border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
-            type="text"
+            type="email"
             placeholder="Your Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full p-3 border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
-            type="number"
+            type="tel"
             placeholder="Your Phone"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
@@ -123,7 +127,7 @@ function Application() {
           />
           <div>
             <label className="block text-lg font-medium mb-2">
-              Select Resume(.jpg, .png, .webp)
+              Select Resume (.jpg, .png, .webp)
             </label>
             <input
               type="file"
