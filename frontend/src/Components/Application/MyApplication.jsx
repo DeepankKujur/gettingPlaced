@@ -184,7 +184,15 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
         </p>
         <p className="text-gray-700">
           <span className="font-semibold text-gray-900">Status:</span>{" "}
-          {element.interviewScheduled ? "Interview Scheduled" : "Under Review"}
+          <span
+            className={
+              element.interviewScheduled ? "text-green-500" : "text-gray-600"
+            }
+          >
+            {element.interviewScheduled
+              ? "Interview Scheduled"
+              : "Under Review"}
+          </span>
         </p>
       </div>
 

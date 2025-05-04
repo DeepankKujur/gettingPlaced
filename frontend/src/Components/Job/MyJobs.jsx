@@ -44,9 +44,13 @@ function MyJobs() {
   const handleUpdateJob = async (jobId) => {
     const updatedJob = myJobs.find((job) => job._id === jobId);
     await axios
-      .put(`https://gettingplaced.onrender.com/api/job/update/${jobId}`, updatedJob, {
-        withCredentials: true,
-      })
+      .put(
+        `https://gettingplaced.onrender.com/api/job/update/${jobId}`,
+        updatedJob,
+        {
+          withCredentials: true,
+        }
+      )
       .then((res) => {
         toast.success(res.data.message);
         setEditingMode(null);
@@ -64,9 +68,7 @@ function MyJobs() {
       })
       .then((res) => {
         toast.success(res.data.message);
-        setMyJobs((prevJobs) =>
-          prevJobs.filter((job) => job._id !== jobId)
-        );
+        setMyJobs((prevJobs) => prevJobs.filter((job) => job._id !== jobId));
       })
       .catch((error) => {
         toast.error(error.response.data.message);
@@ -93,16 +95,18 @@ function MyJobs() {
         </div>
 
         <div className="container w-full h-full max-w-7xl mx-auto">
-          <h3 className="text-2xl font-bold text-center mb-8 text-gray-800">Your Posted Jobs</h3>
+          <h3 className="text-2xl font-bold text-center mb-8 text-gray-800">
+            Your Posted Jobs
+          </h3>
           {myJobs && myJobs.length > 0 ? (
-            <div className="banner grid gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {myJobs.map((element) => (
                 <div
-                  className="card w-full bg-gray-100 rounded-lg shadow-md p-6"
+                  className="card bg-gray-100 rounded-lg shadow-md p-6"
                   key={element._id}
                 >
                   <div className="content space-y-4">
-                    <div className="short_fields grid grid-cols-1 text-gray-800 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div className="short_fields grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                       <div>
                         <span className="font-semibold">Title: </span>
                         <input
@@ -111,7 +115,11 @@ function MyJobs() {
                           disabled={editingMode !== element._id}
                           value={element.title}
                           onChange={(e) =>
-                            handleInputChange(element._id, "title", e.target.value)
+                            handleInputChange(
+                              element._id,
+                              "title",
+                              e.target.value
+                            )
                           }
                         />
                       </div>
@@ -123,7 +131,11 @@ function MyJobs() {
                           disabled={editingMode !== element._id}
                           value={element.country}
                           onChange={(e) =>
-                            handleInputChange(element._id, "country", e.target.value)
+                            handleInputChange(
+                              element._id,
+                              "country",
+                              e.target.value
+                            )
                           }
                         />
                       </div>
@@ -135,7 +147,11 @@ function MyJobs() {
                           disabled={editingMode !== element._id}
                           value={element.company}
                           onChange={(e) =>
-                            handleInputChange(element._id, "company", e.target.value)
+                            handleInputChange(
+                              element._id,
+                              "company",
+                              e.target.value
+                            )
                           }
                         />
                       </div>
@@ -147,7 +163,11 @@ function MyJobs() {
                           disabled={editingMode !== element._id}
                           value={element.city}
                           onChange={(e) =>
-                            handleInputChange(element._id, "city", e.target.value)
+                            handleInputChange(
+                              element._id,
+                              "city",
+                              e.target.value
+                            )
                           }
                         />
                       </div>
@@ -166,15 +186,33 @@ function MyJobs() {
                           disabled={editingMode !== element._id}
                         >
                           <option value="">Select Category</option>
-                          <option value="Graphics & Design">Graphics & Design</option>
-                          <option value="Mobile App Development">Mobile App Development</option>
-                          <option value="Frontend Web Development">Frontend Web Development</option>
-                          <option value="MERN Stack Development">MERN Stack Development</option>
-                          <option value="Account & Finance">Account & Finance</option>
-                          <option value="Artificial Intelligence">Artificial Intelligence</option>
-                          <option value="Video Animation">Video Animation</option>
-                          <option value="MEVN Stack Development">MERN Stack Development</option>
-                          <option value="Data Entry Operator">Data Entry Operator</option>
+                          <option value="Graphics & Design">
+                            Graphics & Design
+                          </option>
+                          <option value="Mobile App Development">
+                            Mobile App Development
+                          </option>
+                          <option value="Frontend Web Development">
+                            Frontend Web Development
+                          </option>
+                          <option value="MERN Stack Development">
+                            MERN Stack Development
+                          </option>
+                          <option value="Account & Finance">
+                            Account & Finance
+                          </option>
+                          <option value="Artificial Intelligence">
+                            Artificial Intelligence
+                          </option>
+                          <option value="Video Animation">
+                            Video Animation
+                          </option>
+                          <option value="MEVN Stack Development">
+                            MERN Stack Development
+                          </option>
+                          <option value="Data Entry Operator">
+                            Data Entry Operator
+                          </option>
                         </select>
                       </div>
                       <div>
@@ -230,7 +268,11 @@ function MyJobs() {
                           className="w-full border border-gray-600 p-2 bg-gray-100 text-gray-800 rounded-md"
                           value={element.expired}
                           onChange={(e) =>
-                            handleInputChange(element._id, "expired", e.target.value)
+                            handleInputChange(
+                              element._id,
+                              "expired",
+                              e.target.value
+                            )
                           }
                           disabled={editingMode !== element._id}
                         >
@@ -240,7 +282,7 @@ function MyJobs() {
                       </div>
                     </div>
 
-                    <div className="long_field grid text-gray-800 border-gray-600 md:grid-cols-2 gap-4 mt-4">
+                    <div className="long_field grid gap-4 mt-4 md:grid-cols-2">
                       <div>
                         <span className="font-semibold">Description:</span>
                         <textarea
