@@ -28,8 +28,8 @@ export default function ZoomForm({ application }) {
     try {
       //Create Zoom meeting
       const res = await axios.post(
-        `https://gettingplaced.onrender.com/api/zoom/create-meeting`,{ withCredentials: true },
-        {form}
+        `https://gettingplaced.onrender.com/api/zoom/create-meeting`,
+        form,{ withCredentials: true }
       );
       const meetingData = res.data;
       setMeeting(meetingData);
