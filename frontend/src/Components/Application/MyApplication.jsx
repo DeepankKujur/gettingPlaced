@@ -171,7 +171,7 @@ const MyApplications = () => {
 
 const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
   return (
-    <div className="bg-white rounded-2xl shadow-md p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 w-full">
+    <div className="bg-white rounded-2xl shadow-md p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-6 w-full">
       {/* Text Section */}
       <div className="flex-1 space-y-3 text-left w-full">
         <p className="text-gray-700">
@@ -207,10 +207,10 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
       </div>
 
       {/* Withdraw Button */}
-      <div className="flex-shrink-0 w-full md:w-auto text-right md:text-left">
+      <div className="flex-shrink-0 w-full sm:w-auto text-right sm:text-left">
         <button
           onClick={() => deleteApplication(element._id)}
-          className="mt-4 md:mt-0 w-full md:w-auto px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-300"
+          className="mt-4 sm:mt-0 w-full sm:w-auto px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-300"
         >
           Withdraw Application
         </button>

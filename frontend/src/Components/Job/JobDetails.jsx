@@ -31,13 +31,16 @@ const JobDetails = () => {
  useEffect(() => {
      const timer = setTimeout(() => {
        setLoading(false);
-     }, 2500);
+     }, 1000);
  
      return () => clearTimeout(timer);
    }, []);
   if(loading) {
     return (
       <div className="w-full min-h-screen flex items-center justify-center">
+        <div className="absolute top-0 left-0 h-full w-full -z-10">
+        <BgAnimation />
+      </div>
         <div className="loader"></div>
       </div>
     );
