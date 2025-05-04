@@ -40,31 +40,31 @@ const JobDetails = () => {
         <span className="absolute left-0 -top-[5px] w-full h-[5px] bg-gradient-to-r from-red-500 to-cyan-400 scale-x-0 group-hover:scale-x-100 origin-left group-hover:origin-right transition-transform duration-500"></span>
       </h3>
       <div className="max-w-4xl mx-auto">
-        <div className="bg-gray-100 rounded-xl shadow-lg p-8 space-y-6 text-gray-900">
-          <p>
+        <div className="bg-gray-100 rounded-xl shadow-lg p-6 sm:p-8 space-y-6 text-gray-900">
+          <p className="text-sm sm:text-base">
             <span className="font-semibold">Title:</span> {job.title}
           </p>
-          <p>
+          <p className="text-sm sm:text-base">
             <span className="font-semibold">Category:</span> {job.category}
           </p>
-          <p>
+          <p className="text-sm sm:text-base">
             <span className="font-semibold">Country:</span> {job.country}
           </p>
-          <p>
+          <p className="text-sm sm:text-base">
             <span className="font-semibold">City:</span> {job.city}
           </p>
-          <p>
+          <p className="text-sm sm:text-base">
             <span className="font-semibold">Location:</span> {job.location}
           </p>
-          <p>
+          <p className="text-sm sm:text-base">
             <span className="font-semibold">Description:</span>{" "}
             {job.description}
           </p>
-          <p>
+          <p className="text-sm sm:text-base">
             <span className="font-semibold">Job Posted On:</span>{" "}
             {job.jobPostedOn}
           </p>
-          <p>
+          <p className="text-sm sm:text-base">
             <span className="font-semibold">Salary:</span>{" "}
             {job.fixedSalary ? (
               <span>{job.fixedSalary}</span>
@@ -82,7 +82,7 @@ const JobDetails = () => {
             <div className="pt-4">
               <Link
                 to={`/application/${job._id}`}
-                className="inline-block w-full text-center text-white bg-blue-600 py-3 rounded-md hover:scale-105 transition-transform font-semibold"
+                className="inline-block w-full text-center text-white bg-blue-600 py-3 rounded-md hover:scale-105 transition-transform font-semibold text-sm sm:text-base"
               >
                 Apply Now
               </Link>
