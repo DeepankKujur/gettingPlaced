@@ -2,6 +2,8 @@
 
 **GettingPlaced** is a role-based job portal web application designed to streamline the recruitment process for both job seekers and employers. The platform facilitates job applications, postings, and interview scheduling, integrating seamlessly with Zoom for virtual interviews and utilizing Nodemailer for email communications.
 
+## [Live Link](https://gettingplaced.netlify.app/)
+
 ## Table of Contents
 
 * [Features](#features)
@@ -14,7 +16,7 @@
 * [License](#license)
 * [Acknowledgements](#acknowledgements)
 
-### [Live Link](https://gettingplaced.netlify.app/)
+### [Live Link]
 
 ## Features
 
