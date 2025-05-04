@@ -78,7 +78,7 @@ export const postApplication = catchAsyncError(async (req, res, next) => {
   }
   const { resume } = req.files;
   //cloudinary doesn't show .pdf formate in frontend so resume formate im using will be .png
-  const allowedFormats = ["image/png", "image/jpg", "image/webp"];
+  const allowedFormats = ["image/png", "image/jpeg", "image/webp"];
 
   if (!allowedFormats.includes(resume.mimetype)) {
     //mimetype means jpg png etc like that thing
