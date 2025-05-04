@@ -1,6 +1,11 @@
 // import "./App.css";
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
 import Home from "./Components/Home/Home";
@@ -20,6 +25,16 @@ import NewNavbar from "./Components/Layout/NewNav";
 import MyApplications from "./Components/Application/MyApplication";
 import { Typewriter } from "react-simple-typewriter";
 import "./index.css";
+
+const ScrollToTop = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
+  return null;
+};
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -51,25 +66,26 @@ export default function App() {
     );
   }
   return (
-    <Router>
-      <NewNavbar />
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/job/getall" element={<Jobs />} />
-        <Route path="/job/:id" element={<JobDetails />} />
-        <Route path="/job/post" element={<PostJob />} />
-        <Route path="/job/me" element={<MyJobs />} />
-        <Route path="/application/:id" element={<Application />} />
-        <Route path="/application/me" element={<MyApplications />} />
-        <Route path="/termsandconditions" element={<TermsAndConditions />} />
-        <Route path="/aboutus" element={<AboutUs />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <Chatbot />
-      <Footer />
-      <Toaster />
-    </Router>
+    <div>
+      <ScrollToTop />
+        <NewNavbar />
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/job/getall" element={<Jobs />} />
+          <Route path="/job/:id" element={<JobDetails />} />
+          <Route path="/job/post" element={<PostJob />} />
+          <Route path="/job/me" element={<MyJobs />} />
+          <Route path="/application/:id" element={<Application />} />
+          <Route path="/application/me" element={<MyApplications />} />
+          <Route path="/termsandconditions" element={<TermsAndConditions />} />
+          <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <Chatbot />
+        <Footer />
+        <Toaster />
+    </div>
   );
 }

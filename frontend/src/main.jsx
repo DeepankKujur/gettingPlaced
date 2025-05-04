@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import axios from "axios";
+import { BrowserRouter } from "react-router-dom";
 
 export const Context = createContext();
 
@@ -18,7 +19,7 @@ const AppWrapper = () => {
         { withCredentials: true }
       );
       // console.log("User data:", data);
-      
+
       if (data.user) {
         setUser(data.user);
         setIsAuthorized(true);
@@ -54,7 +55,7 @@ const AppWrapper = () => {
 };
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  <BrowserRouter>
     <AppWrapper />
-  </React.StrictMode>
+  </BrowserRouter>
 );
