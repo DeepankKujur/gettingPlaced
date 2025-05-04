@@ -218,10 +218,10 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
 
 const EmployerCard = ({ element, openModal, openZoomForm }) => {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-4 sm:p-6 hover:shadow-xl transition-all duration-300 w-full">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 items-start">
-        {/* Info Section */}
-        <div className="space-y-2 text-gray-900 dark:text-gray-100 text-sm sm:text-base">
+    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 transition-all duration-300 w-full">
+      <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr_1fr] gap-6 items-start">
+        {/* Left: Info */}
+        <div className="space-y-2 text-gray-900 dark:text-gray-100 text-sm lg:text-base">
           <p>
             <span className="font-semibold">Name:</span> {element.name}
           </p>
@@ -236,10 +236,10 @@ const EmployerCard = ({ element, openModal, openZoomForm }) => {
           </p>
         </div>
 
-        {/* Resume Preview */}
-        {element.resume?.url && (
+        {/* Middle: Resume Preview */}
+        {element.resume?.url ? (
           <div
-            className="w-full max-w-[120px] sm:max-w-[150px] mx-auto cursor-pointer overflow-hidden rounded-md shadow-md hover:scale-105 transition-transform"
+            className="w-full max-w-[100px] mx-auto cursor-pointer overflow-hidden rounded-lg shadow-md hover:scale-105 transition-transform"
             onClick={() => openModal(element.resume.url)}
           >
             <img
@@ -248,26 +248,32 @@ const EmployerCard = ({ element, openModal, openZoomForm }) => {
               className="object-cover w-full h-40 rounded-md"
             />
           </div>
+        ) : (
+          <div className="text-center text-gray-400 italic">No Resume</div>
         )}
 
-        {/* Actions Section */}
+        {/* Right: Interview Panel */}
         <div className="space-y-4 w-full">
           {element.interviewScheduled && element.zoomHostLink ? (
             <>
-              <div className="bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl p-4 shadow text-sm text-gray-800 dark:text-gray-200">
-                <h3 className="font-medium mb-2">Interview Details</h3>
-                <p>
-                  <span className="font-semibold">📅 Date:</span> {element.interviewDate}
-                </p>
-                <p>
-                  <span className="font-semibold">⏰ Time:</span> {element.interviewTime}
-                </p>
+              <div className="bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl p-4 shadow">
+                <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">
+                  Interview Details
+                </h3>
+                <div className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
+                  <p>
+                    <span className="font-semibold">📅 Date:</span> {element.interviewDate}
+                  </p>
+                  <p>
+                    <span className="font-semibold">⏰ Time:</span> {element.interviewTime}
+                  </p>
+                </div>
               </div>
               <a
                 href={element.zoomHostLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block w-full text-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-md"
+                className="block text-center w-full px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-md"
               >
                 Host Interview
               </a>
@@ -285,5 +291,6 @@ const EmployerCard = ({ element, openModal, openZoomForm }) => {
     </div>
   );
 };
+
 
 export default MyApplications;
