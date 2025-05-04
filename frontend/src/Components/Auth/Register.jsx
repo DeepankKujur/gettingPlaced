@@ -50,8 +50,9 @@ const Register = () => {
   // }
 
   return (
-    <div className="flex w-full h-screen [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]">
-      <div className="flex-1 flex items-center justify-center">
+    <div className="w-full min-h-screen flex flex-col lg:flex-row [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]">
+      {/* Form Section */}
+      <div className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-md p-6">
           <div className="text-center mb-6">
             <h3 className="text-2xl text-white font-semibold mt-4 italic relative inline-block group">
@@ -140,7 +141,7 @@ const Register = () => {
             <button
               type="submit"
               onClick={handleRegister}
-              className="w-full py-3 text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-lg px-4 text-center me-2 mt-3"
+              className="w-full py-3 text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-lg px-4 text-center mt-3"
             >
               Register
             </button>
@@ -153,8 +154,10 @@ const Register = () => {
           </form>
         </div>
       </div>
+
+      {/* Image Section - hidden on small screens */}
       <div
-        className="flex-1 bg-cover bg-center"
+        className="hidden lg:block flex-1 bg-cover bg-center"
         style={{ backgroundImage: "url('/register.png')" }}
       ></div>
     </div>

@@ -1,10 +1,11 @@
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Context } from "../../main";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function NewNavbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
   const { isAuthorized, user, checkAuth } = useContext(Context);
   const navigateTo = useNavigate();
 
@@ -23,89 +24,106 @@ export default function NewNavbar() {
     navigateTo("/login"); // Navigate to the login page
   };
   return (
-    <>
-      {/* Top Navbar */}
-      <nav className="border-gray-200 bg-gray-900 ">
-        <div className="flex flex-wrap justify-between items-center mx-auto w-full px-4 py-3">
-          <Link to={"/"}>
-            <img
-              src="/JobZee-logos__white.png"
-              className="h-20 cursor-pointer"
-              alt="Logo"
-            />
-          </Link>
-          <div className="flex items-center space-x-10 rtl:space-x-reverse">
-            <ul className="flex flex-row font-medium mt-0 space-x-4 rtl:space-x-reverse text-xl">
-              <li>
-                <Link
-                  to={"/"}
-                  className="text-gray-900 dark:text-white hover:underline cursor-pointer"
-                >
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to={"/job/getall"}
-                  className="text-gray-900 dark:text-white hover:underline cursor-pointer"
-                >
-                  All Jobs
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to={"/application/me"}
-                  className="text-gray-900 dark:text-white hover:underline cursor-pointer"
-                >
-                  {user && user.role === "Employer"
-                    ? "Applicant's Applications"
-                    : "My Applications"}
-                </Link>
-              </li>
-              {user?.role === "Employer" ? (
-                <>
-                  <li>
-                    <Link
-                      to={"/job/post"}
-                      className="text-gray-900 dark:text-white hover:underline cursor-pointer"
-                    >
-                      Post a Job
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to={"/job/me"}
-                      className="text-gray-900 dark:text-white hover:underline cursor-pointer"
-                    >
-                      View My Jobs
-                    </Link>
-                  </li>
-                </>
-              ) : null}
-            </ul>
+    <nav className="bg-gray-900 border-gray-200">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4 py-3">
+        {/* Logo */}
+        <Link to="/">
+          <img
+            src="/JobZee-logos__white.png"
+            className="h-14 md:h-20 cursor-pointer"
+            alt="Logo"
+          />
+        </Link>
 
-            {isAuthorized ? (
-              <button
-                className="relative inline-flex items-center justify-center p-0.5 cursor-pointer me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
-                onClick={handleLogout}
-              >
-                <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
-                  LOGOUT
-                </span>
-              </button>
+        {/* Hamburger icon for mobile */}
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          type="button"
+          className="inline-flex items-center p-2 ml-3 text-sm text-white md:hidden focus:outline-none focus:ring-2 focus:ring-gray-600"
+        >
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            {menuOpen ? (
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
             ) : (
-              <button
-                className="relative inline-flex items-center justify-center p-0.5 cursor-pointer me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
-                onClick={handleLogin}
-              >
-                <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
-                  LOGIN
-                </span>
-              </button>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
             )}
-          </div>
+          </svg>
+        </button>
+
+        {/* Menu items */}
+        <div
+          className={`${
+            menuOpen ? "block" : "hidden"
+          } w-full md:flex md:items-center md:w-auto`}
+        >
+          <ul className="flex flex-col md:flex-row md:space-x-6 mt-4 md:mt-0 text-white items-center text-lg font-medium">
+            <li>
+              <Link to="/" className="hover:underline">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link to="/job/getall" className="hover:underline">
+                All Jobs
+              </Link>
+            </li>
+            <li>
+              <Link to="/application/me" className="hover:underline">
+                {user?.role === "Employer"
+                  ? "Applicant's Applications"
+                  : "My Applications"}
+              </Link>
+            </li>
+            {user?.role === "Employer" && (
+              <>
+                <li>
+                  <Link to="/job/post" className="hover:underline">
+                    Post a Job
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/job/me" className="hover:underline">
+                    View My Jobs
+                  </Link>
+                </li>
+              </>
+            )}
+            <li className="mt-4 md:mt-0">
+              {isAuthorized ? (
+                <button
+                  className="bg-gradient-to-br from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white px-4 py-2 rounded-lg transition"
+                  onClick={handleLogout}
+                >
+                  LOGOUT
+                </button>
+              ) : (
+                <button
+                  className="bg-gradient-to-br from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white px-4 py-2 rounded-lg transition"
+                  onClick={handleLogin}
+                >
+                  LOGIN
+                </button>
+              )}
+            </li>
+          </ul>
         </div>
-      </nav>
-    </>
+      </div>
+    </nav>
   );
 }

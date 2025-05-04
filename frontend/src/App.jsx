@@ -1,5 +1,5 @@
 // import "./App.css";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
@@ -18,8 +18,38 @@ import Footer from "./Components/Layout/Footer";
 import Chatbot from "./Components/Chatbot";
 import NewNavbar from "./Components/Layout/NewNav";
 import MyApplications from "./Components/Application/MyApplication";
+import { Typewriter } from "react-simple-typewriter";
+import "./index.css";
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen bg-gray-900 text-white px-4">
+        <div className="loader mx-6"></div>
+        <div className="text-center text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">
+          <Typewriter
+            words={['Launching your experience...', 'Loading magic...']}
+            loop={false}
+            cursor
+            cursorStyle="_"
+            typeSpeed={70}
+            deleteSpeed={50}
+            delaySpeed={1000}
+          />
+        </div>
+      </div>
+    );
+  }
   return (
     <Router>
       <NewNavbar />

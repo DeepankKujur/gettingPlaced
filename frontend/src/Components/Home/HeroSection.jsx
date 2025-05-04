@@ -58,7 +58,7 @@ const HeroSection = () => {
   return (
     <div className="flex flex-col py-[75px] px-4 lg:px-0">
       <div className="flex flex-col lg:flex-row w-full px-10 mb-7 min-h-[450px] relative">
-        <div className="flex flex-col justify-center flex-1 z-10 text-white lg:text-left text-center">
+        <div className="flex flex-col justify-center items-center lg:items-start flex-1 z-10 text-white lg:text-left text-center">
           <h1 className="text-4xl md:text-5xl italic font-bold max-w-[600px] mx-auto lg:mx-0">
             Find a job that suits your interests and skills
           </h1>
@@ -94,7 +94,7 @@ const HeroSection = () => {
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-4 justify-between w-full p-12 mx-auto">
+      <div className="flex flex-wrap gap-4 justify-center md:justify-between w-full p-12 mx-auto">
         {details.map((item) => (
           <div
             key={item.id}

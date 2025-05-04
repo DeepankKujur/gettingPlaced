@@ -31,8 +31,9 @@ const Login = () => {
   };
 
   return (
-    <div className="flex w-full min-h-screen [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]">
-      <div className="flex-1 flex items-center justify-center">
+    <div className="w-full min-h-screen flex flex-col lg:flex-row bg-gradient-to-br from-black to-[#63e]">
+      {/* Form Section */}
+      <div className="flex-1 flex items-center justify-center px-6 py-12">
         <div className="w-full max-w-sm">
           <div className="text-center mb-6">
             <h3 className="text-2xl text-white font-semibold mt-4 italic relative inline-block group">
@@ -91,7 +92,7 @@ const Login = () => {
             <button
               type="submit"
               onClick={handleLogin}
-              className="w-full py-3 text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-lg px-4 text-center me-2 mt-3"
+              className="w-full py-3 text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-lg px-4 text-center mt-3"
             >
               Login
             </button>
@@ -104,8 +105,10 @@ const Login = () => {
           </form>
         </div>
       </div>
+
+      {/* Image Section */}
       <div
-        className="flex-1 bg-cover bg-center"
+        className="hidden lg:block flex-1 bg-cover bg-center"
         style={{ backgroundImage: "url('/login.png')" }}
       ></div>
     </div>
