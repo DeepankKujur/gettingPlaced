@@ -188,18 +188,17 @@ const MyApplications = () => {
 
 const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
   return (
-    <div className="bg-white rounded-2xl shadow-md p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-6 w-full">
-      {/* Text Section */}
-      <div className="flex-1 space-y-3 text-left w-full">
-        <p className="text-gray-700">
+    <div className="bg-white rounded-2xl shadow-md p-4 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6 w-full">
+      <div className="flex-1 space-y-2 text-left w-full">
+        <p className="text-gray-700 text-sm sm:text-base">
           <span className="font-semibold text-gray-900">Company:</span>{" "}
           {element.jobId?.company || "N/A"}
         </p>
-        <p className="text-gray-700">
+        <p className="text-gray-700 text-sm sm:text-base">
           <span className="font-semibold text-gray-900">Job Title:</span>{" "}
           {element.jobId?.title || "N/A"}
         </p>
-        <p className="text-gray-700">
+        <p className="text-gray-700 text-sm sm:text-base">
           <span className="font-semibold text-gray-900">Status:</span>{" "}
           <span
             className={
@@ -213,23 +212,21 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
         </p>
       </div>
 
-      {/* Resume Image */}
-      <div className="flex-shrink-0">
+      <div className="flex justify-center md:justify-end">
         <img
           src={element.resume.url}
           alt="resume"
           onClick={() => openModal(element.resume.url)}
-          className="w-32 h-32 max-w-[8rem] object-cover rounded-lg cursor-pointer hover:scale-105 transition-transform duration-300"
+          className="w-24 h-24 sm:w-28 sm:h-28 object-cover rounded-lg cursor-pointer hover:scale-105 transition-transform"
         />
       </div>
 
-      {/* Withdraw Button */}
-      <div className="flex-shrink-0 w-full sm:w-auto text-right sm:text-left">
+      <div className="w-full md:w-auto text-center md:text-right">
         <button
           onClick={() => deleteApplication(element._id)}
-          className="mt-4 sm:mt-0 w-full sm:w-auto px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-300"
+          className="mt-4 md:mt-0 w-full md:w-auto px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition"
         >
-          Withdraw Application
+          Withdraw
         </button>
       </div>
     </div>
@@ -238,86 +235,79 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
 
 const EmployerCard = ({ element, openModal, openZoomForm }) => {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 flex flex-col sm:flex-row sm:items-start gap-6 hover:shadow-2xl transition-all duration-300 w-full">
-      {/* User Info */}
-      <div className="flex-1 space-y-3 text-gray-900 dark:text-gray-100">
-        <p>
-          <span className="font-semibold">Name:</span> {element.name}
-        </p>
-        <p>
-          <span className="font-semibold">Email:</span>{" "}
-          {element.email || "Not provided"}
-        </p>
-        <p>
-          <span className="font-semibold">Phone:</span>{" "}
-          {element.phone || "Not provided"}
-        </p>
-        <p>
-          <span className="font-semibold">Address:</span>{" "}
-          {element.address || "Not provided"}
-        </p>
-      </div>
-
-      {/* Resume Thumbnail */}
-      {element.resume?.url && (
-        <div
-          className="w-32 h-40 cursor-pointer overflow-hidden rounded-md shadow-md hover:scale-105 transition-transform flex-shrink-0"
-          onClick={() => openModal(element.resume?.url)}
-        >
-          <img
-            src={element.resume.url}
-            alt="Resume"
-            className="object-cover w-full h-full bg-green-500"
-          />
+    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 transition-all duration-300 w-full">
+      <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr_1fr] gap-6 items-start">
+        {/* Left: Info */}
+        <div className="space-y-2 text-gray-900 dark:text-gray-100 text-sm lg:text-base">
+          <p>
+            <span className="font-semibold">Name:</span> {element.name}
+          </p>
+          <p>
+            <span className="font-semibold">Email:</span> {element.email || "N/A"}
+          </p>
+          <p>
+            <span className="font-semibold">Phone:</span> {element.phone || "N/A"}
+          </p>
+          <p>
+            <span className="font-semibold">Address:</span> {element.address || "N/A"}
+          </p>
         </div>
-      )}
 
-      {/* Action Section */}
-      <div className="w-full sm:w-60 flex-shrink-0">
-        {element.interviewScheduled && element.zoomHostLink ? (
-          <>
-            {/* Interview Info Card */}
-            <div className="bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl p-4 shadow-md mb-4">
-              <h3 className="text-sm font-medium text-gray-800 dark:text-gray-200 mb-2">
-                Interview Details
-              </h3>
-              <div className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
-                <p>
-                  <span className="font-semibold text-gray-900 dark:text-white">
-                    📅 Date:
-                  </span>{" "}
-                  {element.interviewDate}
-                </p>
-                <p>
-                  <span className="font-semibold text-gray-900 dark:text-white">
-                    ⏰ Time:
-                  </span>{" "}
-                  {element.interviewTime}
-                </p>
-              </div>
-            </div>
-
-            {/* Host Button */}
-            <a
-              href={element.zoomHostLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block w-full text-center px-5 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-md transition"
-            >
-              Host Interview
-            </a>
-          </>
-        ) : (
-          <button
-            onClick={() => openZoomForm(element)}
-            className="w-full px-5 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md transition"
+        {/* Middle: Resume Preview */}
+        {element.resume?.url ? (
+          <div
+            className="w-full max-w-[100px] mx-auto cursor-pointer overflow-hidden rounded-lg shadow-md hover:scale-105 transition-transform"
+            onClick={() => openModal(element.resume.url)}
           >
-            Invite for Interview
-          </button>
+            <img
+              src={element.resume.url}
+              alt="Resume"
+              className="object-cover w-full h-40 rounded-md"
+            />
+          </div>
+        ) : (
+          <div className="text-center text-gray-400 italic">No Resume</div>
         )}
+
+        {/* Right: Interview Panel */}
+        <div className="space-y-4 w-full">
+          {element.interviewScheduled && element.zoomHostLink ? (
+            <>
+              <div className="bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl p-4 shadow">
+                <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">
+                  Interview Details
+                </h3>
+                <div className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
+                  <p>
+                    <span className="font-semibold">📅 Date:</span> {element.interviewDate}
+                  </p>
+                  <p>
+                    <span className="font-semibold">⏰ Time:</span> {element.interviewTime}
+                  </p>
+                </div>
+              </div>
+              <a
+                href={element.zoomHostLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-center w-full px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-md"
+              >
+                Host Interview
+              </a>
+            </>
+          ) : (
+            <button
+              onClick={() => openZoomForm(element)}
+              className="w-full px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md"
+            >
+              Invite for Interview
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
 };
+
 
 export default MyApplications;
