@@ -1,32 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { MessageCircle, X } from "lucide-react";
+import { Context } from "../main.jsx";
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
-  const [isChatOpen, setIsChatOpen] = useState(false); // State for toggling chatbox
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
+  const { isAuthorized, user } = useContext(Context);
 
   const API_KEY = "AIzaSyDvvdqVBlH0m8R_awO-336aaD1nn3SwKOQ";
   const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
   const generateBotResponse = async () => {
+    let roleInfo = "";
+
+    if (isAuthorized && user?.role) {
+      roleInfo = `The user is logged in as a "${user.role}". You should tailor your response to suit a ${user.role}.`;
+    } else {
+      roleInfo = `The user is not logged in. Provide general guidance for both job seekers and employers.`;
+    }
+
     const context = `
-      You are an intelligent assistant for the website "Getting Placed" (https://gettingplaced.netlify.app), 
+      You are an intelligent assistant for the website "Getting Placed" (https://gettingplaced.netlify.app),
       a role-based job platform connecting job seekers and employers.
-  
-      ### For Job Seekers:
-      - Can view all available job listings up to date.
-      - Can search for jobs by title or category.
-      - Can apply to jobs directly through the platform.
-      
-      ### For Employers:
-      - Can view and search all job listings.
-      - Can post new job opportunities.
-      - Can view, update, and delete their posted jobs (CRUD operations).
-      - Can schedule interviews with applicants using Zoom API.
-      - Can send interview invites via email using Nodemailer.
-  
-      When responding, focus on guiding users based on their role (job seeker or employer) and your knowledge of the site's features. Only respond with what's relevant to the platform.
+
+      ${roleInfo}
+
+      ### Platform Features:
+
+      **For Job Seekers:**
+      - View all job listings
+      - Search by title or category
+      - Apply to jobs
+
+      **For Employers:**
+      - Post new jobs
+      - Manage listings (edit/delete)
+      - Schedule interviews (Zoom API)
+      - Send interview invites (Nodemailer)
     `;
 
     const requestOptions = {
@@ -44,20 +56,23 @@ const Chatbot = () => {
       const response = await fetch(API_URL, requestOptions);
       const data = await response.json();
 
-      if (!response.ok) throw new Error(data.error.message);
+      if (!response.ok) throw new Error(data.error?.message || "API error");
 
-      setMessages((prevMessages) => [
-        ...prevMessages,
+      setMessages((prev) => [
+        ...prev,
         { text: data.candidates[0].content.parts[0].text, sender: "bot" },
       ]);
     } catch (error) {
       console.error("Error generating response:", error);
+      setMessages((prev) => [
+        ...prev,
+        { text: "Sorry, I couldn't respond. Please try again.", sender: "bot" },
+      ]);
     }
   };
 
   const handleSend = () => {
     if (!input.trim()) return;
-
     setMessages([...messages, { text: input, sender: "user" }]);
     generateBotResponse();
     setInput("");
@@ -65,7 +80,6 @@ const Chatbot = () => {
 
   return (
     <div className="fixed bottom-5 right-5 z-50">
-      {/* Chat Icon */}
       {!isChatOpen && (
         <button
           className="bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 transition"
@@ -75,10 +89,8 @@ const Chatbot = () => {
         </button>
       )}
 
-      {/* Chatbox */}
       {isChatOpen && (
-        <div className="w-80 max-w-[90vw] h-[500px] flex flex-col bg-white shadow-xl rounded-lg fixed bottom-20 right-5 sm:right-5">
-          {/* Header */}
+        <div className="w-80 max-w-[90vw] h-[500px] flex flex-col bg-white shadow-xl rounded-lg fixed bottom-20 right-5">
           <div className="bg-blue-500 text-white p-3 flex justify-between items-center rounded-t-lg">
             <h2 className="text-base font-semibold">Chat With Me</h2>
             <button onClick={() => setIsChatOpen(false)}>
@@ -86,7 +98,6 @@ const Chatbot = () => {
             </button>
           </div>
 
-          {/* Messages */}
           <div className="flex-grow overflow-y-auto p-3 space-y-2">
             {messages.map((msg, index) => (
               <div
@@ -102,7 +113,6 @@ const Chatbot = () => {
             ))}
           </div>
 
-          {/* Input Box */}
           <div className="flex border-t border-gray-300 p-2 gap-2">
             <input
               type="text"
