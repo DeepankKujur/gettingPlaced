@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import { MessageCircle, X } from "lucide-react";
 import { Context } from "../main.jsx";
 
@@ -8,6 +8,15 @@ const Chatbot = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
 
   const { isAuthorized, user } = useContext(Context);
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const API_KEY = "AIzaSyDvvdqVBlH0m8R_awO-336aaD1nn3SwKOQ";
   const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
@@ -111,6 +120,7 @@ const Chatbot = () => {
                 {msg.text}
               </div>
             ))}
+            <div ref={messagesEndRef} />
           </div>
 
           <div className="flex border-t border-gray-300 p-2 gap-2">
