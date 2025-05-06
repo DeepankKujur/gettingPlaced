@@ -76,7 +76,7 @@ const Jobs = () => {
               Quick Filters:
             </p>
             <div className="flex flex-wrap gap-2">
-              {["Frontend", "Backend", "Design", "Finance", "India"].map(
+              {["Frontend", "Backend", "Design", "Finance", "India","Bangalore"].map(
                 (filter) => (
                   <button
                     key={filter}
