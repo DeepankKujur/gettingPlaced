@@ -38,7 +38,8 @@ const Jobs = () => {
       job.title.toLowerCase().includes(term) ||
       job.category.toLowerCase().includes(term) ||
       job.country.toLowerCase().includes(term) ||
-      job.company?.toLowerCase().includes(term)
+      job.company?.toLowerCase().includes(term) ||
+      job.city?.toLowerCase().includes(term)
     );
   });
 
@@ -75,7 +76,7 @@ const Jobs = () => {
               Quick Filters:
             </p>
             <div className="flex flex-wrap gap-2">
-              {["Frontend", "Backend", "Design", "Finance", "India"].map(
+              {["Frontend", "Backend", "Design", "Finance", "India","Bangalore"].map(
                 (filter) => (
                   <button
                     key={filter}
@@ -106,7 +107,7 @@ const Jobs = () => {
               <p className="text-base text-purple-300 mb-1">
                 {element.category}
               </p>
-              <p className="text-sm text-gray-400">{element.country}</p>
+              <p className="text-sm text-gray-400">{`${element.city}, ${element.country}`}</p>
             </div>
 
             <div className="mt-5">
