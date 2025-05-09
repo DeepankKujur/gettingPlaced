@@ -16,7 +16,6 @@
 * [License](#license)
 * [Acknowledgements](#acknowledgements)
 
-### [Live Link]
 
 ## Features
 

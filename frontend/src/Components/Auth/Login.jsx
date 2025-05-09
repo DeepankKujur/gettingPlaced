@@ -37,7 +37,7 @@ const Login = () => {
         <div className="w-full max-w-sm">
           <div className="text-center mb-6">
             <h3 className="text-2xl text-white font-semibold mt-4 italic relative inline-block group">
-              <span className="hover-underline">Create a new account</span>
+              <span className="hover-underline">Login to your account</span>
               <span className="absolute left-0 -bottom-[5px] w-full h-[2px] bg-gradient-to-r from-pink-500 to-cyan-400 scale-x-0 group-hover:scale-x-100 origin-right group-hover:origin-left transition-transform duration-500"></span>
             </h3>
           </div>

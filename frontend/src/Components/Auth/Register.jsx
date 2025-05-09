@@ -130,7 +130,7 @@ const Register = () => {
               <div className="flex items-center border border-gray-500 rounded-md p-2">
                 <input
                   type="password"
-                  placeholder="Your Password"
+                  placeholder="Must contian at least 8 char"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="flex-1 bg-transparent text-white outline-none"
