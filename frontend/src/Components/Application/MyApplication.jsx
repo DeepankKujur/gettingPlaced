@@ -234,13 +234,6 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
 };
 
 const EmployerCard = ({ element, openModal, openZoomForm }) => {
-  const isFutureInterview = () => {
-    if (!element.interviewScheduled || !element.interviewDate || !element.interviewTime) return false;
-
-    const interviewDateTime = new Date(`${element.interviewDate}T${element.interviewTime}`);
-    return interviewDateTime > new Date();
-  };
-
   return (
     <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 transition-all duration-300 w-full">
       <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr_1fr] gap-6 items-start">
@@ -278,7 +271,7 @@ const EmployerCard = ({ element, openModal, openZoomForm }) => {
 
         {/* Right: Interview Panel */}
         <div className="space-y-4 w-full">
-          {element.interviewScheduled && element.zoomHostLink && isFutureInterview() ? (
+          {element.interviewScheduled && element.zoomHostLink ? (
             <>
               <div className="bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl p-4 shadow">
                 <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">
