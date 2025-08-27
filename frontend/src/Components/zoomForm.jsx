@@ -26,7 +26,7 @@ export default function ZoomForm({ application }) {
     try {
       //Create Zoom meeting
       const res = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/zoom/create-meeting`,
+        `https://gettingplaced.onrender.com/api/zoom/create-meeting`,
         form,
         { withCredentials: true }
       );
@@ -35,7 +35,7 @@ export default function ZoomForm({ application }) {
 
       //Send interview email
       await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/invite/interview`,
+        `https://gettingplaced.onrender.com/api/invite/interview`,
         {
           to: application.email,
           applicantName: application.name,
@@ -49,7 +49,7 @@ export default function ZoomForm({ application }) {
 
       //Update application status
       await axios.patch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/application/status/${
+        `https://gettingplaced.onrender.com/api/application/status/${
           application._id
         }`,
         {},
@@ -58,7 +58,7 @@ export default function ZoomForm({ application }) {
 
       //Update application with interview info
       await axios.patch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/application/update/${
+        `https://gettingplaced.onrender.com/api/application/update/${
           application._id
         }`,
         {

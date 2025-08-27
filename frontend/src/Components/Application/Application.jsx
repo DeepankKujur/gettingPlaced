@@ -38,7 +38,7 @@ function Application() {
 
     try {
       const { data } = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/application/post`,
+        `https://gettingplaced.onrender.com/api/application/post`,
         formData,
         {
           withCredentials: true,
