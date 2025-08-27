@@ -19,7 +19,7 @@ const HeroSection = () => {
     const fetchStats = async () => {
       try {
         const { data } = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/api/totalCounts/`,
+          `https://gettingplaced.onrender.com/api/totalCounts/`,
           { withCredentials: true }
         );
         setStats(data);
