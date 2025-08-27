@@ -27,12 +27,8 @@ const MyApplications = () => {
       try {
         const endpoint =
           user?.role === "Employer"
-            ? `${
-                import.meta.env.VITE_BACKEND_URL
-              }/api/application/employer/getall`
-            : `${
-                import.meta.env.VITE_BACKEND_URL
-              }/api/application/jobseeker/getall`;
+            ? `https://gettingplaced.onrender.com/api/application/employer/getall`
+            : `https://gettingplaced.onrender.com/api/application/jobseeker/getall`;
 
         const { data } = await axios.get(endpoint, { withCredentials: true });
         setApplications(data.applications);
@@ -192,8 +188,8 @@ const MyApplications = () => {
 
 const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
   return (
-    <div className="bg-white rounded-2xl shadow-md p-4 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6 w-full">
-      <div className="flex-1 space-y-2 text-left w-full">
+    <div className="bg-white rounded-2xl shadow-md sm:p-3 flex flex-col md:flex-row md:items-center justify-between gap-1 sm:gap-2 w-full overflow-hidden">
+      <div className="flex-1 p-3 space-y-1 text-left w-1/3 wrap-break-word">
         <p className="text-gray-700 text-sm sm:text-base">
           <span className="font-semibold text-gray-900">Company:</span>{" "}
           {element.jobId?.company || "N/A"}
@@ -216,12 +212,12 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
         </p>
       </div>
 
-      <div className="flex justify-center md:justify-end">
+      <div className="flex bg-green-500 w-1/3 justify-center md:justify-end">
         <img
           src={element.resume.url}
           alt="resume"
           onClick={() => openModal(element.resume.url)}
-          className="w-24 h-24 sm:w-28 sm:h-28 object-cover rounded-lg cursor-pointer hover:scale-105 transition-transform"
+          className="w-28 h-28 sm:w-38 sm:h-38 object-cover rounded-lg cursor-pointer hover:scale-105 transition-transform"
         />
       </div>
 
