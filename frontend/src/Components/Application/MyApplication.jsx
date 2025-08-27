@@ -47,7 +47,7 @@ const MyApplications = () => {
   const deleteApplication = async (id) => {
     try {
       const { data } = await axios.delete(
-        `${import.meta.env.VITE_BACKEND_URL}/api/application/delete/${id}`,
+        `https://gettingplaced.onrender.com/api/application/delete/${id}`,
         { withCredentials: true }
       );
       toast.success(data.message);
