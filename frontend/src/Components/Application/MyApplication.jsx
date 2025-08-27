@@ -27,8 +27,12 @@ const MyApplications = () => {
       try {
         const endpoint =
           user?.role === "Employer"
-            ? `https://gettingplaced.onrender.com/api/application/employer/getall`
-            : `https://gettingplaced.onrender.com/api/application/jobseeker/getall`;
+            ? `${
+                import.meta.env.VITE_BACKEND_URL
+              }/api/application/employer/getall`
+            : `${
+                import.meta.env.VITE_BACKEND_URL
+              }/api/application/jobseeker/getall`;
 
         const { data } = await axios.get(endpoint, { withCredentials: true });
         setApplications(data.applications);
@@ -43,7 +47,7 @@ const MyApplications = () => {
   const deleteApplication = async (id) => {
     try {
       const { data } = await axios.delete(
-        `https://gettingplaced.onrender.com/api/application/delete/${id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/application/delete/${id}`,
         { withCredentials: true }
       );
       toast.success(data.message);
@@ -92,16 +96,16 @@ const MyApplications = () => {
 
     return () => clearTimeout(timer);
   }, []);
- if(loading) {
-   return (
-     <div className="w-full min-h-screen flex items-center justify-center">
-       <div className="absolute top-0 left-0 h-full w-full -z-10">
-       <BgAnimation />
-     </div>
-       <div className="loader"></div>
-     </div>
-   );
- }
+  if (loading) {
+    return (
+      <div className="w-full min-h-screen flex items-center justify-center">
+        <div className="absolute top-0 left-0 h-full w-full -z-10">
+          <BgAnimation />
+        </div>
+        <div className="loader"></div>
+      </div>
+    );
+  }
   return (
     <div className="w-full min-h-screen flex flex-col items-center py-8 px-4 sm:px-6 lg:px-8">
       <div className="absolute top-0 left-0 h-full w-full -z-10">
@@ -236,78 +240,88 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
 const EmployerCard = ({ element, openModal, openZoomForm }) => {
   return (
     <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 transition-all duration-300 w-full">
-      <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr_1fr] gap-6 items-start">
+      <div className="flex flex-col lg:flex-row gap-6 overflow-hidden">
         {/* Left: Info */}
-        <div className="space-y-2 text-gray-900 dark:text-gray-100 text-sm lg:text-base">
-          <p>
+        <div className="w-[60%] space-y-3 text-gray-900 dark:text-gray-100 text-sm ">
+          <p className="truncate">
             <span className="font-semibold">Name:</span> {element.name}
           </p>
-          <p>
-            <span className="font-semibold">Email:</span> {element.email || "N/A"}
+          <p className="truncate">
+            <span className="font-semibold">Email:</span>{" "}
+            {element.email || "N/A"}
           </p>
-          <p>
-            <span className="font-semibold">Phone:</span> {element.phone || "N/A"}
+          <p className="truncate">
+            <span className="font-semibold">Phone:</span>{" "}
+            {element.phone || "N/A"}
           </p>
-          <p>
-            <span className="font-semibold">Address:</span> {element.address || "N/A"}
+          <p className="break-words">
+            <span className="font-semibold">Address:</span>{" "}
+            {element.address || "N/A"}
           </p>
         </div>
 
         {/* Middle: Resume Preview */}
-        {element.resume?.url ? (
-          <div
-            className="w-full max-w-[100px] mx-auto cursor-pointer overflow-hidden rounded-lg shadow-md hover:scale-105 transition-transform"
-            onClick={() => openModal(element.resume.url)}
-          >
-            <img
-              src={element.resume.url}
-              alt="Resume"
-              className="object-cover w-full h-40 rounded-md"
-            />
-          </div>
-        ) : (
-          <div className="text-center text-gray-400 italic">No Resume</div>
-        )}
-
-        {/* Right: Interview Panel */}
-        <div className="space-y-4 w-full">
-          {element.interviewScheduled && element.zoomHostLink ? (
-            <>
-              <div className="bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl p-4 shadow">
-                <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">
-                  Interview Details
-                </h3>
-                <div className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
-                  <p>
-                    <span className="font-semibold">📅 Date:</span> {element.interviewDate}
-                  </p>
-                  <p>
-                    <span className="font-semibold">⏰ Time:</span> {element.interviewTime}
-                  </p>
-                </div>
-              </div>
-              <a
-                href={element.zoomHostLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block text-center w-full px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-md"
-              >
-                Host Interview
-              </a>
-            </>
-          ) : (
-            <button
-              onClick={() => openZoomForm(element)}
-              className="w-full px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md"
+        <div className="flex justify-center lg:justify-start">
+          {element.resume?.url ? (
+            <div
+              className="w-24 h-32 mx-auto cursor-pointer overflow-hidden rounded-lg shadow-md bg-gray-200 flex items-center justify-center hover:scale-105 transition-transform"
+              onClick={() => openModal(element.resume.url)}
             >
-              Invite for Interview
-            </button>
+              <img
+                src={element.resume.url}
+                alt="Resume"
+                className="object-cover w-full h-full"
+              />
+            </div>
+          ) : (
+            <div className="w-24 h-32 mx-auto overflow-hidden rounded-lg shadow-md bg-gray-200 flex items-center justify-center">
+              <span className="text-gray-500 text-xs text-center">
+                No Resume
+              </span>
+            </div>
           )}
         </div>
+      </div>
+
+      {/* Right: Interview Panel */}
+      <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700 space-y-4 w-full">
+        {element.interviewScheduled && element.zoomHostLink ? (
+          <>
+            <div className="bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl p-4">
+              <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">
+                Interview Details
+              </h3>
+              <div className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
+                <p>
+                  <span className="font-semibold">Date:</span>{" "}
+                  {element.interviewDate}
+                </p>
+                <p>
+                  <span className="font-semibold">Time:</span>{" "}
+                  {element.interviewTime}
+                </p>
+              </div>
+            </div>
+            <a
+              href={element.zoomHostLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block text-center w-full px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-md"
+            >
+              Host Interview
+            </a>
+          </>
+        ) : (
+          <button
+            onClick={() => openZoomForm(element)}
+            className="w-full px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md"
+          >
+            Invite for Interview
+          </button>
+        )}
       </div>
     </div>
   );
 };
-
 
 export default MyApplications;

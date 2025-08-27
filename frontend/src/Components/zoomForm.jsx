@@ -1,5 +1,5 @@
-import { useState } from "react";
 import axios from "axios";
+import { useState } from "react";
 
 export default function ZoomForm({ application }) {
   const [form, setForm] = useState({
@@ -7,12 +7,10 @@ export default function ZoomForm({ application }) {
     time: "",
     company: "",
   });
-
+  const [error, setError] = useState(""); // Error state for better error handling
   const [meeting, setMeeting] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(""); // Error state for better error handling
   const [success, setSuccess] = useState(false); // Success state for confirmation
-
   const todayDate = new Date().toISOString().split("T")[0]; // yyyy-mm-dd
 
   const handleSubmit = async (e) => {
@@ -28,7 +26,7 @@ export default function ZoomForm({ application }) {
     try {
       //Create Zoom meeting
       const res = await axios.post(
-        `https://gettingplaced.onrender.com/api/zoom/create-meeting`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/zoom/create-meeting`,
         form,
         { withCredentials: true }
       );
@@ -37,7 +35,7 @@ export default function ZoomForm({ application }) {
 
       //Send interview email
       await axios.post(
-        `https://gettingplaced.onrender.com/api/invite/interview`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/invite/interview`,
         {
           to: application.email,
           applicantName: application.name,
@@ -51,14 +49,18 @@ export default function ZoomForm({ application }) {
 
       //Update application status
       await axios.patch(
-        `https://gettingplaced.onrender.com/api/application/status/${application._id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/application/status/${
+          application._id
+        }`,
         {},
         { withCredentials: true }
       );
 
       //Update application with interview info
       await axios.patch(
-        `https://gettingplaced.onrender.com/api/application/update/${application._id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/application/update/${
+          application._id
+        }`,
         {
           interviewScheduled: true,
           interviewDate: form.date.split("-").reverse().join("-"), // Convert yyyy-mm-dd to dd-mm-yyyy

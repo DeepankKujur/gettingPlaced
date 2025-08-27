@@ -1,8 +1,7 @@
-import React from "react";
-import HeroSection from "./HeroSection";
 import HowItWorks from "./HowItWorks";
-import PopularCategories from "./PopularCategories";
+import HeroSection from "./HeroSection";
 import BgAnimation from "../Layout/BgAnimation";
+import PopularCategories from "./PopularCategories";
 
 const Home = () => {
   return (

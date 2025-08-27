@@ -8,16 +8,17 @@ import BgAnimation from "../Layout/BgAnimation";
 import { useContext, useEffect, useState } from "react";
 
 function MyJobs() {
-  const [myJobs, setMyJobs] = useState([]);
-  const [editingMode, setEditingMode] = useState(null);
-  const { isAuthorized, user } = useContext(Context);
   const navigateTo = useNavigate();
+  const [myJobs, setMyJobs] = useState([]);
+  const { isAuthorized, user } = useContext(Context);
+  const [editingMode, setEditingMode] = useState(null);
+
   // Fetching all jobs of an employer
   useEffect(() => {
     const fetchJobs = async () => {
       try {
         const { data } = await axios.get(
-          `https://gettingplaced.onrender.com/api/job/myjobs`,
+          `${import.meta.env.VITE_BACKEND_URL}/api/job/myjobs`,
           { withCredentials: true }
         );
         setMyJobs(data.myJobs);
@@ -45,7 +46,7 @@ function MyJobs() {
     const updatedJob = myJobs.find((job) => job._id === jobId);
     await axios
       .put(
-        `https://gettingplaced.onrender.com/api/job/update/${jobId}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/job/update/${jobId}`,
         updatedJob,
         {
           withCredentials: true,
@@ -63,7 +64,7 @@ function MyJobs() {
   // function for deleting job
   const handleJobDelete = async (jobId) => {
     await axios
-      .delete(`https://gettingplaced.onrender.com/api/job/delete/${jobId}`, {
+      .delete(`${import.meta.env.VITE_BACKEND_URL}/api/job/delete/${jobId}`, {
         withCredentials: true,
       })
       .then((res) => {

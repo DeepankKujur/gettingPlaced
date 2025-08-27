@@ -1,17 +1,17 @@
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Context } from "../../main";
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function NewNavbar() {
+  const navigateTo = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const { isAuthorized, user, checkAuth } = useContext(Context);
-  const navigateTo = useNavigate();
 
   const handleLogout = async () => {
     try {
-      await axios.get(`https://gettingplaced.onrender.com/api/user/logout`, {
+      await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/user/logout`, {
         withCredentials: true,
       });
       await checkAuth(); // Re-check auth state after logout
@@ -20,9 +20,11 @@ export default function NewNavbar() {
       toast.error(error.response?.data?.message || "Logout failed");
     }
   };
+
   const handleLogin = () => {
     navigateTo("/login"); // Navigate to the login page
   };
+
   return (
     <nav className="bg-gray-900 border-gray-200">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4 py-3">

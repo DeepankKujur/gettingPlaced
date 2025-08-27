@@ -1,20 +1,20 @@
 import axios from "axios";
 import { Context } from "../../main";
 import { useNavigate } from "react-router-dom";
-import { Link, useParams } from "react-router-dom";
-import React, { useContext, useEffect, useState } from "react";
 import BgAnimation from "../Layout/BgAnimation";
+import { Link, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 
 const JobDetails = () => {
   const { id } = useParams();
-  const [job, setJob] = useState({});
   const navigateTo = useNavigate();
+  const [job, setJob] = useState({});
   const [loading, setLoading] = useState(true);
   const { isAuthorized, user } = useContext(Context);
 
   useEffect(() => {
     axios
-      .get(`https://gettingplaced.onrender.com/api/job/${id}`, {
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/job/${id}`, {
         withCredentials: true,
       })
       .then((res) => {
@@ -28,19 +28,20 @@ const JobDetails = () => {
   if (!isAuthorized) {
     navigateTo("/login");
   }
- useEffect(() => {
-     const timer = setTimeout(() => {
-       setLoading(false);
-     }, 2000);
- 
-     return () => clearTimeout(timer);
-   }, []);
-  if(loading) {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
     return (
       <div className="w-full min-h-screen flex items-center justify-center">
         <div className="absolute top-0 left-0 h-full w-full -z-10">
-        <BgAnimation />
-      </div>
+          <BgAnimation />
+        </div>
         <div className="loader"></div>
       </div>
     );

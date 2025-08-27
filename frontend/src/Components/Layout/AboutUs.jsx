@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { FaTwitter, FaLinkedin, FaGithub, FaInstagram } from "react-icons/fa";
+import { useEffect } from "react";
+import { FaLinkedin, FaGithub } from "react-icons/fa";
 
 const AboutUs = () => {
   useEffect(() => {

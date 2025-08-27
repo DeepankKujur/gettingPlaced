@@ -1,9 +1,9 @@
-import React, { createContext, useState, useEffect } from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
 import "./index.css";
 import axios from "axios";
+import App from "./App.jsx";
+import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
+import { createContext, useState, useEffect } from "react";
 
 export const Context = createContext();
 
@@ -15,11 +15,9 @@ const AppWrapper = () => {
   const checkAuth = async () => {
     try {
       const { data } = await axios.get(
-        `https://gettingplaced.onrender.com/api/user/public/getuser`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/user/public/getuser`,
         { withCredentials: true }
       );
-      // console.log("User data:", data);
-
       if (data.user) {
         setUser(data.user);
         setIsAuthorized(true);
@@ -42,11 +40,11 @@ const AppWrapper = () => {
   return (
     <Context.Provider
       value={{
-        isAuthorized,
-        setIsAuthorized,
         user,
         setUser,
         checkAuth,
+        isAuthorized,
+        setIsAuthorized,
       }}
     >
       {!loading && <App />}

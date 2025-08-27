@@ -1,23 +1,22 @@
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Context } from "../../main";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BgAnimation from "../Layout/BgAnimation";
-import React, { useContext, useState } from "react";
 
 const PostJob = () => {
+  const [city, setCity] = useState("");
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
   const [company, setCompany] = useState("");
   const [country, setCountry] = useState("");
-  const [city, setCity] = useState("");
+  const [category, setCategory] = useState("");
+  const [salaryTo, setSalaryTo] = useState("");
   const [location, setLocation] = useState("");
   const [salaryFrom, setSalaryFrom] = useState("");
-  const [salaryTo, setSalaryTo] = useState("");
+  const [description, setDescription] = useState("");
   const [fixedSalary, setFixedSalary] = useState("");
   const [salaryType, setSalaryType] = useState("default");
-
   const { isAuthorized, user } = useContext(Context);
 
   const handleJobPost = async (e) => {
@@ -35,7 +34,7 @@ const PostJob = () => {
 
     await axios
       .post(
-        `https://gettingplaced.onrender.com/api/job/post`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/job/post`,
         fixedSalary.length >= 4
           ? {
               title,

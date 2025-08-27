@@ -1,19 +1,18 @@
-import React, { useState, useContext, useRef, useEffect } from "react";
-import { MessageCircle, X } from "lucide-react";
 import { Context } from "../main.jsx";
+import { MessageCircle, X } from "lucide-react";
+import { useState, useContext, useRef, useEffect } from "react";
 
 const Chatbot = () => {
-  const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
+  const [messages, setMessages] = useState([]);
   const [isChatOpen, setIsChatOpen] = useState(false);
 
-  const { isAuthorized, user } = useContext(Context);
   const messagesEndRef = useRef(null);
+  const { isAuthorized, user } = useContext(Context);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
-
   useEffect(() => {
     scrollToBottom();
   }, [messages]);

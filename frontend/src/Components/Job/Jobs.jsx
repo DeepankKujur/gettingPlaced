@@ -1,16 +1,15 @@
 import axios from "axios";
-import { Context } from "../../main";
 import { Link } from "react-router-dom";
-import React, { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import BgAnimation from "../Layout/BgAnimation";
 import { useLocation } from "react-router-dom";
 
 const Jobs = () => {
+  const location = useLocation();
   const [jobs, setJobs] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const { isAuthorized } = useContext(Context);
-  const location = useLocation();
 
+  // Extracting Search Term from URL
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const searchFromURL = params.get("search");
@@ -21,7 +20,7 @@ const Jobs = () => {
 
   useEffect(() => {
     axios
-      .get(`https://gettingplaced.onrender.com/api/job/getall`, {
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/job/getall`, {
         withCredentials: true,
       })
       .then((res) => {
@@ -32,6 +31,7 @@ const Jobs = () => {
       });
   }, []);
 
+  // Filter jobs based on search term
   const filteredJobs = jobs.jobs?.filter((job) => {
     const term = searchTerm.toLowerCase();
     return (

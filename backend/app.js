@@ -17,6 +17,7 @@ dbConnection();
 
 app.use(cors({
   origin: 'https://gettingplaced.netlify.app',
+  // origin: "http://localhost:5173",
   credentials: true
 }));
 app.use(express.json());

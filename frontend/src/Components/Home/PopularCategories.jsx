@@ -1,15 +1,14 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
 import {
   MdOutlineDesignServices,
   MdOutlineWebhook,
   MdAccountBalance,
   MdOutlineAnimation,
 } from "react-icons/md";
-import { TbAppsFilled } from "react-icons/tb";
 import { FaReact } from "react-icons/fa";
-import { GiArtificialIntelligence } from "react-icons/gi";
+import { TbAppsFilled } from "react-icons/tb";
+import { useNavigate } from "react-router-dom"; 
 import { IoGameController } from "react-icons/io5";
+import { GiArtificialIntelligence } from "react-icons/gi";
 
 const PopularCategories = () => {
   const navigateTo = useNavigate();
@@ -77,7 +76,6 @@ const PopularCategories = () => {
     const encodedTitle = encodeURIComponent(title);
     navigateTo(`/job/getall?search=${encodedTitle}`);
   };
-  
 
   return (
     <div className="w-full max-w-[1500px] mx-auto flex flex-col items-center mt-5 p-12 gap-12 text-center">

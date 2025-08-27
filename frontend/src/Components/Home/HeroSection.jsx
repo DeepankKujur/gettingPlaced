@@ -1,14 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
-import { FaBuilding, FaSuitcase, FaUsers, FaUserPlus } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-import { Context } from "../../main";
-import { Typewriter } from "react-simple-typewriter";
 import axios from "axios";
+import { Context } from "../../main";
+import { useNavigate } from "react-router-dom";
+import { Typewriter } from "react-simple-typewriter";
+import { useContext, useEffect, useState } from "react";
+import { FaBuilding, FaSuitcase, FaUsers, FaUserPlus } from "react-icons/fa";
 
 const HeroSection = () => {
   const navigate = useNavigate();
   const { isAuthorized } = useContext(Context);
-
   const [stats, setStats] = useState({
     liveJobs: -1,
     companies: -1,
@@ -19,7 +18,10 @@ const HeroSection = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const {data} = await axios.get(`https://gettingplaced.onrender.com/api/totalCounts/`,{ withCredentials: true });
+        const { data } = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/totalCounts/`,
+          { withCredentials: true }
+        );
         setStats(data);
       } catch (error) {
         console.error("Failed to fetch stats:", error);
@@ -53,7 +55,7 @@ const HeroSection = () => {
       subTitle: "Employers",
       icon: <FaUserPlus />,
     },
-  ];  
+  ];
 
   return (
     <div className="flex flex-col py-[75px] px-4 lg:px-0">

@@ -23,7 +23,7 @@ const Register = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        `https://gettingplaced.onrender.com/api/user/register`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/user/register`,
         { name, phone, email, role, password },
         {
           headers: {
